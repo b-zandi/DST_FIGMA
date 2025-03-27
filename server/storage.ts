@@ -1,20 +1,48 @@
-import { users, faqs, type User, type InsertUser, type FAQ, type InsertFAQ } from "@shared/schema";
+import { 
+  users, 
+  faqs, 
+  investments, 
+  userInvestments,
+  type User, 
+  type InsertUser, 
+  type FAQ, 
+  type InsertFAQ,
+  type Investment,
+  type InsertInvestment,
+  type UserInvestment,
+  type InsertUserInvestment
+} from "@shared/schema";
 import createMemoryStore from "memorystore";
 import session from "express-session";
 
 const MemoryStore = createMemoryStore(session);
 
 export interface IStorage {
+  // User methods
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   getUserByEmail(email: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
   updateUser(id: number, userData: Partial<User>): Promise<User | undefined>;
   
+  // FAQ methods
   getAllFaqs(): Promise<FAQ[]>;
   getFaqById(id: number): Promise<FAQ | undefined>;
   getFaqsByCategory(category: string): Promise<FAQ[]>;
   createFaq(faq: InsertFAQ): Promise<FAQ>;
+  
+  // Investment methods
+  getAllInvestments(): Promise<Investment[]>;
+  getInvestmentById(id: number): Promise<Investment | undefined>;
+  getInvestmentsByAssetClass(assetClass: string): Promise<Investment[]>;
+  getInvestmentsByPropertyType(propertyType: string): Promise<Investment[]>;
+  createInvestment(investment: InsertInvestment): Promise<Investment>;
+  
+  // User Investment methods
+  getUserInvestments(userId: number): Promise<(UserInvestment & { investment: Investment })[]>;
+  getUserInvestmentById(id: number): Promise<(UserInvestment & { investment: Investment }) | undefined>;
+  createUserInvestment(userInvestment: InsertUserInvestment): Promise<UserInvestment>;
+  updateUserInvestment(id: number, data: Partial<UserInvestment>): Promise<UserInvestment | undefined>;
   
   sessionStore: session.Store;
 }
@@ -22,21 +50,32 @@ export interface IStorage {
 export class MemStorage implements IStorage {
   private users: Map<number, User>;
   private faqs: Map<number, FAQ>;
+  private investments: Map<number, Investment>;
+  private userInvestments: Map<number, UserInvestment>;
   sessionStore: session.Store;
   currentUserId: number;
   currentFaqId: number;
+  currentInvestmentId: number;
+  currentUserInvestmentId: number;
 
   constructor() {
     this.users = new Map();
     this.faqs = new Map();
+    this.investments = new Map();
+    this.userInvestments = new Map();
     this.currentUserId = 1;
     this.currentFaqId = 1;
+    this.currentInvestmentId = 1;
+    this.currentUserInvestmentId = 1;
     this.sessionStore = new MemoryStore({
       checkPeriod: 86400000,
     });
     
     // Initialize some default FAQs
     this.initDefaultFaqs();
+    
+    // Initialize some default investments 
+    this.initDefaultInvestments();
   }
 
   async getUser(id: number): Promise<User | undefined> {
@@ -107,6 +146,85 @@ export class MemStorage implements IStorage {
     return faq;
   }
 
+  // Investment methods
+  async getAllInvestments(): Promise<Investment[]> {
+    return Array.from(this.investments.values());
+  }
+
+  async getInvestmentById(id: number): Promise<Investment | undefined> {
+    return this.investments.get(id);
+  }
+
+  async getInvestmentsByAssetClass(assetClass: string): Promise<Investment[]> {
+    return Array.from(this.investments.values())
+      .filter(investment => investment.assetClass === assetClass);
+  }
+
+  async getInvestmentsByPropertyType(propertyType: string): Promise<Investment[]> {
+    return Array.from(this.investments.values())
+      .filter(investment => investment.propertyType === propertyType);
+  }
+
+  async createInvestment(insertInvestment: InsertInvestment): Promise<Investment> {
+    const id = this.currentInvestmentId++;
+    const investment: Investment = { ...insertInvestment, id };
+    this.investments.set(id, investment);
+    return investment;
+  }
+
+  // User Investment methods
+  async getUserInvestments(userId: number): Promise<(UserInvestment & { investment: Investment })[]> {
+    const userInvestmentsList = Array.from(this.userInvestments.values())
+      .filter(ui => ui.userId === userId);
+    
+    return userInvestmentsList.map(ui => {
+      const investment = this.investments.get(ui.investmentId);
+      if (!investment) {
+        throw new Error(`Investment with id ${ui.investmentId} not found`);
+      }
+      return { ...ui, investment };
+    });
+  }
+
+  async getUserInvestmentById(id: number): Promise<(UserInvestment & { investment: Investment }) | undefined> {
+    const userInvestment = this.userInvestments.get(id);
+    if (!userInvestment) return undefined;
+    
+    const investment = this.investments.get(userInvestment.investmentId);
+    if (!investment) return undefined;
+    
+    return { ...userInvestment, investment };
+  }
+
+  async createUserInvestment(insertUserInvestment: InsertUserInvestment): Promise<UserInvestment> {
+    const id = this.currentUserInvestmentId++;
+    const now = new Date();
+    
+    const userInvestment: UserInvestment = {
+      id,
+      userId: insertUserInvestment.userId,
+      investmentId: insertUserInvestment.investmentId,
+      investmentAmount: insertUserInvestment.investmentAmount,
+      investmentDate: now,
+      ownershipPercentage: insertUserInvestment.ownershipPercentage,
+      distributionsPaid: "0", // Starting with 0 distributions paid
+      lastDistributionDate: null, // No distributions yet
+      investmentStatus: insertUserInvestment.investmentStatus,
+    };
+    
+    this.userInvestments.set(id, userInvestment);
+    return userInvestment;
+  }
+
+  async updateUserInvestment(id: number, data: Partial<UserInvestment>): Promise<UserInvestment | undefined> {
+    const userInvestment = this.userInvestments.get(id);
+    if (!userInvestment) return undefined;
+    
+    const updatedUserInvestment = { ...userInvestment, ...data };
+    this.userInvestments.set(id, updatedUserInvestment);
+    return updatedUserInvestment;
+  }
+
   private initDefaultFaqs() {
     const defaultFaqs: Array<Omit<FAQ, 'id'>> = [
       {
@@ -162,6 +280,89 @@ export class MemStorage implements IStorage {
     defaultFaqs.forEach(faq => {
       const id = this.currentFaqId++;
       this.faqs.set(id, { ...faq, id });
+    });
+  }
+  
+  private initDefaultInvestments() {
+    // Using the investments data from the investing-page.tsx as our default data
+    const defaultInvestments: Array<Omit<Investment, 'id'>> = [
+      {
+        title: "Multi-Family Apartment Complex",
+        location: "Dallas, TX",
+        propertyType: "Residential",
+        assetClass: "Multi-Family",
+        minInvestment: 50000,
+        projectedYield: "5.8%",
+        offeringSize: "$85,200,000",
+        holdPeriod: "5-7 years",
+        imageUrl: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=500",
+        description: "Class A apartment complex with 320 units in a high-growth suburb of Dallas. The property features resort-style amenities, modern fixtures, and is located near major employers.",
+        status: "available",
+        sponsor: "North Star Real Estate",
+        propertyAddress: "8750 Central Expressway, Dallas, TX 75231",
+        yearBuilt: "2018",
+        squareFeet: "375,000",
+        occupancy: "94%",
+        offeringDate: "October 2023",
+        closingDate: "November 30, 2023",
+        distributionFrequency: "Monthly",
+        debtFinancing: "60% LTV, 10-year term, 4.2% fixed rate",
+        taxAdvantages: "100% bonus depreciation in year 1",
+        detailedDescription: "This Class A apartment complex consists of 320 units across 12 three-story buildings on a 22-acre site. The property was built in 2018 and features modern finishes including granite countertops, stainless steel appliances, and wood-style flooring. Community amenities include a resort-style pool, state-of-the-art fitness center, dog park, and resident clubhouse.\n\nThe property is located in a high-growth suburb of Dallas with excellent access to major employment centers, retail, and entertainment options. The submarket has experienced 5.2% average annual rent growth over the past 5 years with occupancy consistently above 93%.\n\nThe business plan involves light value-add improvements to unit interiors and common areas to support continued rent growth, with a target hold period of 5-7 years."
+      },
+      {
+        title: "Medical Office Portfolio",
+        location: "Charlotte, NC",
+        propertyType: "Commercial",
+        assetClass: "Medical Office",
+        minInvestment: 100000,
+        projectedYield: "6.2%",
+        offeringSize: "$42,500,000",
+        holdPeriod: "7-10 years",
+        imageUrl: "https://images.unsplash.com/photo-1582719471137-c3967ffb1c42?auto=format&fit=crop&q=80&w=500",
+        description: "Portfolio of three medical office buildings leased to credit tenants with weighted average lease term of 8.4 years. All properties are located near major hospital systems.",
+        status: "available",
+        sponsor: "Healthcare Properties Trust",
+        propertyAddress: "Multiple locations in Charlotte, NC",
+        yearBuilt: "2008-2015",
+        squareFeet: "156,000 (total)",
+        occupancy: "97%",
+        offeringDate: "September 2023",
+        closingDate: "December 15, 2023",
+        distributionFrequency: "Monthly",
+        debtFinancing: "55% LTV, 7-year term, 4.5% fixed rate",
+        taxAdvantages: "Cost segregation study provided",
+        detailedDescription: "This medical office portfolio consists of three Class A medical office buildings totaling 156,000 square feet in Charlotte, NC. The buildings are strategically located adjacent to major hospital systems and are leased to a diverse mix of medical practices including cardiology, ophthalmology, orthopedics, and primary care.\n\nThe portfolio has a weighted average lease term of 8.4 years with structured rent increases averaging 2.5% annually. The tenant base includes several credit-rated healthcare systems and established medical practices with long operating histories in the market.\n\nThe investment thesis is centered on the stable, recession-resistant nature of healthcare real estate and the strong demographic trends supporting healthcare demand in the Charlotte market."
+      },
+      {
+        title: "Industrial Distribution Center",
+        location: "Phoenix, AZ",
+        propertyType: "Commercial",
+        assetClass: "Industrial",
+        minInvestment: 25000,
+        projectedYield: "5.5%",
+        offeringSize: "$38,750,000",
+        holdPeriod: "5-7 years",
+        imageUrl: "https://images.unsplash.com/photo-1586528116493-a029325540fa?auto=format&fit=crop&q=80&w=500",
+        description: "Modern distribution facility with 215,000 square feet leased to an e-commerce tenant. Strategic location with excellent access to major highways and growing population centers.",
+        status: "available",
+        sponsor: "Logistics Capital Partners",
+        propertyAddress: "4720 E Jones Ave, Phoenix, AZ 85040",
+        yearBuilt: "2019",
+        squareFeet: "215,000",
+        occupancy: "100%",
+        offeringDate: "November 2023",
+        closingDate: "January 20, 2024",
+        distributionFrequency: "Monthly",
+        debtFinancing: "58% LTV, 5-year term, 4.0% fixed rate",
+        taxAdvantages: "Cost segregation and 100% bonus depreciation",
+        detailedDescription: "This modern industrial distribution facility was built in 2019 and features 215,000 square feet of high-bay warehouse space with 32' clear heights, ESFR sprinkler system, 50 dock-high doors, and 2 drive-in doors. The property is 100% leased to a national e-commerce logistics provider on a 7-year triple-net lease with 2.75% annual rent escalations.\n\nLocated in the Southeast Valley industrial submarket of Phoenix, the property has excellent access to I-10, I-17, and Loop 202, allowing for efficient distribution throughout the Southwest region. The Phoenix industrial market has experienced significant growth due to population migration, e-commerce expansion, and reshoring of manufacturing operations.\n\nThe investment strategy is focused on stable cash flow from the in-place lease with potential for rent growth upon renewal given the property's strategic location and the strong fundamentals of the Phoenix industrial market."
+      }
+    ];
+    
+    defaultInvestments.forEach(investment => {
+      const id = this.currentInvestmentId++;
+      this.investments.set(id, { ...investment, id });
     });
   }
 }
