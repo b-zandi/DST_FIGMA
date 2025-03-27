@@ -10,6 +10,7 @@ import ProfilePage from "@/pages/profile-page";
 import TestPage from "@/pages/test-page";
 import InvestingPage from "@/pages/investing-page";
 import InvestmentDetailPage from "@/pages/investment-detail-page";
+import AccreditationPage from "@/pages/accreditation-page";
 import { AuthProvider } from "@/hooks/use-auth";
 import { ProtectedRoute } from "./lib/protected-route";
 
@@ -21,6 +22,7 @@ function Router() {
       <Route path="/faq" component={FAQPage} />
       <Route path="/investing" component={InvestingPage} />
       <Route path="/investment/:id" component={InvestmentDetailPage} />
+      <Route path="/accreditation" component={AccreditationPage} />
       <Route path="/test" component={TestPage} />
       <ProtectedRoute path="/profile" component={ProfilePage} />
       <Route component={NotFound} />

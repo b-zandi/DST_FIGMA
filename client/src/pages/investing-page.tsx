@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useQuery } from "@tanstack/react-query";
-import { Briefcase, Building, MapPin, Calendar, DollarSign, ChevronRight, Filter, SlidersHorizontal } from "lucide-react";
+import { Briefcase, Building, MapPin, Calendar, DollarSign, ChevronRight, Filter, SlidersHorizontal, Shield } from "lucide-react";
 import { 
   Select,
   SelectContent,
@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import { useState } from "react";
 import { useAuth } from "@/hooks/use-auth";
+import { Link } from "wouter";
 
 // Example DST investment opportunities
 const investments = [
@@ -134,6 +135,21 @@ export default function InvestingPage() {
               Browse our curated selection of Delaware Statutory Trust investment opportunities.
               {!user && " Sign in or register to access full investment details."}
             </p>
+            <div className="mt-3 p-4 bg-blue-50 border border-blue-100 rounded-md">
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
+                  <Shield className="h-5 w-5 text-primary mt-0.5" />
+                </div>
+                <div className="ml-3">
+                  <p className="text-sm text-gray-700">
+                    DST investments are exclusively available to accredited investors as defined by the SEC.{" "}
+                    <Link href="/accreditation" className="text-primary hover:text-primary/90 font-medium">
+                      Learn more about accreditation requirements
+                    </Link>
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Filters */}

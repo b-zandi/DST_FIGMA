@@ -21,7 +21,9 @@ import {
   CheckCircle,
   AlertCircle,
   Users,
-  TrendingUp
+  TrendingUp,
+  Shield,
+  Info
 } from "lucide-react";
 import {
   Tabs,
@@ -325,6 +327,22 @@ export default function InvestmentDetailPage() {
                       <CardTitle>Investment Overview</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
+                      <div className="mb-6 p-4 bg-blue-50 border border-blue-100 rounded-md">
+                        <div className="flex items-start">
+                          <div className="flex-shrink-0">
+                            <Shield className="h-5 w-5 text-primary mt-0.5" />
+                          </div>
+                          <div className="ml-3">
+                            <h4 className="text-sm font-medium text-[#1A2B50]">Accredited Investors Only</h4>
+                            <p className="text-sm text-gray-700 mt-1">
+                              This DST investment is exclusively available to accredited investors. Accreditation verification will be required prior to investment.{" "}
+                              <Link href="/accreditation" className="text-primary hover:text-primary/90 font-medium">
+                                Learn more about accreditation requirements
+                              </Link>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
                       <p className="whitespace-pre-line">{investment.detailedDescription}</p>
                     </CardContent>
                   </Card>
