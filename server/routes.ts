@@ -188,7 +188,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
-  // Temporary route to check users (remove in production)
+  // Temporary routes to check users (remove in production)
   app.get("/api/debug/check-user/:username", async (req, res, next) => {
     try {
       const username = req.params.username;
@@ -198,6 +198,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       const { password, ...safeUser } = user;
       res.json({ exists: true, user: safeUser });
+    } catch (error) {
+      next(error);
+    }
+  });
+  
+  app.get("/api/debug/list-users", async (req, res, next) => {
+    try {
+      // Get all users from the Map in MemStorage
+      const allUsers = Array.from((storage as any).users.values()).map(user => {
+        const { password, ...safeUser } = user;
+        return safeUser;
+      });
+      res.json(allUsers);
     } catch (error) {
       next(error);
     }
