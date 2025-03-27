@@ -187,6 +187,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
       next(error);
     }
   });
+  
+  // Temporary route to check users (remove in production)
+  app.get("/api/debug/check-user/:username", async (req, res, next) => {
+    try {
+      const username = req.params.username;
+      const user = await storage.getUserByUsername(username);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      const { password, ...safeUser } = user;
+      res.json({ exists: true, user: safeUser });
+    } catch (error) {
+      next(error);
+    }
+  });
 
   const httpServer = createServer(app);
 
