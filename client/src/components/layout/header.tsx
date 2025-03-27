@@ -52,20 +52,20 @@ export function Header() {
               className="flex items-center text-gray-600 hover:text-[#1A2B50]"
             >
               <BarChart2 className="h-4 w-4 mr-1" />
-              <span>Investing</span>
+              <span>Search Investments</span>
             </Link>
             
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger className="flex items-center text-gray-600 hover:text-[#1A2B50]">
                   <User className="h-4 w-4 mr-1" />
-                  <span>{user.username}</span>
+                  <span>{user.firstName || user.username}</span>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuItem asChild>
                     <Link href="/profile" className="flex w-full cursor-pointer">
                       <User className="h-4 w-4 mr-2" />
-                      Profile
+                      {user.firstName ? `${user.firstName}'s Profile` : "Profile"}
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={handleLogout} className="flex cursor-pointer">
@@ -118,7 +118,7 @@ export function Header() {
           >
             <div className="flex items-center">
               <BarChart2 className="h-4 w-4 mr-2" />
-              Investing
+              Search Investments
             </div>
           </Link>
           
@@ -130,7 +130,7 @@ export function Header() {
               >
                 <div className="flex items-center">
                   <User className="h-4 w-4 mr-2" />
-                  Profile
+                  {user.firstName ? `${user.firstName}'s Profile` : "Profile"}
                 </div>
               </Link>
               <button
