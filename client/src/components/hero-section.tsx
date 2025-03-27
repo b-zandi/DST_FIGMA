@@ -18,13 +18,17 @@ export function HeroSection() {
           Access institutional-quality real estate investments with professional management and significant tax advantages.
         </p>
         <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-          <Button size="lg" className="gap-2">
-            View Investments
-            <ChevronRight className="h-4 w-4" />
+          <Button size="lg" className="gap-2" asChild>
+            <Link href="/investing">
+              View Investments
+              <ChevronRight className="h-4 w-4" />
+            </Link>
           </Button>
-          <Button size="lg" variant="outline" className="gap-2 text-[#1A2B50] border-gray-300">
-            Learn More
-            <ExternalLink className="h-4 w-4" />
+          <Button size="lg" variant="outline" className="gap-2 text-[#1A2B50] border-gray-300" asChild>
+            <Link href="/learn-more">
+              Learn More
+              <ExternalLink className="h-4 w-4" />
+            </Link>
           </Button>
         </div>
       </div>
