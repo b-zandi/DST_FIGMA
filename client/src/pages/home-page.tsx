@@ -13,8 +13,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useQuery } from "@tanstack/react-query";
-import { MapPin, ArrowRight, InfoIcon, Phone, Mail } from "lucide-react";
+import { MapPin, ArrowRight, InfoIcon, Phone, Mail, MessageSquareText } from "lucide-react";
 import { FAQ } from "@shared/schema";
+import { ScheduleCallDialog } from "@/components/schedule-call-dialog";
 
 export default function HomePage() {
   const { data: faqs } = useQuery<FAQ[]>({
@@ -110,13 +111,22 @@ export default function HomePage() {
                 Our team of investment professionals is here to help you navigate the world of DST investments and 1031 exchanges.
               </p>
               <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                <Button variant="secondary" className="gap-2">
-                  <Phone className="h-4 w-4" />
-                  Schedule a Call
-                </Button>
-                <Button variant="outline" className="border-white text-white hover:bg-[#1A2B50]/80 gap-2">
+                <ScheduleCallDialog />
+                
+                <Button 
+                  variant="outline" 
+                  className="border-white text-white bg-white/20 hover:bg-white/30 hover:text-white gap-2"
+                >
                   <Mail className="h-4 w-4" />
                   Contact Us
+                </Button>
+                
+                <Button
+                  variant="outline"
+                  className="border-white bg-indigo-600/90 text-white hover:bg-indigo-600 hover:text-white gap-2"
+                >
+                  <MessageSquareText className="h-4 w-4" />
+                  Chat with Franklin AI
                 </Button>
               </div>
             </div>
