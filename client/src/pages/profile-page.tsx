@@ -105,7 +105,7 @@ export default function ProfilePage() {
       lastName: user?.lastName || "",
       phone: user?.phone || "",
       email: user?.email || "",
-    },
+    } as ProfileUpdate,
   });
 
   // Update form values when user data changes
@@ -116,7 +116,7 @@ export default function ProfilePage() {
         lastName: user.lastName || "",
         phone: user.phone || "",
         email: user.email || "",
-      });
+      } as ProfileUpdate);
       setIsAccreditedInvestor(user.accreditedStatus || false);
     }
   }, [user, form]);
@@ -211,7 +211,14 @@ export default function ProfilePage() {
                                   <FormItem>
                                     <FormLabel>First Name</FormLabel>
                                     <FormControl>
-                                      <Input placeholder="Enter your first name" {...field} />
+                                      <Input 
+                                        placeholder="Enter your first name" 
+                                        value={field.value || ""} 
+                                        onChange={field.onChange}
+                                        onBlur={field.onBlur}
+                                        ref={field.ref}
+                                        name={field.name}
+                                      />
                                     </FormControl>
                                     <FormMessage />
                                   </FormItem>
@@ -225,7 +232,14 @@ export default function ProfilePage() {
                                   <FormItem>
                                     <FormLabel>Last Name</FormLabel>
                                     <FormControl>
-                                      <Input placeholder="Enter your last name" {...field} />
+                                      <Input 
+                                        placeholder="Enter your last name"
+                                        value={field.value || ""} 
+                                        onChange={field.onChange}
+                                        onBlur={field.onBlur}
+                                        ref={field.ref}
+                                        name={field.name}
+                                      />
                                     </FormControl>
                                     <FormMessage />
                                   </FormItem>
@@ -240,7 +254,15 @@ export default function ProfilePage() {
                                 <FormItem>
                                   <FormLabel>Email</FormLabel>
                                   <FormControl>
-                                    <Input type="email" placeholder="Enter your email" {...field} />
+                                    <Input 
+                                      type="email" 
+                                      placeholder="Enter your email" 
+                                      value={field.value || ""} 
+                                      onChange={field.onChange}
+                                      onBlur={field.onBlur}
+                                      ref={field.ref}
+                                      name={field.name}
+                                    />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
@@ -254,7 +276,15 @@ export default function ProfilePage() {
                                 <FormItem>
                                   <FormLabel>Phone</FormLabel>
                                   <FormControl>
-                                    <Input type="tel" placeholder="Enter your phone number" {...field} />
+                                    <Input 
+                                      type="tel" 
+                                      placeholder="Enter your phone number" 
+                                      value={field.value || ""} 
+                                      onChange={field.onChange}
+                                      onBlur={field.onBlur}
+                                      ref={field.ref}
+                                      name={field.name}
+                                    />
                                   </FormControl>
                                   <FormMessage />
                                 </FormItem>
@@ -326,13 +356,13 @@ export default function ProfilePage() {
                           <Briefcase className={`h-5 w-5 ${userInvestments.length > 0 ? "text-green-500" : "text-gray-400"}`} />
                           <div>
                             <p className="font-medium">Active Investments</p>
-                            <p className="text-sm text-gray-500">
-                              {isLoadingInvestments ? (
-                                <Skeleton className="h-4 w-20" />
-                              ) : (
-                                `${userInvestments.length} Investment${userInvestments.length !== 1 ? 's' : ''}`
-                              )}
-                            </p>
+                            {isLoadingInvestments ? (
+                              <Skeleton className="h-4 w-20 mt-1" />
+                            ) : (
+                              <p className="text-sm text-gray-500">
+                                {`${userInvestments.length} Investment${userInvestments.length !== 1 ? 's' : ''}`}
+                              </p>
+                            )}
                           </div>
                         </div>
 
@@ -402,38 +432,38 @@ export default function ProfilePage() {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                           <div className="bg-gray-50 p-4 rounded-lg">
                             <p className="text-sm text-gray-500 mb-1">Total Invested</p>
-                            <p className="text-2xl font-bold text-[#1A2B50]">
-                              {isLoadingInvestments ? (
-                                <Skeleton className="h-8 w-28" />
-                              ) : (
-                                formatCurrency(totalInvestmentValue)
-                              )}
-                            </p>
+                            {isLoadingInvestments ? (
+                              <Skeleton className="h-8 w-28" />
+                            ) : (
+                              <p className="text-2xl font-bold text-[#1A2B50]">
+                                {formatCurrency(totalInvestmentValue)}
+                              </p>
+                            )}
                           </div>
                           <div className="bg-gray-50 p-4 rounded-lg">
                             <p className="text-sm text-gray-500 mb-1">Active Investments</p>
-                            <p className="text-2xl font-bold text-[#1A2B50]">
-                              {isLoadingInvestments ? (
-                                <Skeleton className="h-8 w-20" />
-                              ) : (
-                                userInvestments.length
-                              )}
-                            </p>
+                            {isLoadingInvestments ? (
+                              <Skeleton className="h-8 w-20" />
+                            ) : (
+                              <p className="text-2xl font-bold text-[#1A2B50]">
+                                {userInvestments.length}
+                              </p>
+                            )}
                           </div>
                           <div className="bg-gray-50 p-4 rounded-lg">
                             <p className="text-sm text-gray-500 mb-1">Total Distributions</p>
-                            <p className="text-2xl font-bold text-[#1A2B50]">
-                              {isLoadingInvestments ? (
-                                <Skeleton className="h-8 w-28" />
-                              ) : (
-                                formatCurrency(
+                            {isLoadingInvestments ? (
+                              <Skeleton className="h-8 w-28" />
+                            ) : (
+                              <p className="text-2xl font-bold text-[#1A2B50]">
+                                {formatCurrency(
                                   userInvestments.reduce(
                                     (sum, inv) => sum + parseFloat(inv.distributionsPaid), 
                                     0
                                   )
-                                )
-                              )}
-                            </p>
+                                )}
+                              </p>
+                            )}
                           </div>
                         </div>
                       </CardContent>
