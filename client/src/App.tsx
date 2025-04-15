@@ -8,7 +8,7 @@ import AuthPage from "@/pages/auth-page";
 import FAQPage from "@/pages/faq-page";
 import ProfilePage from "@/pages/profile-page";
 import TestPage from "@/pages/test-page";
-import InvestingPage from "@/pages/investing-page";
+
 import InvestmentDetailPage from "@/pages/investment-detail-page";
 import AccreditationPage from "@/pages/accreditation-page";
 import LearnMorePage from "@/pages/learn-more-page";
@@ -21,7 +21,7 @@ function Router() {
       <Route path="/" component={HomePage} />
       <Route path="/auth" component={AuthPage} />
       <Route path="/faq" component={FAQPage} />
-      <Route path="/investing" component={InvestingPage} />
+
       <Route path="/investment/:id" component={InvestmentDetailPage} />
       <Route path="/accreditation" component={AccreditationPage} />
       <Route path="/learn-more" component={LearnMorePage} />

@@ -47,13 +47,7 @@ export function Header() {
               <Bell className="h-4 w-4 mr-1" />
               <span>Notifications</span>
             </Link>
-            <Link
-              href="/investing"
-              className="flex items-center text-gray-600 hover:text-[#1A2B50]"
-            >
-              <BarChart2 className="h-4 w-4 mr-1" />
-              <span>Search Investments</span>
-            </Link>
+
             
             {user ? (
               <DropdownMenu>
@@ -112,15 +106,7 @@ export function Header() {
               Notifications
             </div>
           </Link>
-          <Link
-            href="/investing"
-            className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:bg-gray-100"
-          >
-            <div className="flex items-center">
-              <BarChart2 className="h-4 w-4 mr-2" />
-              Search Investments
-            </div>
-          </Link>
+
           
           {user ? (
             <>

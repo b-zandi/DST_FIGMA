@@ -383,17 +383,12 @@ export default function LearnMorePage() {
                         </div>
                         <div>
                           <h3 className="text-xl font-semibold text-[#1A2B50] mb-2">
-                            Explore Available DST Offerings
+                            Consult With Our DST Specialists
                           </h3>
                           <p className="text-gray-600 mb-4">
-                            Browse our curated selection of institutional-quality DST investments across diverse property types and locations. Each offering includes detailed information about the property, sponsor, financial projections, and risk factors.
+                            Connect with our team of DST investment specialists who can provide detailed information about available offerings across diverse property types and locations. Our experts will guide you through property information, sponsor details, financial projections, and risk factors.
                           </p>
-                          <Button asChild variant="outline" size="sm">
-                            <Link href="/investing" className="flex items-center gap-1">
-                              View Investments
-                              <ChevronRight className="h-4 w-4" />
-                            </Link>
-                          </Button>
+
                         </div>
                       </div>
                     </Card>
@@ -503,14 +498,10 @@ export default function LearnMorePage() {
                   Ready to Explore DST Investments?
                 </h2>
                 <p className="text-lg text-gray-600 mb-8">
-                  Browse our current investment opportunities or schedule a call with one of our DST investment specialists.
+                  Schedule a call with one of our DST investment specialists to learn more about current opportunities.
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
-                  <Button asChild size="lg">
-                    <Link href="/investing">
-                      View Investment Opportunities
-                    </Link>
-                  </Button>
+
                   <Button asChild variant="outline" size="lg">
                     <Link href="/contact">
                       Schedule a Consultation
