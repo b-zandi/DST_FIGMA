@@ -1,19 +1,19 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Building, Bell, BarChart2, User, Menu, LogOut } from "lucide-react";
+import { Building, ChevronDown, User, Menu, LogOut } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [location] = useLocation();
   const { user, logoutMutation } = useAuth();
 
   const toggleMobileMenu = () => {
@@ -24,122 +24,168 @@ export function Header() {
     logoutMutation.mutate();
   };
 
+  const navItems = [
+    { title: "Investments", href: "/investments" },
+    { title: "Learn", href: "/learn-more" },
+    { title: "Accreditation", href: "/accreditation" },
+    { title: "FAQ", href: "/faq" },
+  ];
+
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
+    <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16 items-center">
+        <div className="flex justify-between h-20 items-center">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="flex items-center space-x-2">
               <span className="text-primary">
-                <Building className="h-6 w-6" />
+                <Building className="h-8 w-8" />
               </span>
-              <span className="text-[#1A2B50] font-semibold text-lg">DST Brokerage</span>
+              <span className="font-semibold text-xl">DST Brokerage</span>
             </Link>
           </div>
 
-          {/* Navigation - Desktop */}
-          <nav className="hidden md:flex space-x-8 items-center">
-            <Link
-              href="/notifications"
-              className="flex items-center text-gray-600 hover:text-[#1A2B50]"
-            >
-              <Bell className="h-4 w-4 mr-1" />
-              <span>Notifications</span>
-            </Link>
-
-            
-            {user ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center text-gray-600 hover:text-[#1A2B50]">
-                  <User className="h-4 w-4 mr-1" />
-                  <span>{user.firstName || user.username}</span>
+          {/* Main Navigation - Desktop */}
+          <nav className="hidden lg:flex items-center space-x-2">
+            {navItems.map((item) => (
+              <DropdownMenu key={item.title}>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="text-gray-600 font-medium text-base">
+                    {item.title}
+                    <ChevronDown className="ml-1 h-4 w-4 opacity-70" />
+                  </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent>
+                <DropdownMenuContent align="start" className="w-56">
                   <DropdownMenuItem asChild>
-                    <Link href="/profile" className="flex w-full cursor-pointer">
-                      <User className="h-4 w-4 mr-2" />
-                      {user.firstName ? `${user.firstName}'s Profile` : "Profile"}
+                    <Link href={item.href} className="cursor-pointer">
+                      All {item.title}
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={handleLogout} className="flex cursor-pointer">
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link href={`${item.href}/featured`} className="cursor-pointer">
+                      Featured {item.title}
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href={`${item.href}/popular`} className="cursor-pointer">
+                      Popular {item.title}
+                    </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ))}
+          </nav>
+
+          {/* Auth Navigation - Desktop */}
+          <div className="hidden lg:flex items-center space-x-4">
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="gap-2">
+                    <User className="h-4 w-4" />
+                    <span>{user.firstName || user.username}</span>
+                    <ChevronDown className="h-4 w-4 opacity-70" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem asChild>
+                    <Link href="/profile" className="cursor-pointer">
+                      <User className="h-4 w-4 mr-2" />
+                      Profile
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
                     <LogOut className="h-4 w-4 mr-2" />
                     Logout
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Link
-                href="/auth"
-                className={cn(
-                  buttonVariants({ variant: "outline", size: "sm" }),
-                  "text-[#1A2B50]"
-                )}
-              >
-                Log In
-              </Link>
+              <>
+                <Link
+                  href="/auth?tab=login"
+                  className={cn(
+                    buttonVariants({ variant: "ghost", size: "default" }),
+                    "text-gray-700"
+                  )}
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/auth?tab=register"
+                  className={cn(
+                    buttonVariants({ variant: "default", size: "default" }),
+                    "bg-primary text-white hover:bg-primary/90"
+                  )}
+                >
+                  Sign Up
+                </Link>
+              </>
             )}
-          </nav>
+          </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button
-              type="button"
-              className="text-gray-500 hover:text-gray-700 focus:outline-none"
+          <div className="lg:hidden">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-gray-700"
               onClick={toggleMobileMenu}
             >
               <Menu className="h-6 w-6" />
-            </button>
+            </Button>
           </div>
         </div>
       </div>
 
       {/* Mobile Menu */}
-      <div className={`md:hidden bg-white border-t ${mobileMenuOpen ? 'block' : 'hidden'}`}>
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <Link
-            href="/notifications"
-            className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:bg-gray-100"
-          >
-            <div className="flex items-center">
-              <Bell className="h-4 w-4 mr-2" />
-              Notifications
-            </div>
-          </Link>
-
-          
-          {user ? (
-            <>
-              <Link
-                href="/profile"
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:bg-gray-100"
-              >
-                <div className="flex items-center">
-                  <User className="h-4 w-4 mr-2" />
-                  {user.firstName ? `${user.firstName}'s Profile` : "Profile"}
-                </div>
-              </Link>
-              <button
-                onClick={handleLogout}
-                className="w-full text-left block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:bg-gray-100"
-              >
-                <div className="flex items-center">
-                  <LogOut className="h-4 w-4 mr-2" />
-                  Log Out
-                </div>
-              </button>
-            </>
-          ) : (
+      <div className={`lg:hidden bg-white border-t ${mobileMenuOpen ? 'block' : 'hidden'}`}>
+        <div className="py-3 px-4 space-y-3">
+          {navItems.map((item) => (
             <Link
-              href="/auth"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:bg-gray-100"
+              key={item.title}
+              href={item.href}
+              className="block py-2 text-base font-medium text-gray-700 hover:text-primary"
             >
-              <div className="flex items-center">
-                <User className="h-4 w-4 mr-2" />
-                Log In
-              </div>
+              {item.title}
             </Link>
-          )}
+          ))}
+          
+          <div className="pt-4 border-t border-gray-200">
+            {user ? (
+              <>
+                <Link
+                  href="/profile"
+                  className="block py-2 text-base font-medium text-gray-700 hover:text-primary"
+                >
+                  Profile
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="w-full text-left block py-2 text-base font-medium text-gray-700 hover:text-primary"
+                >
+                  Log Out
+                </button>
+              </>
+            ) : (
+              <div className="flex flex-col space-y-3 pt-2">
+                <Link
+                  href="/auth?tab=login"
+                  className="block py-2 px-4 text-center rounded-md border border-gray-300 text-gray-700 font-medium"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/auth?tab=register"
+                  className="block py-2 px-4 text-center rounded-md bg-primary text-white font-medium"
+                >
+                  Sign Up
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </header>
