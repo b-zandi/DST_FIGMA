@@ -5,7 +5,6 @@ import { FeaturesSection } from "@/components/features-section";
 import { CTASection } from "@/components/cta-section";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import {
   Accordion,
   AccordionContent,
@@ -13,7 +12,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useQuery } from "@tanstack/react-query";
-import { MapPin, ArrowRight, InfoIcon, Phone, Mail, MessageSquareText } from "lucide-react";
+import { ArrowRight, InfoIcon, Phone, Mail, MessageSquareText, CheckCircle2 } from "lucide-react";
 import { FAQ } from "@shared/schema";
 import { ScheduleCallDialog } from "@/components/schedule-call-dialog";
 
@@ -28,106 +27,213 @@ export default function HomePage() {
       <main className="flex-grow">
         <HeroSection />
         <FeaturesSection />
-        <CTASection />
-
+        
         {/* Accreditation Info Section */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-            <div className="bg-gray-50 rounded-lg p-8 border border-gray-200">
-              <div className="flex items-start">
-                <div className="flex-shrink-0 mt-1">
-                  <InfoIcon className="h-6 w-6 text-primary" />
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <div className="inline-flex items-center bg-primary/10 text-primary rounded-full py-1 px-3 text-sm font-medium mb-4">
+                  <CheckCircle2 className="h-4 w-4 mr-1" />
+                  Investor Qualifications
                 </div>
-                <div className="ml-4">
-                  <h3 className="text-xl font-semibold text-[#1A2B50] mb-3">
-                    Accredited Investor Information
-                  </h3>
-                  <p className="text-gray-600 mb-4">
-                    DST investments are available exclusively to accredited investors as defined by the Securities and Exchange Commission (SEC). To qualify as an accredited investor, you must meet one of the following criteria:
-                  </p>
-                  <ul className="list-disc pl-5 space-y-2 text-gray-600 mb-4">
-                    <li>Individual income exceeding $200,000 in each of the two most recent years, or joint income with a spouse exceeding $300,000.</li>
-                    <li>Net worth exceeding $1 million, either individually or jointly with a spouse (excluding primary residence).</li>
-                    <li>Certain professional certifications, designations, or credentials recognized by the SEC.</li>
-                  </ul>
-                  <Link href="/accreditation" className="text-primary hover:text-primary/90 font-medium inline-flex items-center">
+                
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-5">
+                  Are you an accredited investor?
+                </h2>
+                
+                <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                  DST investments are available exclusively to accredited investors as defined by the Securities and Exchange Commission (SEC).
+                </p>
+                
+                <div className="space-y-5 mb-8">
+                  <div className="flex items-start gap-3">
+                    <div className="bg-primary/10 rounded-full p-1 mt-1">
+                      <CheckCircle2 className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-gray-900">Income requirements</p>
+                      <p className="text-gray-600">Individual income exceeding $200,000 in each of the two most recent years, or joint income with a spouse exceeding $300,000.</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <div className="bg-primary/10 rounded-full p-1 mt-1">
+                      <CheckCircle2 className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-gray-900">Net worth requirements</p>
+                      <p className="text-gray-600">Net worth exceeding $1 million, either individually or jointly with a spouse (excluding primary residence).</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <div className="bg-primary/10 rounded-full p-1 mt-1">
+                      <CheckCircle2 className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-gray-900">Professional qualifications</p>
+                      <p className="text-gray-600">Certain professional certifications, designations, or credentials recognized by the SEC.</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <Button asChild variant="outline" className="gap-2">
+                  <Link href="/accreditation">
                     Learn more about accreditation
-                    <ArrowRight className="ml-1 h-4 w-4" />
+                    <ArrowRight className="h-4 w-4" />
                   </Link>
+                </Button>
+              </div>
+              
+              <div className="relative">
+                <div className="absolute -z-10 w-80 h-80 bg-blue-100 rounded-full blur-3xl opacity-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                <div className="bg-white rounded-lg shadow-lg border border-gray-100 p-8 relative">
+                  <div className="flex items-center mb-6">
+                    <InfoIcon className="h-6 w-6 text-primary mr-3" />
+                    <h3 className="text-xl font-semibold text-gray-900">
+                      Qualification Process
+                    </h3>
+                  </div>
+                  
+                  <p className="text-gray-600 mb-6">
+                    Our streamlined verification process helps determine if you meet the SEC's criteria for an accredited investor. Here's how it works:
+                  </p>
+                  
+                  <ol className="space-y-4 mb-6">
+                    <li className="flex gap-4">
+                      <div className="flex-shrink-0 h-7 w-7 rounded-full bg-primary text-white flex items-center justify-center font-medium">1</div>
+                      <div className="flex-1">
+                        <p className="font-medium text-gray-900">Create an account</p>
+                        <p className="text-gray-600 text-sm">Sign up for free and complete your investor profile</p>
+                      </div>
+                    </li>
+                    
+                    <li className="flex gap-4">
+                      <div className="flex-shrink-0 h-7 w-7 rounded-full bg-primary text-white flex items-center justify-center font-medium">2</div>
+                      <div className="flex-1">
+                        <p className="font-medium text-gray-900">Submit verification materials</p>
+                        <p className="text-gray-600 text-sm">Provide the necessary documentation based on your qualification method</p>
+                      </div>
+                    </li>
+                    
+                    <li className="flex gap-4">
+                      <div className="flex-shrink-0 h-7 w-7 rounded-full bg-primary text-white flex items-center justify-center font-medium">3</div>
+                      <div className="flex-1">
+                        <p className="font-medium text-gray-900">Receive confirmation</p>
+                        <p className="text-gray-600 text-sm">Once verified, gain access to all DST investment opportunities</p>
+                      </div>
+                    </li>
+                  </ol>
+                  
+                  <Button asChild className="w-full">
+                    <Link href="/auth?tab=register">
+                      Start Verification Process
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
+        <CTASection />
+
         {/* FAQ Preview Section */}
-        <section className="py-16 bg-gray-50">
+        <section className="py-20 bg-gray-50">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-[#1A2B50] mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 Frequently Asked Questions
               </h2>
-              <p className="text-lg text-gray-600">
-                Learn more about DST investments and how they work
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                Get answers to common questions about Delaware Statutory Trust investments
               </p>
             </div>
 
             {/* FAQ Accordion */}
-            <div className="space-y-4">
-              <Accordion type="single" collapsible className="space-y-4">
+            <div className="space-y-3 mb-10">
+              <Accordion type="single" collapsible className="space-y-3">
                 {faqs?.slice(0, 4).map((faq) => (
-                  <AccordionItem key={faq.id} value={`faq-${faq.id}`}>
-                    <Card className="overflow-hidden">
-                      <AccordionTrigger className="px-6 py-4 hover:no-underline">
-                        <h3 className="text-lg font-medium text-[#1A2B50] text-left">
-                          {faq.question}
-                        </h3>
-                      </AccordionTrigger>
-                      <AccordionContent className="px-6 pb-4 text-gray-600">
-                        {faq.answer}
-                      </AccordionContent>
-                    </Card>
+                  <AccordionItem key={faq.id} value={`faq-${faq.id}`} className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                    <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                      <h3 className="text-lg font-medium text-gray-900 text-left">
+                        {faq.question}
+                      </h3>
+                    </AccordionTrigger>
+                    <AccordionContent className="px-6 pb-4 text-gray-600">
+                      {faq.answer}
+                    </AccordionContent>
                   </AccordionItem>
                 ))}
               </Accordion>
             </div>
 
-            <div className="text-center mt-8">
-              <Button asChild>
-                <Link href="/faq">View All FAQs</Link>
+            <div className="text-center">
+              <Button asChild variant="outline" size="lg" className="gap-2">
+                <Link href="/faq">
+                  View All FAQs
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
               </Button>
             </div>
           </div>
         </section>
 
-        {/* Contact CTA Section */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-            <div className="bg-[#1A2B50] rounded-lg shadow-lg px-6 py-12 md:p-12 text-center">
-              <h2 className="text-3xl font-bold text-white mb-4">
+        {/* Contact Options Section */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 Have questions about DST investments?
               </h2>
-              <p className="text-lg text-white opacity-90 mb-8 max-w-2xl mx-auto">
-                Our team of investment professionals is here to help you navigate the world of DST investments and 1031 exchanges.
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                Our team of investment professionals is here to help you navigate the world of DST investments and 1031 exchanges
               </p>
-              <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                <ScheduleCallDialog />
-                
-                <Button 
-                  variant="outline" 
-                  className="border-white text-white bg-white/20 hover:bg-white/30 hover:text-white gap-2"
-                >
-                  <Mail className="h-4 w-4" />
-                  Contact Us
-                </Button>
-                
-                <Button
-                  variant="outline"
-                  className="border-white bg-indigo-600/90 text-white hover:bg-indigo-600 hover:text-white gap-2"
-                >
-                  <MessageSquareText className="h-4 w-4" />
-                  Chat with Franklin AI
-                </Button>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-gray-50 border border-gray-100 rounded-lg p-8 text-center flex flex-col items-center">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-5">
+                  <Phone className="h-5 w-5 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Schedule a Call</h3>
+                <p className="text-gray-600 mb-6">
+                  Speak directly with one of our investment advisors at a time that works for you.
+                </p>
+                <div className="mt-auto">
+                  <ScheduleCallDialog />
+                </div>
+              </div>
+              
+              <div className="bg-gray-50 border border-gray-100 rounded-lg p-8 text-center flex flex-col items-center">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-5">
+                  <Mail className="h-5 w-5 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Email Us</h3>
+                <p className="text-gray-600 mb-6">
+                  Send us your questions and we'll respond within one business day.
+                </p>
+                <div className="mt-auto">
+                  <Button variant="outline">
+                    Contact Us
+                  </Button>
+                </div>
+              </div>
+              
+              <div className="bg-gray-50 border border-gray-100 rounded-lg p-8 text-center flex flex-col items-center">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-5">
+                  <MessageSquareText className="h-5 w-5 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Chat with AI</h3>
+                <p className="text-gray-600 mb-6">
+                  Get immediate answers to common questions with our AI assistant.
+                </p>
+                <div className="mt-auto">
+                  <Button variant="outline">
+                    Start Chat
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
