@@ -25,7 +25,6 @@ export function Header() {
   };
 
   const navItems = [
-    { title: "Investments", href: "/investments" },
     { title: "Learn", href: "/learn-more" },
     { title: "Accreditation", href: "/accreditation" },
     { title: "FAQ", href: "/faq" },
