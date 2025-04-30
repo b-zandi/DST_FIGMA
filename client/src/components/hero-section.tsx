@@ -29,8 +29,8 @@ export function HeroSection() {
               Accreditation Process
               <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link href="/learn-more" className="flex items-center gap-2 text-primary font-medium hover:underline">
-              DST Resources
+            <Link href="/products" className="flex items-center gap-2 text-primary font-medium hover:underline">
+              Find a DST
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -47,8 +47,8 @@ export function HeroSection() {
                 Access professionally managed Delaware Statutory Trust investments with significant tax advantages and passive income potential.
               </p>
               <Button size="lg" variant="outline" className="gap-2 border-gray-300" asChild>
-                <Link href="/learn-more">
-                  Learn More
+                <Link href="/products/find-dst">
+                  Find a DST
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>

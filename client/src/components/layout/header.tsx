@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation } from "wouter";
+import { Link } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -11,6 +11,17 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
+
+interface DropdownItem {
+  title: string;
+  href: string;
+}
+
+interface NavItem {
+  title: string;
+  href: string;
+  dropdownItems?: DropdownItem[];
+}
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -25,7 +36,9 @@ export function Header() {
   };
 
   const navItems = [
-    { title: "Learn", href: "/learn-more" },
+    { title: "Products", href: "/products", dropdownItems: [
+      { title: "Find a DST", href: "/products/find-dst" }
+    ] },
     { title: "Accreditation", href: "/accreditation" },
     { title: "FAQ", href: "/faq" },
   ];
@@ -60,17 +73,18 @@ export function Header() {
                       All {item.title}
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
-                    <Link href={`${item.href}/featured`} className="cursor-pointer">
-                      Featured {item.title}
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link href={`${item.href}/popular`} className="cursor-pointer">
-                      Popular {item.title}
-                    </Link>
-                  </DropdownMenuItem>
+                  {item.dropdownItems && (
+                    <>
+                      <DropdownMenuSeparator />
+                      {item.dropdownItems.map((dropdownItem) => (
+                        <DropdownMenuItem key={dropdownItem.title} asChild>
+                          <Link href={dropdownItem.href} className="cursor-pointer">
+                            {dropdownItem.title}
+                          </Link>
+                        </DropdownMenuItem>
+                      ))}
+                    </>
+                  )}
                 </DropdownMenuContent>
               </DropdownMenu>
             ))}
@@ -141,18 +155,33 @@ export function Header() {
 
       {/* Mobile Menu */}
       <div className={`lg:hidden bg-white border-t ${mobileMenuOpen ? 'block' : 'hidden'}`}>
-        <div className="py-3 px-4 space-y-3">
+        <div className="py-3 px-4">
           {navItems.map((item) => (
-            <Link
-              key={item.title}
-              href={item.href}
-              className="block py-2 text-base font-medium text-gray-700 hover:text-primary"
-            >
-              {item.title}
-            </Link>
+            <div key={item.title} className="py-2">
+              <Link
+                href={item.href}
+                className="block text-base font-medium text-gray-700 hover:text-primary"
+              >
+                {item.title}
+              </Link>
+              
+              {item.dropdownItems && (
+                <div className="pl-4 mt-2 space-y-2 border-l border-gray-200">
+                  {item.dropdownItems.map((dropdownItem) => (
+                    <Link
+                      key={dropdownItem.title}
+                      href={dropdownItem.href}
+                      className="block text-sm text-gray-600 hover:text-primary"
+                    >
+                      {dropdownItem.title}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
           
-          <div className="pt-4 border-t border-gray-200">
+          <div className="pt-4 mt-2 border-t border-gray-200">
             {user ? (
               <>
                 <Link
