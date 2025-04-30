@@ -31,106 +31,128 @@ export default function HomePage() {
         <HowItWorksSection />
         
         {/* Accreditation Info Section */}
-        <section className="py-8 bg-gray-50 border-b border-gray-100">
+        <section className="py-12 bg-white border-b border-gray-100">
           <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">
-                Are you an accredited investor?
-              </h2>
-              
-              <p className="text-gray-600 mb-5 text-sm">
-                To participate in DST investments, you must be an accredited investor as defined by the Securities and Exchange Commission (SEC).
-              </p>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5">
-                <div className="flex items-start gap-2">
-                  <div className="flex-shrink-0 mt-1">
-                    <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <circle cx="12" cy="12" r="10" strokeWidth="2" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="font-medium text-gray-900 text-xs">Income requirements</p>
-                    <p className="text-gray-600 text-xs">Individual income exceeding $200,000 in each of the two most recent years, or joint income with a spouse exceeding $300,000.</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-2">
-                  <div className="flex-shrink-0 mt-1">
-                    <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <circle cx="12" cy="12" r="10" strokeWidth="2" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="font-medium text-gray-900 text-xs">Net worth requirements</p>
-                    <p className="text-gray-600 text-xs">Net worth exceeding $1 million, either individually or jointly with a spouse (excluding primary residence).</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-2">
-                  <div className="flex-shrink-0 mt-1">
-                    <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <circle cx="12" cy="12" r="10" strokeWidth="2" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="font-medium text-gray-900 text-xs">Professional certifications</p>
-                    <p className="text-gray-600 text-xs">Certain professional certifications, designations, or credentials recognized by the SEC.</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-2">
-                  <div className="flex-shrink-0 mt-1">
-                    <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <circle cx="12" cy="12" r="10" strokeWidth="2" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="font-medium text-gray-900 text-xs">Entity investments</p>
-                    <p className="text-gray-600 text-xs">Financial institutions, private business development companies, or organizations with assets exceeding $5 million.</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-white p-5 border border-gray-200 rounded-lg mb-5">
-                <h3 className="font-semibold text-sm mb-3">Qualification Process</h3>
-                <ol className="space-y-3">
-                  <li className="flex gap-3">
-                    <div className="flex-shrink-0 h-5 w-5 rounded-full bg-gray-100 flex items-center justify-center text-xs">1</div>
-                    <div className="flex-1">
-                      <p className="font-medium text-gray-900 text-xs">Create your account</p>
-                      <p className="text-gray-600 text-xs">Complete your investor profile</p>
-                    </div>
-                  </li>
+            <div className="max-w-5xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Left Column */}
+                <div>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                    Are you an accredited investor?
+                  </h2>
                   
-                  <li className="flex gap-3">
-                    <div className="flex-shrink-0 h-5 w-5 rounded-full bg-gray-100 flex items-center justify-center text-xs">2</div>
-                    <div className="flex-1">
-                      <p className="font-medium text-gray-900 text-xs">Submit verification documents</p>
-                      <p className="text-gray-600 text-xs">Upload required financial documentation</p>
-                    </div>
-                  </li>
+                  <p className="text-gray-600 mb-6">
+                    DST investments are available exclusively to accredited investors as defined by the Securities and Exchange Commission (SEC).
+                  </p>
                   
-                  <li className="flex gap-3">
-                    <div className="flex-shrink-0 h-5 w-5 rounded-full bg-gray-100 flex items-center justify-center text-xs">3</div>
-                    <div className="flex-1">
-                      <p className="font-medium text-gray-900 text-xs">Receive confirmation</p>
-                      <p className="text-gray-600 text-xs">Gain access to all DST investment opportunities</p>
+                  <div className="space-y-5">
+                    <div className="flex items-start gap-3">
+                      <div className="flex-shrink-0 mt-1">
+                        <svg className="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <circle cx="12" cy="12" r="10" strokeWidth="2" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-900">Income requirements</p>
+                        <p className="text-gray-600">Individual income exceeding $200,000 in each of the two most recent years, or joint income with a spouse exceeding $300,000.</p>
+                      </div>
                     </div>
-                  </li>
-                </ol>
-              </div>
-              
-              <div className="text-center">
-                <Button asChild size="sm" className="bg-blue-600 hover:bg-blue-700 text-white h-8 rounded-md text-xs">
-                  <Link href="/auth?tab=register">
-                    Start Verification Process
-                  </Link>
-                </Button>
+                    
+                    <div className="flex items-start gap-3">
+                      <div className="flex-shrink-0 mt-1">
+                        <svg className="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <circle cx="12" cy="12" r="10" strokeWidth="2" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-900">Net worth requirements</p>
+                        <p className="text-gray-600">Net worth exceeding $1 million, either individually or jointly with a spouse (excluding primary residence).</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start gap-3">
+                      <div className="flex-shrink-0 mt-1">
+                        <svg className="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <circle cx="12" cy="12" r="10" strokeWidth="2" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-900">Professional qualifications</p>
+                        <p className="text-gray-600">Certain professional certifications, designations, or credentials recognized by the SEC.</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-8">
+                    <Button asChild variant="outline" className="gap-2">
+                      <Link href="/accreditation">
+                        Learn more about accreditation
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+                
+                {/* Right Column - Qualification Card */}
+                <div>
+                  <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
+                    <div className="flex items-center mb-5">
+                      <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                        <InfoIcon className="h-5 w-5 text-blue-500" />
+                      </div>
+                      <h3 className="text-xl font-semibold text-gray-900">
+                        Qualification Process
+                      </h3>
+                    </div>
+                    
+                    <p className="text-gray-600 mb-6">
+                      Our streamlined verification process helps determine if you meet the SEC's criteria for an accredited investor. Here's how it works:
+                    </p>
+                    
+                    <div className="space-y-5">
+                      <div className="flex gap-4">
+                        <div className="flex-shrink-0 h-7 w-7 rounded-full bg-blue-500 text-white flex items-center justify-center">
+                          1
+                        </div>
+                        <div>
+                          <p className="font-medium text-gray-900">Create an account</p>
+                          <p className="text-gray-600">Sign up for free and complete your investor profile</p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex gap-4">
+                        <div className="flex-shrink-0 h-7 w-7 rounded-full bg-blue-500 text-white flex items-center justify-center">
+                          2
+                        </div>
+                        <div>
+                          <p className="font-medium text-gray-900">Submit verification materials</p>
+                          <p className="text-gray-600">Provide the necessary documentation based on your qualification method</p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex gap-4">
+                        <div className="flex-shrink-0 h-7 w-7 rounded-full bg-blue-500 text-white flex items-center justify-center">
+                          3
+                        </div>
+                        <div>
+                          <p className="font-medium text-gray-900">Receive confirmation</p>
+                          <p className="text-gray-600">Once verified, gain access to all DST investment opportunities</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-8">
+                      <Button asChild className="w-full bg-blue-500 hover:bg-blue-600 text-white">
+                        <Link href="/auth?tab=register">
+                          Start Verification Process
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
