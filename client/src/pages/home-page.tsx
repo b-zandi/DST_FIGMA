@@ -3,7 +3,6 @@ import { Footer } from "@/components/layout/footer";
 import { HeroSection } from "@/components/hero-section";
 import { FeaturesSection } from "@/components/features-section";
 import { HowItWorksSection } from "@/components/how-it-works-section";
-import { CTASection } from "@/components/cta-section";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import {
@@ -157,8 +156,6 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-
-        <CTASection />
 
         {/* FAQ Preview Section */}
         <section className="py-8 bg-white border-b border-gray-100">
