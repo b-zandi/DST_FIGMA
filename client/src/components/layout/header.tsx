@@ -57,14 +57,6 @@ export function Header() {
 
           {/* Main Navigation - Desktop */}
           <nav className="hidden md:flex items-center space-x-6 flex-1">
-            <Link 
-              href="/dashboard"
-              className="flex items-center text-gray-600 hover:text-gray-900 text-sm font-medium"
-            >
-              <Building className="h-4 w-4 mr-1.5" />
-              Dashboard
-            </Link>
-            
             {navItems.map((item, index) => (
               <Link 
                 key={item.title} 
@@ -144,16 +136,6 @@ export function Header() {
       {/* Mobile Menu */}
       <div className={`md:hidden bg-white border-t ${mobileMenuOpen ? 'block' : 'hidden'}`}>
         <div className="py-2 px-4">
-          
-          <div className="py-2">
-            <Link 
-              href="/dashboard"
-              className="flex items-center text-sm text-gray-700 hover:text-gray-900 py-1.5"
-            >
-              <Building className="h-4 w-4 mr-1.5" />
-              Dashboard
-            </Link>
-          </div>
           
           {navItems.map((item, index) => (
             <div key={item.title} className="py-2">
