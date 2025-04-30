@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Building, ChevronDown, User, Menu, LogOut, Search } from "lucide-react";
+import { Building, ChevronDown, User, Menu, LogOut } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
@@ -77,18 +77,8 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Search - Desktop */}
+          {/* Auth - Desktop */}
           <div className="hidden md:flex items-center ml-auto">
-            <div className="relative flex items-center">
-              <Input
-                type="search"
-                placeholder="Search..."
-                className="w-48 pl-3 pr-9 py-1 text-sm border-gray-300 rounded-md h-7 text-gray-600"
-              />
-              <button className="absolute right-1 h-5 w-5 p-0.5 rounded-md bg-gray-100 flex items-center justify-center">
-                <Search className="h-3.5 w-3.5 text-gray-600" />
-              </button>
-            </div>
             
             {user ? (
               <DropdownMenu>
@@ -154,17 +144,6 @@ export function Header() {
       {/* Mobile Menu */}
       <div className={`md:hidden bg-white border-t ${mobileMenuOpen ? 'block' : 'hidden'}`}>
         <div className="py-2 px-4">
-          {/* Search */}
-          <div className="relative my-3">
-            <Input
-              type="search"
-              placeholder="Search..."
-              className="w-full pl-3 pr-9 py-1 text-sm border-gray-300 rounded-md h-7"
-            />
-            <button className="absolute right-1 top-1 h-5 w-5 p-0.5 rounded-sm bg-gray-100 flex items-center justify-center">
-              <Search className="h-3.5 w-3.5 text-gray-600" />
-            </button>
-          </div>
           
           <div className="py-2">
             <Link 
