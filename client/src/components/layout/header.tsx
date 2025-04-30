@@ -32,74 +32,68 @@ export function Header() {
   };
 
   const navItems: NavItem[] = [
-    { title: "Dashboard", href: "/dashboard", icon: <Building className="h-4 w-4 mr-1.5" /> },
-    { title: "Investments", href: "/investing", icon: <svg className="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+    { title: "Find a DST", href: "/products/find-dst", icon: <Building className="h-4 w-4 mr-1.5" /> },
+    { title: "Are You Accredited?", href: "/accreditation", icon: <svg className="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
     </svg> },
-    { title: "Funding", href: "/funding", icon: <svg className="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg> },
-    { title: "Contact", href: "/contact", icon: <svg className="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+    { title: "FAQ", href: "/faq", icon: <svg className="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg> },
   ];
 
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
-      <div className="container mx-auto">
-        <div className="flex h-14 items-center">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex h-12 items-center">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center mr-8">
             <Link href="/" className="flex items-center text-blue-500">
               <svg className="h-5 w-5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
-              <span className="font-medium text-base">DST Brokerage</span>
+              <span className="font-medium text-sm">DST Brokerage</span>
             </Link>
           </div>
 
           {/* Main Navigation - Desktop */}
-          <nav className="hidden md:flex items-center space-x-1 flex-1">
-            {navItems.map((item) => (
+          <nav className="hidden md:flex items-center space-x-6 flex-1">
+            <Link 
+              href="/dashboard"
+              className="flex items-center text-gray-600 hover:text-gray-900 text-sm font-medium"
+            >
+              <Building className="h-4 w-4 mr-1.5" />
+              Dashboard
+            </Link>
+            
+            {navItems.map((item, index) => (
               <Link 
                 key={item.title} 
                 href={item.href}
-                className="flex items-center text-gray-600 hover:text-gray-900 py-1 px-3 text-sm font-medium"
+                className={`flex items-center text-gray-600 hover:text-gray-900 text-sm font-medium py-3 ${index === 1 ? 'border-b-2 border-blue-500' : ''}`}
               >
                 {item.icon}
                 {item.title}
               </Link>
             ))}
-            
-            {/* The active item will have a border-bottom */}
-            <Link 
-              href="/investors"
-              className="flex items-center text-gray-600 hover:text-gray-900 py-1 px-3 text-sm font-medium border-b-2 border-blue-500"
-            >
-              <svg className="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-              Investors
-            </Link>
           </nav>
 
-          {/* Search + Auth - Desktop */}
+          {/* Search - Desktop */}
           <div className="hidden md:flex items-center ml-auto">
-            <div className="relative mr-4">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-2">
-                <Search className="h-4 w-4 text-gray-400" />
-              </div>
+            <div className="relative flex items-center">
               <Input
                 type="search"
                 placeholder="Search..."
-                className="w-52 pl-8 pr-4 py-1 text-sm border-gray-300 rounded-md h-8"
+                className="w-48 pl-3 pr-9 py-1 text-sm border-gray-300 rounded-md h-7 text-gray-600"
               />
+              <button className="absolute right-1 h-5 w-5 p-0.5 rounded-md bg-gray-100 flex items-center justify-center">
+                <Search className="h-3.5 w-3.5 text-gray-600" />
+              </button>
             </div>
             
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="gap-2 text-sm">
+                  <Button variant="ghost" className="gap-2 text-sm ml-4">
                     <User className="h-4 w-4" />
                     <span>{user.firstName || user.username}</span>
                     <ChevronDown className="h-4 w-4 opacity-70" />
@@ -125,7 +119,7 @@ export function Header() {
                   href="/auth?tab=login"
                   className={cn(
                     buttonVariants({ variant: "ghost", size: "sm" }),
-                    "text-gray-700 text-sm"
+                    "text-gray-700 text-sm ml-4"
                   )}
                 >
                   Sign In
@@ -134,7 +128,7 @@ export function Header() {
                   href="/auth?tab=register"
                   className={cn(
                     buttonVariants({ size: "sm" }),
-                    "bg-black text-white hover:bg-gray-800 ml-2"
+                    "bg-black text-white hover:bg-gray-800 ml-2 text-sm"
                   )}
                 >
                   Sign Up
@@ -162,21 +156,31 @@ export function Header() {
         <div className="py-2 px-4">
           {/* Search */}
           <div className="relative my-3">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-2">
-              <Search className="h-4 w-4 text-gray-400" />
-            </div>
             <Input
               type="search"
               placeholder="Search..."
-              className="w-full pl-8 py-1 text-sm border-gray-300 rounded-md"
+              className="w-full pl-3 pr-9 py-1 text-sm border-gray-300 rounded-md h-7"
             />
+            <button className="absolute right-1 top-1 h-5 w-5 p-0.5 rounded-sm bg-gray-100 flex items-center justify-center">
+              <Search className="h-3.5 w-3.5 text-gray-600" />
+            </button>
           </div>
           
-          {navItems.map((item) => (
+          <div className="py-2">
+            <Link 
+              href="/dashboard"
+              className="flex items-center text-sm text-gray-700 hover:text-gray-900 py-1.5"
+            >
+              <Building className="h-4 w-4 mr-1.5" />
+              Dashboard
+            </Link>
+          </div>
+          
+          {navItems.map((item, index) => (
             <div key={item.title} className="py-2">
               <Link
                 href={item.href}
-                className="flex items-center text-sm text-gray-700 hover:text-gray-900"
+                className={`flex items-center text-sm ${index === 1 ? 'text-blue-500 font-medium' : 'text-gray-700'} hover:text-gray-900 py-1.5`}
               >
                 {item.icon}
                 {item.title}
@@ -184,31 +188,21 @@ export function Header() {
             </div>
           ))}
           
-          <div className="py-2">
-            <Link
-              href="/investors"
-              className="flex items-center text-sm text-gray-700 hover:text-gray-900 font-medium"
-            >
-              <svg className="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-              Investors
-            </Link>
-          </div>
-          
           <div className="pt-4 mt-2 border-t border-gray-200">
             {user ? (
               <>
                 <Link
                   href="/profile"
-                  className="block py-2 text-sm text-gray-700 hover:text-gray-900"
+                  className="flex items-center py-2 text-sm text-gray-700 hover:text-gray-900"
                 >
+                  <User className="h-4 w-4 mr-1.5" />
                   Profile
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="w-full text-left block py-2 text-sm text-gray-700 hover:text-gray-900"
+                  className="w-full text-left flex items-center py-2 text-sm text-gray-700 hover:text-gray-900"
                 >
+                  <LogOut className="h-4 w-4 mr-1.5" />
                   Log Out
                 </button>
               </>
