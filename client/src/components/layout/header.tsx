@@ -38,87 +38,93 @@ export function Header() {
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-20 items-center">
-          {/* Logo */}
-          <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="flex items-center space-x-2">
-              <span className="text-primary">
-                <Building className="h-8 w-8" />
-              </span>
-              <span className="font-semibold text-xl">DST Brokerage</span>
-            </Link>
+        <div className="flex h-20 items-center">
+          {/* Left section with logo and navigation */}
+          <div className="flex items-start">
+            {/* Logo */}
+            <div className="flex-shrink-0 mt-1">
+              <Link href="/" className="flex items-center space-x-2">
+                <span className="text-primary">
+                  <Building className="h-8 w-8" />
+                </span>
+                <span className="font-semibold text-xl">DST Brokerage</span>
+              </Link>
+            </div>
+
+            {/* Main Navigation - Desktop */}
+            <nav className="hidden lg:flex flex-col items-start gap-3 ml-12 mt-1">
+              {navItems.map((item) => (
+                <Button key={item.title} variant="link" className="h-auto p-0 text-gray-700 font-medium text-lg justify-start hover:text-primary hover:no-underline" asChild>
+                  <Link href={item.href}>
+                    {item.title}
+                  </Link>
+                </Button>
+              ))}
+            </nav>
           </div>
 
-          {/* Main Navigation - Desktop */}
-          <nav className="hidden lg:flex items-center space-x-4">
-            {navItems.map((item) => (
-              <Button key={item.title} variant="ghost" className="text-gray-600 font-medium text-base" asChild>
-                <Link href={item.href}>
-                  {item.title}
-                </Link>
+          {/* Right side with auth */}
+          <div className="ml-auto">
+            {/* Auth Navigation - Desktop */}
+            <div className="hidden lg:flex items-center space-x-4">
+              {user ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="gap-2">
+                      <User className="h-4 w-4" />
+                      <span>{user.firstName || user.username}</span>
+                      <ChevronDown className="h-4 w-4 opacity-70" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem asChild>
+                      <Link href="/profile" className="cursor-pointer">
+                        <User className="h-4 w-4 mr-2" />
+                        Profile
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Logout
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <>
+                  <Link
+                    href="/auth?tab=login"
+                    className={cn(
+                      buttonVariants({ variant: "ghost", size: "default" }),
+                      "text-gray-700"
+                    )}
+                  >
+                    Sign In
+                  </Link>
+                  <Link
+                    href="/auth?tab=register"
+                    className={cn(
+                      buttonVariants({ variant: "default", size: "default" }),
+                      "bg-primary text-white hover:bg-primary/90"
+                    )}
+                  >
+                    Sign Up
+                  </Link>
+                </>
+              )}
+            </div>
+
+            {/* Mobile menu button */}
+            <div className="lg:hidden">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-gray-700"
+                onClick={toggleMobileMenu}
+              >
+                <Menu className="h-6 w-6" />
               </Button>
-            ))}
-          </nav>
-
-          {/* Auth Navigation - Desktop */}
-          <div className="hidden lg:flex items-center space-x-4">
-            {user ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="gap-2">
-                    <User className="h-4 w-4" />
-                    <span>{user.firstName || user.username}</span>
-                    <ChevronDown className="h-4 w-4 opacity-70" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem asChild>
-                    <Link href="/profile" className="cursor-pointer">
-                      <User className="h-4 w-4 mr-2" />
-                      Profile
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
-                    <LogOut className="h-4 w-4 mr-2" />
-                    Logout
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
-              <>
-                <Link
-                  href="/auth?tab=login"
-                  className={cn(
-                    buttonVariants({ variant: "ghost", size: "default" }),
-                    "text-gray-700"
-                  )}
-                >
-                  Sign In
-                </Link>
-                <Link
-                  href="/auth?tab=register"
-                  className={cn(
-                    buttonVariants({ variant: "default", size: "default" }),
-                    "bg-primary text-white hover:bg-primary/90"
-                  )}
-                >
-                  Sign Up
-                </Link>
-              </>
-            )}
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="lg:hidden">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-gray-700"
-              onClick={toggleMobileMenu}
-            >
-              <Menu className="h-6 w-6" />
-            </Button>
+            </div>
           </div>
         </div>
       </div>
