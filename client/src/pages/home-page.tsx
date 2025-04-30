@@ -158,25 +158,25 @@ export default function HomePage() {
         </section>
 
         {/* FAQ Preview Section */}
-        <section className="py-8 bg-white border-b border-gray-100">
+        <section className="py-12 bg-white border-b border-gray-100">
           <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto">
-              <h2 className="text-xl font-bold text-gray-900 mb-5">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-2xl font-bold text-gray-900 mb-8">
                 Frequently Asked Questions
               </h2>
 
               {/* FAQ Accordion */}
-              <div className="space-y-2 mb-6">
-                <Accordion type="single" collapsible className="space-y-2">
+              <div className="space-y-4 mb-8">
+                <Accordion type="single" collapsible>
                   {faqs?.slice(0, 3).map((faq) => (
-                    <AccordionItem key={faq.id} value={`faq-${faq.id}`} className="bg-white border border-gray-200 rounded-lg overflow-hidden">
-                      <AccordionTrigger className="px-4 py-3 hover:no-underline">
-                        <h3 className="text-sm font-medium text-gray-900 text-left">
+                    <AccordionItem key={faq.id} value={`faq-${faq.id}`} className="border border-gray-200 rounded-md overflow-hidden mb-4">
+                      <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                        <h3 className="text-base font-medium text-gray-900 text-left">
                           {faq.question}
                         </h3>
                       </AccordionTrigger>
-                      <AccordionContent className="px-4 pb-3 text-gray-600">
-                        <p className="text-xs">{faq.answer}</p>
+                      <AccordionContent className="px-6 pb-4 pt-2 text-gray-600">
+                        <p>{faq.answer}</p>
                       </AccordionContent>
                     </AccordionItem>
                   ))}
@@ -184,10 +184,10 @@ export default function HomePage() {
               </div>
 
               <div className="text-center">
-                <Button asChild size="sm" variant="outline" className="gap-1 text-xs h-8 border-gray-300 rounded-md">
+                <Button asChild variant="outline" className="gap-2 border-gray-300 bg-white rounded-md text-sm h-auto px-6 py-2">
                   <Link href="/faq">
                     View All FAQs
-                    <ArrowRight className="h-3 w-3" />
+                    <ArrowRight className="h-4 w-4" />
                   </Link>
                 </Button>
               </div>
@@ -196,57 +196,57 @@ export default function HomePage() {
         </section>
 
         {/* Contact Options Section */}
-        <section className="py-8 bg-gray-50">
+        <section className="py-12 bg-gray-50">
           <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto">
-              <h2 className="text-xl font-bold text-gray-900 mb-4 text-center">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">
                 Have questions about DST investments?
               </h2>
-              <p className="text-sm text-gray-600 mb-6 text-center">
+              <p className="text-gray-600 mb-10 text-center">
                 Our team of investment professionals is here to help you navigate the world of DST investments and 1031 exchanges
               </p>
               
-              <div className="grid md:grid-cols-3 gap-4">
-                <div className="bg-white border border-gray-200 rounded-lg p-4 text-center">
-                  <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-3">
-                    <Phone className="h-4 w-4 text-gray-700" />
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="bg-white border border-gray-200 rounded-md p-8 text-center">
+                  <div className="flex justify-center mb-5">
+                    <Phone className="h-6 w-6 text-gray-700" />
                   </div>
-                  <h3 className="text-sm font-semibold text-gray-900 mb-2">Schedule a Call</h3>
-                  <p className="text-xs text-gray-600 mb-3">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Schedule a Call</h3>
+                  <p className="text-gray-600 mb-6">
                     Speak with one of our investment advisors at a time that works for you.
                   </p>
                   <div>
-                    <Button size="sm" variant="outline" className="text-xs h-7 w-full">
+                    <Button variant="outline" className="text-sm px-6 py-2 h-auto border-gray-300 w-full">
                       Book a Time
                     </Button>
                   </div>
                 </div>
                 
-                <div className="bg-white border border-gray-200 rounded-lg p-4 text-center">
-                  <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-3">
-                    <Mail className="h-4 w-4 text-gray-700" />
+                <div className="bg-white border border-gray-200 rounded-md p-8 text-center">
+                  <div className="flex justify-center mb-5">
+                    <Mail className="h-6 w-6 text-gray-700" />
                   </div>
-                  <h3 className="text-sm font-semibold text-gray-900 mb-2">Email Us</h3>
-                  <p className="text-xs text-gray-600 mb-3">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Email Us</h3>
+                  <p className="text-gray-600 mb-6">
                     Send us your questions and we'll respond within one business day.
                   </p>
                   <div>
-                    <Button size="sm" variant="outline" className="text-xs h-7 w-full">
+                    <Button variant="outline" className="text-sm px-6 py-2 h-auto border-gray-300 w-full">
                       Contact Us
                     </Button>
                   </div>
                 </div>
                 
-                <div className="bg-white border border-gray-200 rounded-lg p-4 text-center">
-                  <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-3">
-                    <MessageSquareText className="h-4 w-4 text-gray-700" />
+                <div className="bg-white border border-gray-200 rounded-md p-8 text-center">
+                  <div className="flex justify-center mb-5">
+                    <MessageSquareText className="h-6 w-6 text-gray-700" />
                   </div>
-                  <h3 className="text-sm font-semibold text-gray-900 mb-2">Chat with AI</h3>
-                  <p className="text-xs text-gray-600 mb-3">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Chat with AI</h3>
+                  <p className="text-gray-600 mb-6">
                     Get immediate answers to common questions with our AI assistant.
                   </p>
                   <div>
-                    <Button size="sm" variant="outline" className="text-xs h-7 w-full">
+                    <Button variant="outline" className="text-sm px-6 py-2 h-auto border-gray-300 w-full">
                       Start Chat
                     </Button>
                   </div>
