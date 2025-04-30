@@ -1,38 +1,52 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Building, ArrowRight } from "lucide-react";
+import { Building, ArrowRight, Search } from "lucide-react";
 import { ChatInterface } from "@/components/chat-interface";
+import { Input } from "@/components/ui/input";
 
 export function HeroSection() {
   return (
-    <section className="relative py-20 md:py-32 bg-gradient-to-b from-blue-50/70 to-white overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute top-0 right-0 w-2/3 h-96 bg-blue-100/50 rounded-full blur-3xl opacity-50"></div>
-      <div className="absolute bottom-0 left-0 w-1/2 h-64 bg-blue-100/50 rounded-full blur-3xl opacity-50"></div>
-      <div className="absolute bottom-40 right-20 w-24 h-24 bg-primary/20 rounded-full blur-xl"></div>
-      <div className="absolute top-40 left-20 w-16 h-16 bg-primary/10 rounded-full blur-lg"></div>
-      
-      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-4xl mx-auto mb-16">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 tracking-tight leading-tight mb-8">
-            DST Investing.<br />Made Simple.
+    <section className="bg-gray-50 py-10">
+      <div className="container mx-auto px-4">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            DST Investing. Made Simple.
           </h1>
-          <p className="text-xl text-gray-600 mb-12 leading-relaxed max-w-3xl mx-auto">
-            Discover institutional-quality real estate investments with tax advantages and passive income potential through Delaware Statutory Trusts.
+          <p className="text-lg text-gray-600 mb-6">
+            Get expert DST due diligence and Delaware Statutory Trust investment advice for your 1031 exchange or direct investment
           </p>
           
-          {/* Chat Interface */}
-          <ChatInterface />
+          {/* Search Bar */}
+          <div className="relative mb-8">
+            <div className="flex items-center border border-gray-300 rounded-lg bg-white p-1">
+              <div className="flex-1 flex items-center px-3 py-2">
+                <Search className="h-5 w-5 text-gray-400 mr-2" />
+                <Input 
+                  type="text" 
+                  placeholder="Ask Franklin AI about DST investments..."
+                  className="flex-1 border-0 focus-visible:ring-0 focus-visible:ring-offset-0 px-0 py-1"
+                />
+              </div>
+              <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white rounded-md px-4">
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
           
-          <div className="flex justify-center items-center gap-8 mt-8">
-            <Link href="/accreditation" className="flex items-center gap-2 text-primary font-medium hover:underline">
-              Accreditation Process
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link href="/products" className="flex items-center gap-2 text-primary font-medium hover:underline">
-              Find a DST
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+          {/* Quick Links */}
+          <div className="flex flex-wrap gap-2 mb-10">
+            <div className="flex items-center bg-white border border-gray-200 rounded-full py-1 px-3 text-sm">
+              <span className="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
+              <span>How do DSTs work?</span>
+            </div>
+            <div className="flex items-center bg-white border border-gray-200 rounded-full py-1 px-3 text-sm">
+              <span className="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
+              <span>DST investment benefits</span>
+            </div>
+            <div className="flex items-center bg-white border border-gray-200 rounded-full py-1 px-3 text-sm">
+              <span className="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
+              <span>Am I accredited?</span>
+            </div>
           </div>
         </div>
         

@@ -2,6 +2,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { HeroSection } from "@/components/hero-section";
 import { FeaturesSection } from "@/components/features-section";
+import { HowItWorksSection } from "@/components/how-it-works-section";
 import { CTASection } from "@/components/cta-section";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
@@ -27,6 +28,7 @@ export default function HomePage() {
       <main className="flex-grow">
         <HeroSection />
         <FeaturesSection />
+        <HowItWorksSection />
         
         {/* Accreditation Info Section */}
         <section className="py-20 bg-white">
