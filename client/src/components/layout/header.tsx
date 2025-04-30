@@ -12,15 +12,9 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 
-interface DropdownItem {
-  title: string;
-  href: string;
-}
-
 interface NavItem {
   title: string;
   href: string;
-  dropdownItems?: DropdownItem[];
 }
 
 export function Header() {
@@ -36,10 +30,8 @@ export function Header() {
   };
 
   const navItems = [
-    { title: "Products", href: "/products", dropdownItems: [
-      { title: "Find a DST", href: "/products/find-dst" }
-    ] },
-    { title: "Accreditation", href: "/accreditation" },
+    { title: "Find a DST", href: "/products/find-dst" },
+    { title: "Are You Accredited?", href: "/accreditation" },
     { title: "FAQ", href: "/faq" },
   ];
 
@@ -58,35 +50,13 @@ export function Header() {
           </div>
 
           {/* Main Navigation - Desktop */}
-          <nav className="hidden lg:flex items-center space-x-2">
+          <nav className="hidden lg:flex items-center space-x-4">
             {navItems.map((item) => (
-              <DropdownMenu key={item.title}>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="text-gray-600 font-medium text-base">
-                    {item.title}
-                    <ChevronDown className="ml-1 h-4 w-4 opacity-70" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="start" className="w-56">
-                  <DropdownMenuItem asChild>
-                    <Link href={item.href} className="cursor-pointer">
-                      All {item.title}
-                    </Link>
-                  </DropdownMenuItem>
-                  {item.dropdownItems && (
-                    <>
-                      <DropdownMenuSeparator />
-                      {item.dropdownItems.map((dropdownItem) => (
-                        <DropdownMenuItem key={dropdownItem.title} asChild>
-                          <Link href={dropdownItem.href} className="cursor-pointer">
-                            {dropdownItem.title}
-                          </Link>
-                        </DropdownMenuItem>
-                      ))}
-                    </>
-                  )}
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <Button key={item.title} variant="ghost" className="text-gray-600 font-medium text-base" asChild>
+                <Link href={item.href}>
+                  {item.title}
+                </Link>
+              </Button>
             ))}
           </nav>
 
@@ -164,20 +134,6 @@ export function Header() {
               >
                 {item.title}
               </Link>
-              
-              {item.dropdownItems && (
-                <div className="pl-4 mt-2 space-y-2 border-l border-gray-200">
-                  {item.dropdownItems.map((dropdownItem) => (
-                    <Link
-                      key={dropdownItem.title}
-                      href={dropdownItem.href}
-                      className="block text-sm text-gray-600 hover:text-primary"
-                    >
-                      {dropdownItem.title}
-                    </Link>
-                  ))}
-                </div>
-              )}
             </div>
           ))}
           
