@@ -37,22 +37,19 @@ export function Header() {
 
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-20 items-center">
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="flex items-center space-x-2">
-              <span className="text-primary">
-                <Building className="h-8 w-8" />
-              </span>
-              <span className="font-semibold text-xl">DST Brokerage</span>
+              <span className="font-semibold text-lg text-gray-900">DST Brokerage</span>
             </Link>
           </div>
 
           {/* Main Navigation - Desktop */}
-          <nav className="hidden lg:flex items-center space-x-4">
+          <nav className="hidden lg:flex items-center space-x-1">
             {navItems.map((item) => (
-              <Button key={item.title} variant="ghost" className="text-gray-600 font-medium text-base" asChild>
+              <Button key={item.title} variant="ghost" className="text-gray-600 text-sm" asChild>
                 <Link href={item.href}>
                   {item.title}
                 </Link>
@@ -61,11 +58,11 @@ export function Header() {
           </nav>
 
           {/* Auth Navigation - Desktop */}
-          <div className="hidden lg:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center">
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="gap-2">
+                  <Button variant="ghost" className="gap-2 text-sm">
                     <User className="h-4 w-4" />
                     <span>{user.firstName || user.username}</span>
                     <ChevronDown className="h-4 w-4 opacity-70" />
@@ -90,8 +87,8 @@ export function Header() {
                 <Link
                   href="/auth?tab=login"
                   className={cn(
-                    buttonVariants({ variant: "ghost", size: "default" }),
-                    "text-gray-700"
+                    buttonVariants({ variant: "ghost", size: "sm" }),
+                    "text-gray-700 text-sm"
                   )}
                 >
                   Sign In
@@ -99,8 +96,8 @@ export function Header() {
                 <Link
                   href="/auth?tab=register"
                   className={cn(
-                    buttonVariants({ variant: "default", size: "default" }),
-                    "bg-primary text-white hover:bg-primary/90"
+                    buttonVariants({ size: "sm" }),
+                    "bg-black text-white hover:bg-gray-800 ml-2"
                   )}
                 >
                   Sign Up
@@ -130,7 +127,7 @@ export function Header() {
             <div key={item.title} className="py-2">
               <Link
                 href={item.href}
-                className="block text-base font-medium text-gray-700 hover:text-primary"
+                className="block text-sm text-gray-700 hover:text-gray-900"
               >
                 {item.title}
               </Link>
@@ -142,13 +139,13 @@ export function Header() {
               <>
                 <Link
                   href="/profile"
-                  className="block py-2 text-base font-medium text-gray-700 hover:text-primary"
+                  className="block py-2 text-sm text-gray-700 hover:text-gray-900"
                 >
                   Profile
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="w-full text-left block py-2 text-base font-medium text-gray-700 hover:text-primary"
+                  className="w-full text-left block py-2 text-sm text-gray-700 hover:text-gray-900"
                 >
                   Log Out
                 </button>
@@ -157,13 +154,13 @@ export function Header() {
               <div className="flex flex-col space-y-3 pt-2">
                 <Link
                   href="/auth?tab=login"
-                  className="block py-2 px-4 text-center rounded-md border border-gray-300 text-gray-700 font-medium"
+                  className="block py-2 px-4 text-center rounded-md border border-gray-300 text-gray-700 text-sm"
                 >
                   Sign In
                 </Link>
                 <Link
                   href="/auth?tab=register"
-                  className="block py-2 px-4 text-center rounded-md bg-primary text-white font-medium"
+                  className="block py-2 px-4 text-center rounded-md bg-black text-white text-sm"
                 >
                   Sign Up
                 </Link>
