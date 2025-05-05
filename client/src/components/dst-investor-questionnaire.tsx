@@ -144,6 +144,12 @@ const page2Questions = [
     label: 'Anything else we should know?',
     type: 'textarea',
   },
+  {
+    name: 'truthfulAcknowledgement',
+    label: 'I hereby acknowledge that all the information provided is truthful and accurate to the best of my knowledge.',
+    type: 'checkbox',
+    required: true,
+  },
 ] as const
 
 /* ---------- Zod schema ---------- */
@@ -181,6 +187,9 @@ const Page2Schema = z.object({
     .optional(),
   advisor: z.enum(['yes', 'no']).optional(),
   notes: z.string().optional(),
+  truthfulAcknowledgement: z.literal(true, {
+    errorMap: () => ({ message: "You must acknowledge that the information provided is truthful" })
+  })
 })
 
 const WizardSchema = Page1Schema.merge(Page2Schema)
@@ -314,6 +323,24 @@ export const DSTInvestorQuestionnaire: React.FC<Props> = ({ onComplete }) => {
               className="border rounded p-2"
               {...register(q.name as keyof WizardInputs)}
             />
+          </div>
+        )
+      case 'checkbox':
+        return (
+          <div className="flex flex-col gap-2">
+            <div className="flex items-start gap-2 bg-blue-50 p-4 rounded-lg border border-blue-100">
+              <input
+                type="checkbox"
+                className="mt-1"
+                {...register(q.name as keyof WizardInputs)}
+              />
+              <label className="font-medium text-blue-800">{q.label}</label>
+            </div>
+            {errors[q.name as keyof WizardInputs] && (
+              <p className="text-red-500 text-sm">
+                {String(errors[q.name as keyof WizardInputs]?.message)}
+              </p>
+            )}
           </div>
         )
       default:

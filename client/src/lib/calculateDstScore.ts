@@ -13,6 +13,7 @@ export type DstAnswers = {
   riskTolerance?: number;
   advisor?: 'yes' | 'no';
   notes?: string;
+  truthfulAcknowledgement: boolean;
 };
 
 export function calculateDstScore(answers: DstAnswers): {
