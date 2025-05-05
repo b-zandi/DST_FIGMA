@@ -6,7 +6,7 @@ import { calculateDstScore, DstAnswers } from '@/lib/calculateDstScore'
 
 /* ---------- Question metadata ---------- */
 
-export const page1Questions = [
+const page1Questions = [
   {
     name: 'accredited',
     label: 'Are you already an accredited investor?',
@@ -51,8 +51,8 @@ export const page1Questions = [
     type: 'radio',
     options: [
       { value: '<3', label: '< 3 years' },
-      { value: '3-5', label: '3 – 5 years' },
-      { value: '5-10', label: '5 – 10 years' },
+      { value: '3-5', label: '3-5 years' },
+      { value: '5-10', label: '5-10 years' },
       { value: '10+', label: '10 years +' },
     ],
     required: true,
@@ -77,7 +77,7 @@ export const page1Questions = [
   },
 ] as const
 
-export const page2Questions = [
+const page2Questions = [
   {
     name: 'location',
     label: 'Property location (state or ZIP)',
@@ -102,9 +102,9 @@ export const page2Questions = [
     type: 'select',
     options: [
       { value: 'free', label: 'Owned free & clear' },
-      { value: 'lt25', label: '< 25 % of value' },
-      { value: '25to50', label: '25 – 50 % of value' },
-      { value: 'gt50', label: '> 50 % of value' },
+      { value: 'lt25', label: '< 25% of value' },
+      { value: '25to50', label: '25-50% of value' },
+      { value: 'gt50', label: '> 50% of value' },
     ],
   },
   {
@@ -330,8 +330,8 @@ export const DSTInvestorQuestionnaire: React.FC<Props> = ({ onComplete }) => {
     >
       <h3 className="text-lg font-semibold">
         {step === 1
-          ? 'Step 1 / 2 — Required'
-          : 'Step 2 / 2 — Fine-tune your match (optional)'}
+          ? 'Step 1 / 2 - Required'
+          : 'Step 2 / 2 - Fine-tune your match (optional)'}
       </h3>
 
       {(step === 1 ? page1Questions : page2Questions).map((q) => (
