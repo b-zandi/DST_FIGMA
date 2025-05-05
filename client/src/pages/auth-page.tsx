@@ -18,29 +18,38 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useAuth } from "@/hooks/use-auth";
-import { Building, Shield, Briefcase, AlertTriangle, CheckCircle2 } from "lucide-react";
+import { Building, Shield, Briefcase, AlertTriangle, CheckCircle2, UserCircle } from "lucide-react";
 import { DSTInvestorQuestionnaire } from "@/components/dst-investor-questionnaire";
 import { DstAnswers } from "@/lib/calculateDstScore";
 
 const loginSchema = z.object({
-  username: z.string().min(1, "Username is required"),
+  email: z.string().email("Please enter a valid email address"),
   password: z.string().min(1, "Password is required"),
 });
 
-const registerSchema = z.object({
-  username: z.string().min(3, "Username must be at least 3 characters"),
-  email: z.string().email("Invalid email address"),
+const registerEmailSchema = z.object({
+  email: z.string().email("Please enter a valid email address"),
   password: z.string().min(8, "Password must be at least 8 characters"),
+  passwordConfirm: z.string().min(8, "Password confirmation is required"),
   agreeTerms: z.boolean().refine((val) => val === true, {
     message: "You must agree to the terms and conditions",
   }),
+}).refine((data) => data.password === data.passwordConfirm, {
+  message: "Passwords don't match",
+  path: ["passwordConfirm"],
+});
+
+const registerProfileSchema = z.object({
+  firstName: z.string().min(1, "First name is required"),
+  lastName: z.string().min(1, "Last name is required"),
 });
 
 type LoginFormValues = z.infer<typeof loginSchema>;
-type RegisterFormValues = z.infer<typeof registerSchema>;
+type RegisterEmailFormValues = z.infer<typeof registerEmailSchema>;
+type RegisterProfileFormValues = z.infer<typeof registerProfileSchema>;
 
 // Registration process stages
-type RegistrationStage = 'form' | 'questionnaire' | 'accreditationResult';
+type RegistrationStage = 'emailForm' | 'profileForm' | 'questionnaire' | 'accreditationResult';
 
 // Accreditation result type
 type AccreditationResult = {
@@ -56,8 +65,9 @@ export default function AuthPage() {
   const [activeTab, setActiveTab] = useState<string>(tabFromUrl === "register" ? "register" : "login");
   
   // Registration process state
-  const [registrationStage, setRegistrationStage] = useState<RegistrationStage>('form');
-  const [formData, setFormData] = useState<Omit<RegisterFormValues, 'agreeTerms'> | null>(null);
+  const [registrationStage, setRegistrationStage] = useState<RegistrationStage>('emailForm');
+  const [emailFormData, setEmailFormData] = useState<Omit<RegisterEmailFormValues, 'agreeTerms' | 'passwordConfirm'> | null>(null);
+  const [profileFormData, setProfileFormData] = useState<RegisterProfileFormValues | null>(null);
   const [accreditationResult, setAccreditationResult] = useState<AccreditationResult | null>(null);
 
   const { user, loginMutation, registerMutation } = useAuth();
@@ -73,18 +83,26 @@ export default function AuthPage() {
   const loginForm = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
     },
   });
 
-  const registerForm = useForm<RegisterFormValues>({
-    resolver: zodResolver(registerSchema),
+  const registerEmailForm = useForm<RegisterEmailFormValues>({
+    resolver: zodResolver(registerEmailSchema),
     defaultValues: {
-      username: "",
       email: "",
       password: "",
+      passwordConfirm: "",
       agreeTerms: false,
+    },
+  });
+  
+  const registerProfileForm = useForm<RegisterProfileFormValues>({
+    resolver: zodResolver(registerProfileSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
     },
   });
 
@@ -92,10 +110,16 @@ export default function AuthPage() {
     loginMutation.mutate(data);
   };
 
-  const onRegisterSubmit = (data: RegisterFormValues) => {
-    // Save form data and proceed to questionnaire
-    const { agreeTerms, ...userData } = data;
-    setFormData(userData);
+  const onRegisterEmailSubmit = (data: RegisterEmailFormValues) => {
+    // Save email form data and proceed to profile form
+    const { agreeTerms, passwordConfirm, ...emailData } = data;
+    setEmailFormData(emailData);
+    setRegistrationStage('profileForm');
+  };
+  
+  const onRegisterProfileSubmit = (data: RegisterProfileFormValues) => {
+    // Save profile data and proceed to questionnaire
+    setProfileFormData(data);
     setRegistrationStage('questionnaire');
   };
   
@@ -105,14 +129,16 @@ export default function AuthPage() {
   };
   
   const handleCompleteRegistration = () => {
-    if (formData && accreditationResult) {
+    if (emailFormData && profileFormData && accreditationResult) {
       // Process data for storage
       // Update accredited status based on segment
       const isAccredited = accreditationResult.segment === 'high' || accreditationResult.segment === 'medium';
       
       // Convert questionnaire answers to JSON string for storage
-      const userData = {
-        ...formData,
+      // Remove passwordConfirm as it's not stored in the database
+      const { passwordConfirm, ...userData } = {
+        ...emailFormData,
+        ...profileFormData,
         accreditedStatus: isAccredited,
         accreditationScore: accreditationResult.score,
         accreditationSegment: accreditationResult.segment,
@@ -124,8 +150,9 @@ export default function AuthPage() {
   };
   
   const resetRegistration = () => {
-    setRegistrationStage('form');
-    setFormData(null);
+    setRegistrationStage('emailForm');
+    setEmailFormData(null);
+    setProfileFormData(null);
     setAccreditationResult(null);
   };
 
@@ -154,12 +181,12 @@ export default function AuthPage() {
                     <form onSubmit={loginForm.handleSubmit(onLoginSubmit)} className="space-y-4">
                       <FormField
                         control={loginForm.control}
-                        name="username"
+                        name="email"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Username</FormLabel>
+                            <FormLabel>Email</FormLabel>
                             <FormControl>
-                              <Input placeholder="Enter your username" {...field} />
+                              <Input placeholder="Enter your email" {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -202,26 +229,12 @@ export default function AuthPage() {
                 </TabsContent>
 
                 <TabsContent value="register" className="space-y-4">
-                  {registrationStage === 'form' && (
+                  {registrationStage === 'emailForm' && (
                     <>
-                      <Form {...registerForm}>
-                        <form onSubmit={registerForm.handleSubmit(onRegisterSubmit)} className="space-y-4">
+                      <Form {...registerEmailForm}>
+                        <form onSubmit={registerEmailForm.handleSubmit(onRegisterEmailSubmit)} className="space-y-4">
                           <FormField
-                            control={registerForm.control}
-                            name="username"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Username</FormLabel>
-                                <FormControl>
-                                  <Input placeholder="Choose a username" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-
-                          <FormField
-                            control={registerForm.control}
+                            control={registerEmailForm.control}
                             name="email"
                             render={({ field }) => (
                               <FormItem>
@@ -235,7 +248,7 @@ export default function AuthPage() {
                           />
 
                           <FormField
-                            control={registerForm.control}
+                            control={registerEmailForm.control}
                             name="password"
                             render={({ field }) => (
                               <FormItem>
@@ -247,9 +260,23 @@ export default function AuthPage() {
                               </FormItem>
                             )}
                           />
+                          
+                          <FormField
+                            control={registerEmailForm.control}
+                            name="passwordConfirm"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Confirm Password</FormLabel>
+                                <FormControl>
+                                  <Input type="password" placeholder="Confirm your password" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
 
                           <FormField
-                            control={registerForm.control}
+                            control={registerEmailForm.control}
                             name="agreeTerms"
                             render={({ field }) => (
                               <FormItem className="flex flex-row items-start space-x-3 space-y-0 mt-4">
@@ -273,7 +300,7 @@ export default function AuthPage() {
                             type="submit" 
                             className="w-full"
                           >
-                            Continue
+                            Create Account
                           </Button>
                         </form>
                       </Form>
@@ -287,6 +314,66 @@ export default function AuthPage() {
                           Already have an account? Log in here
                         </Button>
                       </div>
+                    </>
+                  )}
+                  
+                  {registrationStage === 'profileForm' && (
+                    <>
+                      <div className="mb-4">
+                        <h3 className="text-lg font-semibold mb-2">Complete Your Profile</h3>
+                        <p className="text-gray-600 text-sm">
+                          Please provide your name to continue with the registration process.
+                        </p>
+                      </div>
+                      
+                      <Form {...registerProfileForm}>
+                        <form onSubmit={registerProfileForm.handleSubmit(onRegisterProfileSubmit)} className="space-y-4">
+                          <FormField
+                            control={registerProfileForm.control}
+                            name="firstName"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>First Name</FormLabel>
+                                <FormControl>
+                                  <Input placeholder="Enter your first name" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+
+                          <FormField
+                            control={registerProfileForm.control}
+                            name="lastName"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Last Name</FormLabel>
+                                <FormControl>
+                                  <Input placeholder="Enter your last name" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+
+                          <Button 
+                            type="submit" 
+                            className="w-full"
+                          >
+                            Continue to Questionnaire
+                          </Button>
+                          
+                          <div className="text-center mt-2">
+                            <Button 
+                              variant="link" 
+                              onClick={() => setRegistrationStage('emailForm')}
+                              className="text-sm text-gray-500"
+                            >
+                              Back to Account Details
+                            </Button>
+                          </div>
+                        </form>
+                      </Form>
                     </>
                   )}
                   
