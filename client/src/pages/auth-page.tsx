@@ -18,7 +18,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useAuth } from "@/hooks/use-auth";
-import { Building, Shield, Briefcase, AlertTriangle, CheckCircle2, UserCircle } from "lucide-react";
+import { Building, Shield, Briefcase, AlertTriangle, CheckCircle2, UserCircle, DollarSign } from "lucide-react";
 import { DSTInvestorQuestionnaire } from "@/components/dst-investor-questionnaire";
 import { DstAnswers } from "@/lib/calculateDstScore";
 
@@ -504,24 +504,24 @@ export default function AuthPage() {
 
                 <div className="flex items-start space-x-4">
                   <div className="bg-white/10 p-2 rounded-lg">
-                    <Shield className="h-6 w-6" />
+                    <Building className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg mb-1">Risk Management</h3>
+                    <h3 className="font-semibold text-lg mb-1">Net Worth Qualification</h3>
                     <p className="text-white/80">
-                      Professional asset management with thorough due diligence and risk assessment processes.
+                      Net worth exceeding $1 million, either individually or jointly with a spouse (excluding primary residence).
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-4">
                   <div className="bg-white/10 p-2 rounded-lg">
-                    <Briefcase className="h-6 w-6" />
+                    <Shield className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg mb-1">Tax Benefits</h3>
+                    <h3 className="font-semibold text-lg mb-1">Professional Qualification</h3>
                     <p className="text-white/80">
-                      Potential tax advantages through 1031 exchanges and passive income opportunities.
+                      Certain professional certifications, designations, or credentials recognized by the SEC.
                     </p>
                   </div>
                 </div>
