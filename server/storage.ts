@@ -104,12 +104,11 @@ export class MemStorage implements IStorage {
     // Create a properly typed User object
     const user: User = {
       id,
-      username: insertUser.username,
       password: insertUser.password,
       email: insertUser.email,
       firstName: insertUser.firstName || null,
       lastName: insertUser.lastName || null,
-      phone: insertUser.phone || null,
+      phone: null, // Optional field
       accreditedStatus: insertUser.accreditedStatus || false,
       accreditationScore: insertUser.accreditationScore || 0,
       accreditationSegment: insertUser.accreditationSegment || 'notReady',
@@ -388,9 +387,9 @@ export class DatabaseStorage implements IStorage {
     return user;
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.username, username));
-    return user;
+  // Now using email instead of username
+  async getUserByUsername(email: string): Promise<User | undefined> {
+    return this.getUserByEmail(email);
   }
 
   async getUserByEmail(email: string): Promise<User | undefined> {
