@@ -4,9 +4,8 @@ import { z } from "zod";
 
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
-  username: text("username").notNull().unique(),
+  email: text("email").notNull().unique(), // Email serves as username
   password: text("password").notNull(),
-  email: text("email").notNull().unique(),
   firstName: text("first_name"),
   lastName: text("last_name"),
   phone: text("phone"),
@@ -66,7 +65,6 @@ export const userInvestments = pgTable("user_investments", {
 
 export const insertUserSchema = createInsertSchema(users)
   .pick({
-    username: true,
     password: true,
     email: true,
     firstName: true,
@@ -80,9 +78,16 @@ export const insertUserSchema = createInsertSchema(users)
   .extend({
     email: z.string().email("Please enter a valid email address"),
     password: z.string().min(8, "Password must be at least 8 characters long"),
+    passwordConfirm: z.string().min(8, "Password confirmation must be at least 8 characters long"),
+    firstName: z.string().optional(),
+    lastName: z.string().optional(),
     accreditationScore: z.number().optional(),
     accreditationSegment: z.enum(['high', 'medium', 'low', 'notReady']).optional(),
     questionnaireData: z.string().optional(),
+  })
+  .refine((data) => data.password === data.passwordConfirm, {
+    message: "Passwords don't match",
+    path: ["passwordConfirm"],
   });
 
 export const profileUpdateSchema = createInsertSchema(users)
@@ -97,7 +102,7 @@ export const profileUpdateSchema = createInsertSchema(users)
   });
 
 export const loginSchema = z.object({
-  username: z.string().min(1, "Username is required"),
+  email: z.string().email("Please enter a valid email address"),
   password: z.string().min(1, "Password is required"),
 });
 
