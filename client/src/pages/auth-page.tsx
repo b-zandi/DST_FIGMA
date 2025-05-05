@@ -378,7 +378,7 @@ export default function AuthPage() {
                   )}
                   
                   {registrationStage === 'questionnaire' && (
-                    <>
+                    <div className="w-full">
                       <div className="mb-4">
                         <h3 className="text-lg font-semibold mb-2">Investor Questionnaire</h3>
                         <p className="text-gray-600 text-sm">
@@ -397,7 +397,7 @@ export default function AuthPage() {
                           Back to Registration Form
                         </Button>
                       </div>
-                    </>
+                    </div>
                   )}
                   
                   {registrationStage === 'accreditationResult' && accreditationResult && (

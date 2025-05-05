@@ -351,49 +351,113 @@ export const DSTInvestorQuestionnaire: React.FC<Props> = ({ onComplete }) => {
   /* ---------- JSX ---------- */
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="space-y-6 bg-white p-6 border rounded"
-    >
-      <h3 className="text-lg font-semibold">
-        {step === 1
-          ? 'Step 1 / 2 - Required'
-          : 'Step 2 / 2 - Fine-tune your match (optional)'}
-      </h3>
+    <div className="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-6 w-full">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="space-y-6 bg-white p-6 border rounded md:w-1/2"
+      >
+        <h3 className="text-lg font-semibold">
+          {step === 1
+            ? 'Step 1 / 2 - Required'
+            : 'Step 2 / 2 - Fine-tune your match (optional)'}
+        </h3>
 
-      {(step === 1 ? page1Questions : page2Questions).map((q) => (
-        <div key={q.name}>{renderField(q as any)}</div>
-      ))}
+        {(step === 1 ? page1Questions : page2Questions).map((q) => (
+          <div key={q.name}>{renderField(q as any)}</div>
+        ))}
 
-      <div className="flex justify-between">
+        <div className="flex justify-between">
+          {step === 2 && (
+            <button
+              type="button"
+              className="px-4 py-2 border rounded"
+              onClick={() => setStep(1)}
+            >
+              Back
+            </button>
+          )}
+
+          {step === 1 ? (
+            <button
+              type="button"
+              className="ml-auto px-4 py-2 bg-blue-600 text-white rounded"
+              onClick={() => setStep(2)}
+            >
+              Next
+            </button>
+          ) : (
+            <button
+              type="submit"
+              className="ml-auto px-4 py-2 bg-green-600 text-white rounded"
+            >
+              Submit
+            </button>
+          )}
+        </div>
+      </form>
+
+      {/* Right Panel - Accredited Investor Information */}
+      <div className="md:w-1/2 bg-[#1A2B50] p-6 border rounded text-white">
+        <h2 className="text-xl font-bold mb-4">What is an Accredited Investor?</h2>
+        
+        <p className="text-white/90 mb-6">
+          An accredited investor is an individual or entity that is allowed to invest in securities that are not registered with financial authorities like the SEC.
+        </p>
+        
+        <h3 className="font-semibold text-lg mb-3">Qualifying Criteria</h3>
+        
+        <div className="space-y-4">
+          <div className="flex items-start space-x-3">
+            <div className="bg-white/10 p-2 rounded-lg flex-shrink-0">
+              <span className="text-xl font-bold">1</span>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-1">Income Qualification</h4>
+              <p className="text-white/80 text-sm">
+                Individual income exceeding $200,000 in each of the two most recent years, or joint income with a spouse exceeding $300,000.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-start space-x-3">
+            <div className="bg-white/10 p-2 rounded-lg flex-shrink-0">
+              <span className="text-xl font-bold">2</span>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-1">Net Worth Qualification</h4>
+              <p className="text-white/80 text-sm">
+                Net worth exceeding $1 million, either individually or jointly with a spouse (excluding primary residence).
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-start space-x-3">
+            <div className="bg-white/10 p-2 rounded-lg flex-shrink-0">
+              <span className="text-xl font-bold">3</span>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-1">Professional Qualification</h4>
+              <p className="text-white/80 text-sm">
+                Certain professional certifications, designations, or credentials recognized by the SEC.
+              </p>
+            </div>
+          </div>
+        </div>
+
         {step === 2 && (
-          <button
-            type="button"
-            className="px-4 py-2 border rounded"
-            onClick={() => setStep(1)}
-          >
-            Back
-          </button>
-        )}
-
-        {step === 1 ? (
-          <button
-            type="button"
-            className="ml-auto px-4 py-2 bg-blue-600 text-white rounded"
-            onClick={() => setStep(2)}
-          >
-            Next
-          </button>
-        ) : (
-          <button
-            type="submit"
-            className="ml-auto px-4 py-2 bg-green-600 text-white rounded"
-          >
-            Submit
-          </button>
+          <div className="mt-6 pt-6 border-t border-white/20">
+            <h3 className="font-semibold text-lg mb-3">DST Benefits</h3>
+            <ul className="space-y-3 text-white/80 text-sm list-disc pl-5">
+              <li>Simplified property management with no landlord responsibilities</li>
+              <li>Institutional-quality properties professionally managed</li>
+              <li>Potential for monthly income distributions</li>
+              <li>Tax advantages through 1031 exchanges</li>
+              <li>Diversification across multiple properties or asset classes</li>
+            </ul>
+          </div>
         )}
       </div>
-    </form>
+    </div>
   )
 }
 
