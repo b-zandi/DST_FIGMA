@@ -105,13 +105,18 @@ export default function AuthPage() {
   };
   
   const handleCompleteRegistration = () => {
-    if (formData) {
-      // Add accreditation status to user data
+    if (formData && accreditationResult) {
+      // Process data for storage
+      // Update accredited status based on segment
+      const isAccredited = accreditationResult.segment === 'high' || accreditationResult.segment === 'medium';
+      
+      // Convert questionnaire answers to JSON string for storage
       const userData = {
         ...formData,
-        accreditationScore: accreditationResult?.score || 0,
-        accreditationSegment: accreditationResult?.segment || 'notReady',
-        questionnaire: accreditationResult?.answers || {}
+        accreditedStatus: isAccredited,
+        accreditationScore: accreditationResult.score,
+        accreditationSegment: accreditationResult.segment,
+        questionnaireData: JSON.stringify(accreditationResult.answers)
       };
       
       registerMutation.mutate(userData);

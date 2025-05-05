@@ -11,6 +11,9 @@ export const users = pgTable("users", {
   lastName: text("last_name"),
   phone: text("phone"),
   accreditedStatus: boolean("accredited_status").default(false),
+  accreditationScore: integer("accreditation_score").default(0),
+  accreditationSegment: text("accreditation_segment").default('notReady'),
+  questionnaireData: text("questionnaire_data"), // Stored as JSON
   isProfileComplete: boolean("is_profile_complete").default(false),
   createdAt: timestamp("created_at").defaultNow(),
 });
@@ -70,10 +73,16 @@ export const insertUserSchema = createInsertSchema(users)
     lastName: true,
     phone: true,
     accreditedStatus: true,
+    accreditationScore: true,
+    accreditationSegment: true,
+    questionnaireData: true,
   })
   .extend({
     email: z.string().email("Please enter a valid email address"),
     password: z.string().min(8, "Password must be at least 8 characters long"),
+    accreditationScore: z.number().optional(),
+    accreditationSegment: z.enum(['high', 'medium', 'low', 'notReady']).optional(),
+    questionnaireData: z.string().optional(),
   });
 
 export const profileUpdateSchema = createInsertSchema(users)
