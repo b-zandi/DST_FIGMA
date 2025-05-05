@@ -14,8 +14,12 @@ import {
 } from "@shared/schema";
 import createMemoryStore from "memorystore";
 import session from "express-session";
+import connectPg from "connect-pg-simple";
+import { db, pool } from "./db";
+import { eq, and } from "drizzle-orm";
 
 const MemoryStore = createMemoryStore(session);
+const PostgresSessionStore = connectPg(session);
 
 export interface IStorage {
   // User methods
@@ -107,7 +111,10 @@ export class MemStorage implements IStorage {
       firstName: insertUser.firstName || null,
       lastName: insertUser.lastName || null,
       phone: insertUser.phone || null,
-      accreditedStatus: insertUser.accreditedStatus || null,
+      accreditedStatus: insertUser.accreditedStatus || false,
+      accreditationScore: insertUser.accreditationScore || 0,
+      accreditationSegment: insertUser.accreditationSegment || 'notReady',
+      questionnaireData: insertUser.questionnaireData || null,
       isProfileComplete: false,
       createdAt: now
     };
@@ -367,4 +374,146 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+export class DatabaseStorage implements IStorage {
+  sessionStore: session.Store;
+
+  constructor() {
+    this.sessionStore = new PostgresSessionStore({ 
+      pool, 
+      createTableIfMissing: true 
+    });
+  }
+
+  async getUser(id: number): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user;
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user;
+  }
+
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.email, email));
+    return user;
+  }
+
+  async createUser(insertUser: InsertUser): Promise<User> {
+    const [user] = await db.insert(users).values(insertUser).returning();
+    return user;
+  }
+
+  async updateUser(id: number, userData: Partial<User>): Promise<User | undefined> {
+    const [updatedUser] = await db
+      .update(users)
+      .set(userData)
+      .where(eq(users.id, id))
+      .returning();
+    return updatedUser;
+  }
+
+  async getAllFaqs(): Promise<FAQ[]> {
+    return db.select().from(faqs).orderBy(faqs.order);
+  }
+
+  async getFaqById(id: number): Promise<FAQ | undefined> {
+    const [faq] = await db.select().from(faqs).where(eq(faqs.id, id));
+    return faq;
+  }
+
+  async getFaqsByCategory(category: string): Promise<FAQ[]> {
+    return db
+      .select()
+      .from(faqs)
+      .where(eq(faqs.category, category))
+      .orderBy(faqs.order);
+  }
+
+  async createFaq(insertFaq: InsertFAQ): Promise<FAQ> {
+    const [faq] = await db.insert(faqs).values(insertFaq).returning();
+    return faq;
+  }
+
+  async getAllInvestments(): Promise<Investment[]> {
+    return db.select().from(investments);
+  }
+
+  async getInvestmentById(id: number): Promise<Investment | undefined> {
+    const [investment] = await db.select().from(investments).where(eq(investments.id, id));
+    return investment;
+  }
+
+  async getInvestmentsByAssetClass(assetClass: string): Promise<Investment[]> {
+    return db
+      .select()
+      .from(investments)
+      .where(eq(investments.assetClass, assetClass));
+  }
+
+  async getInvestmentsByPropertyType(propertyType: string): Promise<Investment[]> {
+    return db
+      .select()
+      .from(investments)
+      .where(eq(investments.propertyType, propertyType));
+  }
+
+  async createInvestment(insertInvestment: InsertInvestment): Promise<Investment> {
+    const [investment] = await db.insert(investments).values(insertInvestment).returning();
+    return investment;
+  }
+
+  async getUserInvestments(userId: number): Promise<(UserInvestment & { investment: Investment })[]> {
+    const result = await db
+      .select({
+        userInvestment: userInvestments,
+        investment: investments
+      })
+      .from(userInvestments)
+      .innerJoin(investments, eq(userInvestments.investmentId, investments.id))
+      .where(eq(userInvestments.userId, userId));
+
+    return result.map(({ userInvestment, investment }) => ({
+      ...userInvestment,
+      investment
+    }));
+  }
+
+  async getUserInvestmentById(id: number): Promise<(UserInvestment & { investment: Investment }) | undefined> {
+    const [result] = await db
+      .select({
+        userInvestment: userInvestments,
+        investment: investments
+      })
+      .from(userInvestments)
+      .innerJoin(investments, eq(userInvestments.investmentId, investments.id))
+      .where(eq(userInvestments.id, id));
+
+    if (!result) return undefined;
+
+    return {
+      ...result.userInvestment,
+      investment: result.investment
+    };
+  }
+
+  async createUserInvestment(insertUserInvestment: InsertUserInvestment): Promise<UserInvestment> {
+    const [userInvestment] = await db
+      .insert(userInvestments)
+      .values(insertUserInvestment)
+      .returning();
+    return userInvestment;
+  }
+
+  async updateUserInvestment(id: number, data: Partial<UserInvestment>): Promise<UserInvestment | undefined> {
+    const [updatedUserInvestment] = await db
+      .update(userInvestments)
+      .set(data)
+      .where(eq(userInvestments.id, id))
+      .returning();
+    return updatedUserInvestment;
+  }
+}
+
+// Switch to database storage instead of memory storage
+export const storage = new DatabaseStorage();
