@@ -18,7 +18,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useAuth } from "@/hooks/use-auth";
-import { Building, Shield, Briefcase } from "lucide-react";
+import { Building, Shield, Briefcase, AlertTriangle, CheckCircle2 } from "lucide-react";
+import { DSTInvestorQuestionnaire } from "@/components/dst-investor-questionnaire";
+import { DstAnswers } from "@/lib/calculateDstScore";
 
 const loginSchema = z.object({
   username: z.string().min(1, "Username is required"),
@@ -37,11 +39,26 @@ const registerSchema = z.object({
 type LoginFormValues = z.infer<typeof loginSchema>;
 type RegisterFormValues = z.infer<typeof registerSchema>;
 
+// Registration process stages
+type RegistrationStage = 'form' | 'questionnaire' | 'accreditationResult';
+
+// Accreditation result type
+type AccreditationResult = {
+  answers: DstAnswers;
+  score: number;
+  segment: 'high' | 'medium' | 'low' | 'notReady';
+};
+
 export default function AuthPage() {
   const [searchParams] = useLocation();
   const params = new URLSearchParams(searchParams);
   const tabFromUrl = params.get("tab");
   const [activeTab, setActiveTab] = useState<string>(tabFromUrl === "register" ? "register" : "login");
+  
+  // Registration process state
+  const [registrationStage, setRegistrationStage] = useState<RegistrationStage>('form');
+  const [formData, setFormData] = useState<Omit<RegisterFormValues, 'agreeTerms'> | null>(null);
+  const [accreditationResult, setAccreditationResult] = useState<AccreditationResult | null>(null);
 
   const { user, loginMutation, registerMutation } = useAuth();
   const [, navigate] = useLocation();
@@ -76,8 +93,35 @@ export default function AuthPage() {
   };
 
   const onRegisterSubmit = (data: RegisterFormValues) => {
+    // Save form data and proceed to questionnaire
     const { agreeTerms, ...userData } = data;
-    registerMutation.mutate(userData);
+    setFormData(userData);
+    setRegistrationStage('questionnaire');
+  };
+  
+  const handleQuestionnaireComplete = (result: AccreditationResult) => {
+    setAccreditationResult(result);
+    setRegistrationStage('accreditationResult');
+  };
+  
+  const handleCompleteRegistration = () => {
+    if (formData) {
+      // Add accreditation status to user data
+      const userData = {
+        ...formData,
+        accreditationScore: accreditationResult?.score || 0,
+        accreditationSegment: accreditationResult?.segment || 'notReady',
+        questionnaire: accreditationResult?.answers || {}
+      };
+      
+      registerMutation.mutate(userData);
+    }
+  };
+  
+  const resetRegistration = () => {
+    setRegistrationStage('form');
+    setFormData(null);
+    setAccreditationResult(null);
   };
 
   return (
@@ -153,90 +197,193 @@ export default function AuthPage() {
                 </TabsContent>
 
                 <TabsContent value="register" className="space-y-4">
-                  <Form {...registerForm}>
-                    <form onSubmit={registerForm.handleSubmit(onRegisterSubmit)} className="space-y-4">
-                      <FormField
-                        control={registerForm.control}
-                        name="username"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Username</FormLabel>
-                            <FormControl>
-                              <Input placeholder="Choose a username" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                  {registrationStage === 'form' && (
+                    <>
+                      <Form {...registerForm}>
+                        <form onSubmit={registerForm.handleSubmit(onRegisterSubmit)} className="space-y-4">
+                          <FormField
+                            control={registerForm.control}
+                            name="username"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Username</FormLabel>
+                                <FormControl>
+                                  <Input placeholder="Choose a username" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
 
-                      <FormField
-                        control={registerForm.control}
-                        name="email"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Email</FormLabel>
-                            <FormControl>
-                              <Input type="email" placeholder="Enter your email" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                          <FormField
+                            control={registerForm.control}
+                            name="email"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Email</FormLabel>
+                                <FormControl>
+                                  <Input type="email" placeholder="Enter your email" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
 
-                      <FormField
-                        control={registerForm.control}
-                        name="password"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Password</FormLabel>
-                            <FormControl>
-                              <Input type="password" placeholder="Create a password" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                          <FormField
+                            control={registerForm.control}
+                            name="password"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Password</FormLabel>
+                                <FormControl>
+                                  <Input type="password" placeholder="Create a password" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
 
-                      <FormField
-                        control={registerForm.control}
-                        name="agreeTerms"
-                        render={({ field }) => (
-                          <FormItem className="flex flex-row items-start space-x-3 space-y-0 mt-4">
-                            <FormControl>
-                              <Checkbox
-                                checked={field.value}
-                                onCheckedChange={field.onChange}
-                              />
-                            </FormControl>
-                            <div className="space-y-1 leading-none">
-                              <FormLabel className="text-sm">
-                                I agree to the terms of service and privacy policy
-                              </FormLabel>
-                              <FormMessage />
+                          <FormField
+                            control={registerForm.control}
+                            name="agreeTerms"
+                            render={({ field }) => (
+                              <FormItem className="flex flex-row items-start space-x-3 space-y-0 mt-4">
+                                <FormControl>
+                                  <Checkbox
+                                    checked={field.value}
+                                    onCheckedChange={field.onChange}
+                                  />
+                                </FormControl>
+                                <div className="space-y-1 leading-none">
+                                  <FormLabel className="text-sm">
+                                    I agree to the terms of service and privacy policy
+                                  </FormLabel>
+                                  <FormMessage />
+                                </div>
+                              </FormItem>
+                            )}
+                          />
+
+                          <Button 
+                            type="submit" 
+                            className="w-full"
+                          >
+                            Continue
+                          </Button>
+                        </form>
+                      </Form>
+
+                      <div className="text-center mt-4">
+                        <Button 
+                          variant="link" 
+                          onClick={() => setActiveTab("login")}
+                          className="text-sm text-primary"
+                        >
+                          Already have an account? Log in here
+                        </Button>
+                      </div>
+                    </>
+                  )}
+                  
+                  {registrationStage === 'questionnaire' && (
+                    <>
+                      <div className="mb-4">
+                        <h3 className="text-lg font-semibold mb-2">Investor Questionnaire</h3>
+                        <p className="text-gray-600 text-sm">
+                          DST investments are exclusively available to accredited investors. Please complete this questionnaire to determine your suitability.
+                        </p>
+                      </div>
+                      
+                      <DSTInvestorQuestionnaire onComplete={handleQuestionnaireComplete} />
+                      
+                      <div className="mt-4 text-center">
+                        <Button 
+                          variant="outline" 
+                          onClick={resetRegistration}
+                          className="text-sm"
+                        >
+                          Back to Registration Form
+                        </Button>
+                      </div>
+                    </>
+                  )}
+                  
+                  {registrationStage === 'accreditationResult' && accreditationResult && (
+                    <div className="space-y-6">
+                      <div className="mb-4">
+                        <h3 className="text-xl font-semibold mb-2">Accreditation Assessment</h3>
+                        <p className="text-gray-600 mb-4">
+                          Based on your responses, we've completed an initial assessment of your investor profile.
+                        </p>
+                        
+                        {accreditationResult.segment === 'high' && (
+                          <div className="bg-green-50 border border-green-200 rounded-lg p-4 flex items-start">
+                            <CheckCircle2 className="h-6 w-6 text-green-500 flex-shrink-0 mt-1 mr-3" />
+                            <div>
+                              <h4 className="font-semibold text-green-800">You appear to be an Accredited Investor</h4>
+                              <p className="text-green-700 mt-1">
+                                Based on your responses, you likely meet the SEC requirements for accredited investor status. You'll be eligible to access our full range of DST investment opportunities.
+                              </p>
                             </div>
-                          </FormItem>
+                          </div>
                         )}
-                      />
-
-                      <Button 
-                        type="submit" 
-                        className="w-full"
-                        disabled={registerMutation.isPending}
-                      >
-                        {registerMutation.isPending ? "Creating account..." : "Create Account"}
-                      </Button>
-                    </form>
-                  </Form>
-
-                  <div className="text-center mt-4">
-                    <Button 
-                      variant="link" 
-                      onClick={() => setActiveTab("login")}
-                      className="text-sm text-primary"
-                    >
-                      Already have an account? Log in here
-                    </Button>
-                  </div>
+                        
+                        {accreditationResult.segment === 'medium' && (
+                          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start">
+                            <CheckCircle2 className="h-6 w-6 text-blue-500 flex-shrink-0 mt-1 mr-3" />
+                            <div>
+                              <h4 className="font-semibold text-blue-800">You may be an Accredited Investor</h4>
+                              <p className="text-blue-700 mt-1">
+                                Based on your responses, you may meet the requirements for accredited investor status. We'll need to verify some additional information after registration.
+                              </p>
+                            </div>
+                          </div>
+                        )}
+                        
+                        {accreditationResult.segment === 'low' && (
+                          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 flex items-start">
+                            <AlertTriangle className="h-6 w-6 text-yellow-500 flex-shrink-0 mt-1 mr-3" />
+                            <div>
+                              <h4 className="font-semibold text-yellow-800">Additional Verification Needed</h4>
+                              <p className="text-yellow-700 mt-1">
+                                Based on your responses, we'll need to collect additional documentation to verify your accredited investor status after registration.
+                              </p>
+                            </div>
+                          </div>
+                        )}
+                        
+                        {accreditationResult.segment === 'notReady' && (
+                          <div className="bg-red-50 border border-red-200 rounded-lg p-4 flex items-start">
+                            <AlertTriangle className="h-6 w-6 text-red-500 flex-shrink-0 mt-1 mr-3" />
+                            <div>
+                              <h4 className="font-semibold text-red-800">You may not qualify as an Accredited Investor</h4>
+                              <p className="text-red-700 mt-1">
+                                Based on your responses, you may not currently meet the SEC requirements for accredited investor status. You can still create an account to access educational resources.
+                              </p>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      
+                      <div className="space-y-4">
+                        <Button 
+                          onClick={handleCompleteRegistration}
+                          className="w-full"
+                          disabled={registerMutation.isPending}
+                        >
+                          {registerMutation.isPending ? "Creating account..." : "Complete Registration"}
+                        </Button>
+                        
+                        <Button 
+                          variant="outline" 
+                          onClick={() => setRegistrationStage('questionnaire')}
+                          className="w-full"
+                        >
+                          Retake Questionnaire
+                        </Button>
+                      </div>
+                    </div>
+                  )}
                 </TabsContent>
               </Tabs>
             </div>
