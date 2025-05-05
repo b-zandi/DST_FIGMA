@@ -481,17 +481,23 @@ export default function AuthPage() {
             </div>
 
             <div className="md:w-1/2 bg-[#1A2B50] p-8 lg:p-12 text-white flex flex-col justify-center">
-              <h2 className="text-2xl font-bold mb-6">Why Choose DST Investments?</h2>
+              <h2 className="text-2xl font-bold mb-6">What is an Accredited Investor?</h2>
 
-              <div className="space-y-8">
+              <div className="space-y-6">
+                <p className="text-white/90 text-lg mb-4">
+                  An accredited investor is an individual or entity that is allowed to invest in securities that are not registered with financial authorities like the SEC.
+                </p>
+                
+                <h3 className="font-semibold text-xl my-4">Qualifying Criteria</h3>
+                
                 <div className="flex items-start space-x-4">
                   <div className="bg-white/10 p-2 rounded-lg">
-                    <Building className="h-6 w-6" />
+                    <DollarSign className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg mb-1">Institutional-Quality Properties</h3>
+                    <h3 className="font-semibold text-lg mb-1">Income Qualification</h3>
                     <p className="text-white/80">
-                      Access commercial real estate opportunities typically available only to large institutional investors.
+                      Individual income exceeding $200,000 in each of the two most recent years, or joint income with a spouse exceeding $300,000.
                     </p>
                   </div>
                 </div>
