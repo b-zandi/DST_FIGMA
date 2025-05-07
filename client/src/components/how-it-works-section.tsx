@@ -67,15 +67,9 @@ export function HowItWorksSection() {
     <section className="py-16 bg-gray-50 border-b border-gray-100 w-full">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-10">
-            <h2 className="text-3xl font-bold text-gray-900">
-              How Does It Work?
-            </h2>
-            <p className="text-blue-600 mt-2 md:mt-0 flex items-center">
-              Simple 3-step process
-              <ArrowUpRight className="ml-1 h-4 w-4" />
-            </p>
-          </div>
+          <h2 className="text-3xl font-bold text-gray-900 mb-10">
+            How Does It Work?
+          </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
             <StepCard 
@@ -109,36 +103,13 @@ export function HowItWorksSection() {
             />
           </div>
           
-          <div className="bg-white p-6 border border-gray-200 rounded-lg mb-8">
-            <div className="flex items-start">
-              <div className="hidden md:block flex-shrink-0 mr-6">
-                <div className="h-14 w-14 rounded-full bg-blue-100 flex items-center justify-center">
-                  <div className="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center">
-                    <CheckCircle className="h-4 w-4 text-white" />
-                  </div>
-                </div>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Ready to start your DST investment journey?</h3>
-                <p className="text-gray-600 mb-4">
-                  Our team of DST investment specialists will guide you through every step of the process, from property selection to closing your investment.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white gap-2">
-                    <Link href="/investing">
-                      Browse Available DSTs
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </Button>
-                  <Button asChild variant="outline" className="border-blue-200 gap-2">
-                    <Link href="/learn-more">
-                      Learn More About DSTs
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </Button>
-                </div>
-              </div>
-            </div>
+          <div className="text-center">
+            <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white gap-2 px-8 py-6 h-auto text-base">
+              <Link href="/investing">
+                Get Started
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Button>
           </div>
         </div>
       </div>
