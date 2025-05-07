@@ -142,16 +142,18 @@ export default function LearnMorePage() {
                     Investors considering a 1031 exchange to defer capital gains and depreciation recapture taxes on the sale of investment property may benefit from reinvesting in a Delaware Statutory Trust (DST). DSTs are popular investment structures that enable investors to invest in diversified portfolios of commercial real estate for passive income. An investor can complete their 1031 exchange by investing in a diversified DST to reap distinctive benefits.
                   </p>
                   
-                  <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
+                  {/* Benefit Cards Section */}
+                  <div className="flex flex-col space-y-6">
+                    {/* Benefit 1 */}
                     <div className="bg-white rounded-lg border border-gray-200 p-6">
-                      <div className="flex items-start mb-4">
-                        <div className="flex-shrink-0 mr-4">
-                          <div className="h-14 w-14 flex items-center justify-center">
-                            <PieChart className="h-10 w-10 text-primary" />
+                      <div className="flex flex-col md:flex-row md:items-center">
+                        <div className="flex-shrink-0 mb-4 md:mb-0 md:mr-6 flex justify-center">
+                          <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center">
+                            <PieChart className="h-8 w-8 text-primary" />
                           </div>
                         </div>
-                        <div>
-                          <h3 className="text-xl font-semibold text-[#1A2B50] mb-2">
+                        <div className="flex-grow">
+                          <h3 className="text-xl font-semibold text-[#1A2B50] mb-3 text-center md:text-left">
                             Broad Diversification Across a Portfolio or Multiple Portfolios
                           </h3>
                           <p className="text-gray-600">
@@ -161,15 +163,16 @@ export default function LearnMorePage() {
                       </div>
                     </div>
                     
+                    {/* Benefit 2 */}
                     <div className="bg-white rounded-lg border border-gray-200 p-6">
-                      <div className="flex items-start mb-4">
-                        <div className="flex-shrink-0 mr-4">
-                          <div className="h-14 w-14 flex items-center justify-center">
-                            <Handshake className="h-10 w-10 text-primary" />
+                      <div className="flex flex-col md:flex-row md:items-center">
+                        <div className="flex-shrink-0 mb-4 md:mb-0 md:mr-6 flex justify-center">
+                          <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center">
+                            <Handshake className="h-8 w-8 text-primary" />
                           </div>
                         </div>
-                        <div>
-                          <h3 className="text-xl font-semibold text-[#1A2B50] mb-2">
+                        <div className="flex-grow">
+                          <h3 className="text-xl font-semibold text-[#1A2B50] mb-3 text-center md:text-left">
                             Passive Cash Flow with Reduced Management Burdens
                           </h3>
                           <p className="text-gray-600">
@@ -179,15 +182,16 @@ export default function LearnMorePage() {
                       </div>
                     </div>
                     
+                    {/* Benefit 3 */}
                     <div className="bg-white rounded-lg border border-gray-200 p-6">
-                      <div className="flex items-start mb-4">
-                        <div className="flex-shrink-0 mr-4">
-                          <div className="h-14 w-14 flex items-center justify-center">
-                            <DollarSign className="h-10 w-10 text-primary" />
+                      <div className="flex flex-col md:flex-row md:items-center">
+                        <div className="flex-shrink-0 mb-4 md:mb-0 md:mr-6 flex justify-center">
+                          <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center">
+                            <DollarSign className="h-8 w-8 text-primary" />
                           </div>
                         </div>
-                        <div>
-                          <h3 className="text-xl font-semibold text-[#1A2B50] mb-2">
+                        <div className="flex-grow">
+                          <h3 className="text-xl font-semibold text-[#1A2B50] mb-3 text-center md:text-left">
                             Investment Amount May Be Customized to Fit Exact Need
                           </h3>
                           <p className="text-gray-600">
@@ -197,15 +201,16 @@ export default function LearnMorePage() {
                       </div>
                     </div>
                     
+                    {/* Benefit 4 */}
                     <div className="bg-white rounded-lg border border-gray-200 p-6">
-                      <div className="flex items-start mb-4">
-                        <div className="flex-shrink-0 mr-4">
-                          <div className="h-14 w-14 flex items-center justify-center">
-                            <FileCheck className="h-10 w-10 text-primary" />
+                      <div className="flex flex-col md:flex-row md:items-center">
+                        <div className="flex-shrink-0 mb-4 md:mb-0 md:mr-6 flex justify-center">
+                          <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center">
+                            <FileCheck className="h-8 w-8 text-primary" />
                           </div>
                         </div>
-                        <div>
-                          <h3 className="text-xl font-semibold text-[#1A2B50] mb-2">
+                        <div className="flex-grow">
+                          <h3 className="text-xl font-semibold text-[#1A2B50] mb-3 text-center md:text-left">
                             Investors Can Close Escrow in as Few as 1-3 Days
                           </h3>
                           <p className="text-gray-600">
@@ -215,15 +220,16 @@ export default function LearnMorePage() {
                       </div>
                     </div>
                     
+                    {/* Benefit 5 */}
                     <div className="bg-white rounded-lg border border-gray-200 p-6">
-                      <div className="flex items-start mb-4">
-                        <div className="flex-shrink-0 mr-4">
-                          <div className="h-14 w-14 flex items-center justify-center">
-                            <Shield className="h-10 w-10 text-primary" />
+                      <div className="flex flex-col md:flex-row md:items-center">
+                        <div className="flex-shrink-0 mb-4 md:mb-0 md:mr-6 flex justify-center">
+                          <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center">
+                            <Shield className="h-8 w-8 text-primary" />
                           </div>
                         </div>
-                        <div>
-                          <h3 className="text-xl font-semibold text-[#1A2B50] mb-2">
+                        <div className="flex-grow">
+                          <h3 className="text-xl font-semibold text-[#1A2B50] mb-3 text-center md:text-left">
                             Strategic Long-Term Planning with Flexible Exit Options
                           </h3>
                           <p className="text-gray-600">
