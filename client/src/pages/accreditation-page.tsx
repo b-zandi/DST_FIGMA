@@ -565,21 +565,18 @@ export default function AccreditationPage() {
         </section>
         
         {/* CTA Section */}
-        <section className="bg-[#1A2B50] py-16">
+        <section className="bg-white py-16">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl font-bold text-white mb-6">
-                Ready to Explore DST Investment Opportunities?
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                Ready to Explore DST Investments?
               </h2>
-              <p className="text-xl text-white/90 mb-8">
-                Whether you're already accredited or need assistance with the verification process, our team is here to help you access institutional-quality real estate investments.
+              <p className="text-xl text-gray-600 mb-8">
+                Schedule a call with one of our DST investment specialists to learn more about current opportunities.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Button size="lg" variant="secondary">
-                  Browse DST Investments
-                </Button>
-                <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
-                  Contact an Advisor
+                <Button size="lg" variant="outline" className="border-gray-300">
+                  Schedule a Consultation
                 </Button>
               </div>
             </div>
