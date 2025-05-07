@@ -46,8 +46,6 @@ export function FeaturesSection() {
               </div>}
               title="Passive Income"
               description="Receive regular distributions from professionally managed properties without the hassles of direct management."
-              linkText="Learn about distributions"
-              linkHref="/learn-more/income"
             />
             <FeatureCard
               icon={<div className="w-8 h-8 bg-blue-100 flex items-center justify-center rounded-full">
@@ -55,8 +53,6 @@ export function FeaturesSection() {
               </div>}
               title="Asset Protection"
               description="Benefit from structured liability protection providing added security."
-              linkText="Explore protection benefits"
-              linkHref="/learn-more/protection"
             />
             <FeatureCard
               icon={<div className="w-8 h-8 bg-blue-100 flex items-center justify-center">
@@ -64,8 +60,6 @@ export function FeaturesSection() {
               </div>}
               title="Tax Advantages"
               description="Take advantage of potential tax deferrals through 1031 exchanges and other tax benefits."
-              linkText="Understand tax benefits"
-              linkHref="/learn-more/tax"
             />
           </div>
         
