@@ -25,6 +25,7 @@ import {
   Shield,
   Info
 } from "lucide-react";
+import { InvestmentProgressTracker } from "@/components/investment-progress-tracker";
 import {
   Tabs,
   TabsContent,
@@ -199,6 +200,7 @@ export default function InvestmentDetailPage() {
   const [investment, setInvestment] = useState<any>(null);
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState("overview");
+  const [investmentStage, setInvestmentStage] = useState(2); // Simulated investment stage (1-5)
 
   useEffect(() => {
     if (params && params.id) {
