@@ -158,29 +158,76 @@ export default function HomePage() {
         </section>
 
         {/* FAQ Preview Section */}
-        <section className="py-12 bg-white border-b border-gray-100">
-          <div className="container mx-auto px-4">
+        <section className="py-12 bg-white border-b border-gray-100 w-full">
+          <div className="w-full px-4 sm:px-6 lg:px-8">
             <div className="max-w-5xl mx-auto">
               <h2 className="text-2xl font-bold text-gray-900 mb-8">
                 Frequently Asked Questions
               </h2>
 
-              {/* FAQ Accordion */}
-              <div className="space-y-4 mb-8">
-                <Accordion type="single" collapsible>
-                  {faqs?.slice(0, 3).map((faq) => (
-                    <AccordionItem key={faq.id} value={`faq-${faq.id}`} className="border border-gray-200 rounded-md overflow-hidden mb-4">
-                      <AccordionTrigger className="px-6 py-4 hover:no-underline">
-                        <h3 className="text-base font-medium text-gray-900 text-left">
-                          {faq.question}
-                        </h3>
-                      </AccordionTrigger>
-                      <AccordionContent className="px-6 pb-4 pt-2 text-gray-600">
-                        <p>{faq.answer}</p>
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
+              {/* FAQ List */}
+              <div className="space-y-6 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <Link href="/faq" className="group">
+                    <div className="border border-gray-200 rounded-md p-6 hover:border-blue-300 hover:shadow-sm transition-all duration-200">
+                      <h3 className="text-lg font-medium text-gray-900 group-hover:text-blue-600 mb-2">
+                        What is a Delaware Statutory Trust (DST)?
+                      </h3>
+                      <p className="text-gray-600 mb-3 line-clamp-2">
+                        A Delaware Statutory Trust (DST) is a legally recognized trust that allows investors to own fractional interests in commercial real estate properties.
+                      </p>
+                      <span className="text-blue-600 text-sm font-medium inline-flex items-center">
+                        Read more
+                        <ArrowRight className="ml-1 h-3 w-3" />
+                      </span>
+                    </div>
+                  </Link>
+                  
+                  <Link href="/faq" className="group">
+                    <div className="border border-gray-200 rounded-md p-6 hover:border-blue-300 hover:shadow-sm transition-all duration-200">
+                      <h3 className="text-lg font-medium text-gray-900 group-hover:text-blue-600 mb-2">
+                        How does a 1031 exchange work with a DST?
+                      </h3>
+                      <p className="text-gray-600 mb-3 line-clamp-2">
+                        When selling an investment property, investors can use a 1031 exchange to defer capital gains taxes by reinvesting the proceeds into a DST property.
+                      </p>
+                      <span className="text-blue-600 text-sm font-medium inline-flex items-center">
+                        Read more
+                        <ArrowRight className="ml-1 h-3 w-3" />
+                      </span>
+                    </div>
+                  </Link>
+                  
+                  <Link href="/faq" className="group">
+                    <div className="border border-gray-200 rounded-md p-6 hover:border-blue-300 hover:shadow-sm transition-all duration-200">
+                      <h3 className="text-lg font-medium text-gray-900 group-hover:text-blue-600 mb-2">
+                        What are the potential benefits of DST investments?
+                      </h3>
+                      <p className="text-gray-600 mb-3 line-clamp-2">
+                        DST investments offer several potential benefits including tax deferral, passive income, access to institutional-quality properties, and more.
+                      </p>
+                      <span className="text-blue-600 text-sm font-medium inline-flex items-center">
+                        Read more
+                        <ArrowRight className="ml-1 h-3 w-3" />
+                      </span>
+                    </div>
+                  </Link>
+                  
+                  <Link href="/faq" className="group">
+                    <div className="border border-gray-200 rounded-md p-6 hover:border-blue-300 hover:shadow-sm transition-all duration-200">
+                      <h3 className="text-lg font-medium text-gray-900 group-hover:text-blue-600 mb-2">
+                        Who can invest in a DST?
+                      </h3>
+                      <p className="text-gray-600 mb-3 line-clamp-2">
+                        DST investments are available exclusively to accredited investors as defined by the Securities and Exchange Commission (SEC).
+                      </p>
+                      <span className="text-blue-600 text-sm font-medium inline-flex items-center">
+                        Read more
+                        <ArrowRight className="ml-1 h-3 w-3" />
+                      </span>
+                    </div>
+                  </Link>
+                </div>
               </div>
 
               <div className="text-center">
