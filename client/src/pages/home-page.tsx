@@ -206,7 +206,7 @@ export default function HomePage() {
                 Our team of investment professionals is here to help you navigate the world of DST investments and 1031 exchanges
               </p>
               
-              <div className="grid md:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
                 <div className="bg-white border border-gray-200 rounded-md p-8 text-center">
                   <div className="flex justify-center mb-5">
                     <Phone className="h-6 w-6 text-gray-700" />
@@ -233,21 +233,6 @@ export default function HomePage() {
                   <div>
                     <Button variant="outline" className="text-sm px-6 py-2 h-auto border-gray-300 w-full">
                       Contact Us
-                    </Button>
-                  </div>
-                </div>
-                
-                <div className="bg-white border border-gray-200 rounded-md p-8 text-center">
-                  <div className="flex justify-center mb-5">
-                    <MessageSquareText className="h-6 w-6 text-gray-700" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Chat with AI</h3>
-                  <p className="text-gray-600 mb-6">
-                    Get immediate answers to common questions with our AI assistant.
-                  </p>
-                  <div>
-                    <Button variant="outline" className="text-sm px-6 py-2 h-auto border-gray-300 w-full">
-                      Start Chat
                     </Button>
                   </div>
                 </div>
