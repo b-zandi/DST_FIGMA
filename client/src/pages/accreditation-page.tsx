@@ -491,7 +491,6 @@ export default function AccreditationPage() {
                     
                     <div className="space-y-4">
                       <Button className="w-full">Schedule a Consultation</Button>
-                      <Button variant="outline" className="w-full">Download Verification Guide</Button>
                     </div>
                     
                     <div className="mt-6 p-4 bg-yellow-50 rounded-lg border border-yellow-100">
