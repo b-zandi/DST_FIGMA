@@ -81,6 +81,16 @@ export function setupAuth(app: Express) {
       // Remove passwordConfirm from the payload as we don't store it
       const { passwordConfirm, ...userDataWithoutConfirm } = req.body;
       
+      // Ensure username is set - use email if not provided
+      if (!userDataWithoutConfirm.username) {
+        userDataWithoutConfirm.username = userDataWithoutConfirm.email;
+      }
+      
+      console.log("Creating user with data:", { 
+        ...userDataWithoutConfirm,
+        password: "REDACTED" 
+      });
+      
       const user = await storage.createUser({
         ...userDataWithoutConfirm,
         password: await hashPassword(userDataWithoutConfirm.password),

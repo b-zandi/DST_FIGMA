@@ -4,7 +4,8 @@ import { z } from "zod";
 
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
-  email: text("email").notNull().unique(), // Email serves as username
+  username: text("username").notNull(), // Required by the database
+  email: text("email").notNull().unique(),
   password: text("password").notNull(),
   firstName: text("first_name"),
   lastName: text("last_name"),
@@ -65,6 +66,7 @@ export const userInvestments = pgTable("user_investments", {
 
 export const insertUserSchema = createInsertSchema(users)
   .pick({
+    username: true,
     password: true,
     email: true,
     firstName: true,
@@ -76,7 +78,6 @@ export const insertUserSchema = createInsertSchema(users)
     questionnaireData: true,
   })
   .extend({
-    username: z.string().optional(), // Add username field for database compatibility
     email: z.string().email("Please enter a valid email address"),
     password: z.string().min(8, "Password must be at least 8 characters long"),
     passwordConfirm: z.string().min(8, "Password confirmation must be at least 8 characters long").optional(),
