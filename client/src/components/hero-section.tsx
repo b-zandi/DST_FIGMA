@@ -5,8 +5,8 @@ import { Input } from "@/components/ui/input";
 
 export function HeroSection() {
   return (
-    <section className="bg-gray-50 py-16">
-      <div className="container mx-auto px-4">
+    <section className="bg-gray-50 py-16 w-full">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             DST Investing. Made Simple.

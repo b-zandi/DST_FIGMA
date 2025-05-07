@@ -196,8 +196,8 @@ export default function HomePage() {
         </section>
 
         {/* Contact Options Section */}
-        <section className="py-12 bg-gray-50">
-          <div className="container mx-auto px-4">
+        <section className="py-12 bg-gray-50 w-full">
+          <div className="w-full px-4 sm:px-6 lg:px-8">
             <div className="max-w-5xl mx-auto">
               <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">
                 Have questions about DST investments?

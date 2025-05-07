@@ -7,8 +7,8 @@ export function CTASection() {
   const { user } = useAuth();
 
   return (
-    <section className="py-24 bg-white border-t border-gray-100">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-24 bg-white border-t border-gray-100 w-full">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="bg-primary/5 rounded-2xl px-8 py-16 relative overflow-hidden">
             {/* Background decoration */}
