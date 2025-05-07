@@ -135,77 +135,101 @@ export default function LearnMorePage() {
                 <div className="bg-gray-50 rounded-lg p-8">
                   <div className="flex items-center mb-6">
                     <TrendingUp className="h-10 w-10 text-primary mr-4" />
-                    <h2 className="text-3xl font-bold text-[#1A2B50]">Benefits of DST Investments</h2>
+                    <h2 className="text-3xl font-bold text-[#1A2B50]">The Benefits of DST Ownership</h2>
                   </div>
                   
                   <p className="text-lg text-gray-700 mb-8">
-                    Delaware Statutory Trusts offer numerous advantages for real estate investors, particularly those looking to defer capital gains taxes through 1031 exchanges and those seeking passive investment opportunities.
+                    Investors considering a 1031 exchange to defer capital gains and depreciation recapture taxes on the sale of investment property may benefit from reinvesting in a Delaware Statutory Trust (DST). DSTs are popular investment structures that enable investors to invest in diversified portfolios of commercial real estate for passive income. An investor can complete their 1031 exchange by investing in a diversified DST to reap distinctive benefits.
                   </p>
                   
-                  <div className="grid md:grid-cols-3 gap-6">
-                    <Card className="p-6">
-                      <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                        <DollarSign className="h-6 w-6 text-primary" />
+                  <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div className="bg-white rounded-lg border border-gray-200 p-6">
+                      <div className="flex items-start mb-4">
+                        <div className="flex-shrink-0 mr-4">
+                          <div className="h-14 w-14 flex items-center justify-center">
+                            <PieChart className="h-10 w-10 text-primary" />
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-semibold text-[#1A2B50] mb-2">
+                            Broad Diversification Across a Portfolio or Multiple Portfolios
+                          </h3>
+                          <p className="text-gray-600">
+                            Acquiring a share in DSTs with well diversified portfolios of assets can protect your capital from being overly dependent on any one property, location, asset class, tenant, industry, lease term, or debt term.
+                          </p>
+                        </div>
                       </div>
-                      <h3 className="text-xl font-semibold text-[#1A2B50] mb-2">
-                        Tax Advantages
-                      </h3>
-                      <ul className="list-disc pl-5 space-y-2 text-gray-600">
-                        <li>Eligible for 1031 tax-deferred exchanges</li>
-                        <li>Potential step-up in basis upon death</li>
-                        <li>Pass-through depreciation benefits</li>
-                        <li>No state income tax in Delaware</li>
-                      </ul>
-                    </Card>
+                    </div>
                     
-                    <Card className="p-6">
-                      <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                        <Handshake className="h-6 w-6 text-primary" />
+                    <div className="bg-white rounded-lg border border-gray-200 p-6">
+                      <div className="flex items-start mb-4">
+                        <div className="flex-shrink-0 mr-4">
+                          <div className="h-14 w-14 flex items-center justify-center">
+                            <Handshake className="h-10 w-10 text-primary" />
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-semibold text-[#1A2B50] mb-2">
+                            Passive Cash Flow with Reduced Management Burdens
+                          </h3>
+                          <p className="text-gray-600">
+                            DST investments can potentially provide monthly income generated from multiple commercial properties. The DST's sponsor is responsible for all management, accounting, and investor services, so the cash flow you receive is fully passive.
+                          </p>
+                        </div>
                       </div>
-                      <h3 className="text-xl font-semibold text-[#1A2B50] mb-2">
-                        Passive Ownership
-                      </h3>
-                      <ul className="list-disc pl-5 space-y-2 text-gray-600">
-                        <li>No landlord responsibilities</li>
-                        <li>Professional property management</li>
-                        <li>No property-level decisions required</li>
-                        <li>Simplified ownership structure</li>
-                        <li>Regular income distributions</li>
-                      </ul>
-                    </Card>
+                    </div>
                     
-                    <Card className="p-6">
-                      <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                        <PieChart className="h-6 w-6 text-primary" />
+                    <div className="bg-white rounded-lg border border-gray-200 p-6">
+                      <div className="flex items-start mb-4">
+                        <div className="flex-shrink-0 mr-4">
+                          <div className="h-14 w-14 flex items-center justify-center">
+                            <DollarSign className="h-10 w-10 text-primary" />
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-semibold text-[#1A2B50] mb-2">
+                            Investment Amount May Be Customized to Fit Exact Need
+                          </h3>
+                          <p className="text-gray-600">
+                            Sole-ownership replacement options can be difficult to fit to your exact exchange needs. By identifying one or more DST offerings, you can tailor your investment amount to potentially eliminate all taxable boot and defer 100% of tax liability.
+                          </p>
+                        </div>
                       </div>
-                      <h3 className="text-xl font-semibold text-[#1A2B50] mb-2">
-                        Diversification
-                      </h3>
-                      <ul className="list-disc pl-5 space-y-2 text-gray-600">
-                        <li>Access to institutional-quality properties</li>
-                        <li>Lower minimum investment thresholds</li>
-                        <li>Ability to split investment across multiple DSTs</li>
-                        <li>Diversification across property types and locations</li>
-                      </ul>
-                    </Card>
-                  </div>
-                  
-                  <div className="mt-8 bg-white rounded-lg p-6 border border-gray-200">
-                    <h3 className="text-xl font-semibold text-[#1A2B50] mb-3">
-                      Additional DST Benefits
-                    </h3>
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div>
-                        <h4 className="font-medium text-[#1A2B50] mb-2">Estate Planning Advantages</h4>
-                        <p className="text-gray-600 mb-4">
-                          DSTs can simplify estate planning by allowing fractional interests to be passed to multiple heirs, potentially removing management burdens from future generations while maintaining the tax benefits.
-                        </p>
+                    </div>
+                    
+                    <div className="bg-white rounded-lg border border-gray-200 p-6">
+                      <div className="flex items-start mb-4">
+                        <div className="flex-shrink-0 mr-4">
+                          <div className="h-14 w-14 flex items-center justify-center">
+                            <FileCheck className="h-10 w-10 text-primary" />
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-semibold text-[#1A2B50] mb-2">
+                            Investors Can Close Escrow in as Few as 1-3 Days
+                          </h3>
+                          <p className="text-gray-600">
+                            Since DSTs have already completed the underwriting, diligence, financing, and closing processes upfront, you can often close on a DST in as few as 1-3 days to successfully complete a 1031 exchange on time.
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h4 className="font-medium text-[#1A2B50] mb-2">Liability Protection</h4>
-                        <p className="text-gray-600 mb-4">
-                          DST investors have no personal liability beyond their investment amount. The trust structure and non-recourse financing protect investors from personal liability for property-related issues and debt.
-                        </p>
+                    </div>
+                    
+                    <div className="bg-white rounded-lg border border-gray-200 p-6">
+                      <div className="flex items-start mb-4">
+                        <div className="flex-shrink-0 mr-4">
+                          <div className="h-14 w-14 flex items-center justify-center">
+                            <Shield className="h-10 w-10 text-primary" />
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-semibold text-[#1A2B50] mb-2">
+                            Strategic Long-Term Planning with Flexible Exit Options
+                          </h3>
+                          <p className="text-gray-600">
+                            Some DSTs are designed to provide multiple exit options, helping investors strategically plan either to perform another 1031 exchange, perform a 721 exchange to acquire ownership in a REIT, cash out, or any combination of these options.
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
