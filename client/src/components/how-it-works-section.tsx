@@ -1,69 +1,144 @@
+import { useState } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, CheckCircle, Clock, Briefcase, ArrowUpRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface StepCardProps {
   number: number;
   title: string;
   description: string;
+  icon: React.ReactNode;
+  benefit: string;
+  isActive: boolean;
+  onClick: () => void;
 }
 
-function StepCard({ number, title, description }: StepCardProps) {
+function StepCard({ number, title, description, icon, benefit, isActive, onClick }: StepCardProps) {
   return (
-    <div className="bg-white p-6 border border-gray-200 rounded-md h-full">
+    <div 
+      className={cn(
+        "bg-white p-6 border rounded-lg transition-all duration-300 cursor-pointer hover:shadow-md h-full",
+        isActive ? "border-blue-500 shadow-md" : "border-gray-200"
+      )}
+      onClick={onClick}
+    >
       <div className="flex items-start mb-4">
         <div className="flex-shrink-0 mr-4">
-          <div className="rounded-full bg-blue-500 text-white flex items-center justify-center h-7 w-7 text-sm font-medium">
+          <div className={cn(
+            "rounded-full flex items-center justify-center h-10 w-10 text-white",
+            isActive ? "bg-blue-600" : "bg-blue-500"
+          )}>
             {number}
           </div>
         </div>
         <div>
-          <h3 className="font-semibold text-gray-900 mb-2">{title}</h3>
+          <h3 className="font-semibold text-gray-900 text-lg mb-2 flex items-center">
+            {title}
+            {isActive && <CheckCircle className="h-4 w-4 ml-2 text-blue-500" />}
+          </h3>
           <p className="text-gray-600">
             {description}
           </p>
         </div>
       </div>
+      
+      {isActive && (
+        <div className="mt-4 pt-4 border-t border-gray-100">
+          <div className="flex items-start">
+            <div className="flex-shrink-0 mr-3 mt-1">
+              {icon}
+            </div>
+            <div>
+              <p className="text-sm font-medium text-blue-700">Key Benefit</p>
+              <p className="text-sm text-gray-600">{benefit}</p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
 export function HowItWorksSection() {
+  const [activeStep, setActiveStep] = useState(1);
+  
   return (
-    <section className="py-12 bg-gray-50 border-b border-gray-100 w-full">
+    <section className="py-16 bg-gray-50 border-b border-gray-100 w-full">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8">
-            How Does It Work?
-          </h2>
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-10">
+            <h2 className="text-3xl font-bold text-gray-900">
+              How Does It Work?
+            </h2>
+            <p className="text-blue-600 mt-2 md:mt-0 flex items-center">
+              Simple 3-step process
+              <ArrowUpRight className="ml-1 h-4 w-4" />
+            </p>
+          </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
             <StepCard 
               number={1}
               title="Prepare"
               description="Determine which investment property you want to sell, establish a qualified intermediary, and close your property."
+              icon={<Clock className="h-5 w-5 text-blue-500" />}
+              benefit="Our team will guide you through the 1031 exchange timeline to ensure you meet all IRS deadlines."
+              isActive={activeStep === 1}
+              onClick={() => setActiveStep(1)}
             />
             
             <StepCard 
               number={2}
               title="Identify a DST"
               description="Our platform will connect you with a DST that matches your investment objectives and timeline."
+              icon={<Briefcase className="h-5 w-5 text-blue-500" />}
+              benefit="Access to institutional-quality real estate investments with lower minimum investments than direct ownership."
+              isActive={activeStep === 2}
+              onClick={() => setActiveStep(2)}
             />
             
             <StepCard 
               number={3}
               title="Deposit & Close"
               description="Make a non-refundable deposit in order to secure your position in the investment."
+              icon={<CheckCircle className="h-5 w-5 text-blue-500" />}
+              benefit="Complete your 1031 exchange quickly and efficiently, often closing in as few as 1-3 days."
+              isActive={activeStep === 3}
+              onClick={() => setActiveStep(3)}
             />
           </div>
           
-          <div className="text-center">
-            <Button asChild className="bg-black hover:bg-gray-800 text-white rounded-md text-sm px-6 py-2 h-auto gap-2">
-              <Link href="/learn-more">
-                Get Started
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
+          <div className="bg-white p-6 border border-gray-200 rounded-lg mb-8">
+            <div className="flex items-start">
+              <div className="hidden md:block flex-shrink-0 mr-6">
+                <div className="h-14 w-14 rounded-full bg-blue-100 flex items-center justify-center">
+                  <div className="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-white" />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Ready to start your DST investment journey?</h3>
+                <p className="text-gray-600 mb-4">
+                  Our team of DST investment specialists will guide you through every step of the process, from property selection to closing your investment.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white gap-2">
+                    <Link href="/investing">
+                      Browse Available DSTs
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </Button>
+                  <Button asChild variant="outline" className="border-blue-200 gap-2">
+                    <Link href="/learn-more">
+                      Learn More About DSTs
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
