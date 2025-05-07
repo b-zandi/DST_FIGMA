@@ -535,6 +535,38 @@ export default function InvestmentDetailPage() {
             </div>
             
             <div className="space-y-6">
+              {/* Investment Progress Tracker */}
+              {user && (
+                <>
+                  <InvestmentProgressTracker
+                    currentStage={investmentStage}
+                    startDate={investment.offeringDate}
+                    estimatedCloseDate={investment.closingDate}
+                    nextAction={{
+                      text: "Complete Next Step",
+                      link: "#"
+                    }}
+                  />
+                  
+                  {/* Test Controls - DEMO ONLY */}
+                  <div className="flex flex-wrap gap-2 mt-3 px-2">
+                    {[1, 2, 3, 4, 5].map(stage => (
+                      <button
+                        key={stage}
+                        onClick={() => setInvestmentStage(stage)}
+                        className={`px-2 py-1 text-xs rounded ${
+                          investmentStage === stage 
+                            ? 'bg-blue-500 text-white' 
+                            : 'bg-gray-200 text-gray-700'
+                        }`}
+                      >
+                        Stage {stage}
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
+              
               {/* CTA Card */}
               <Card className="border-t-4 border-primary">
                 <CardHeader>
