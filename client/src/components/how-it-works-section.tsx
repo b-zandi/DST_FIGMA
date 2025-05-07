@@ -105,7 +105,7 @@ export function HowItWorksSection() {
           
           <div className="text-center">
             <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white gap-2 px-8 py-6 h-auto text-base">
-              <Link href="/investing">
+              <Link href="/auth?tab=register">
                 Get Started
                 <ArrowRight className="h-4 w-4" />
               </Link>
