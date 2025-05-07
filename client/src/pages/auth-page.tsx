@@ -135,12 +135,12 @@ export default function AuthPage() {
       const isAccredited = accreditationResult.segment === 'high' || accreditationResult.segment === 'medium';
       
       // Convert questionnaire answers to JSON string for storage
-      // Remove passwordConfirm as it's not stored in the database
       // Use email as username since the database requires it
       const userData = {
         ...emailFormData,
         ...profileFormData,
         username: emailFormData.email, // Set username equal to email
+        passwordConfirm: emailFormData.password, // Include passwordConfirm for schema validation
         accreditedStatus: isAccredited,
         accreditationScore: accreditationResult.score,
         accreditationSegment: accreditationResult.segment,

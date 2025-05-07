@@ -77,7 +77,7 @@ export function Header() {
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="gap-2 text-sm ml-4">
                     <User className="h-4 w-4" />
-                    <span>{user.firstName || user.username}</span>
+                    <span>{user.firstName || user.email}</span>
                     <ChevronDown className="h-4 w-4 opacity-70" />
                   </Button>
                 </DropdownMenuTrigger>

@@ -76,16 +76,17 @@ export const insertUserSchema = createInsertSchema(users)
     questionnaireData: true,
   })
   .extend({
+    username: z.string().optional(), // Add username field for database compatibility
     email: z.string().email("Please enter a valid email address"),
     password: z.string().min(8, "Password must be at least 8 characters long"),
-    passwordConfirm: z.string().min(8, "Password confirmation must be at least 8 characters long"),
+    passwordConfirm: z.string().min(8, "Password confirmation must be at least 8 characters long").optional(),
     firstName: z.string().optional(),
     lastName: z.string().optional(),
     accreditationScore: z.number().optional(),
     accreditationSegment: z.enum(['high', 'medium', 'low', 'notReady']).optional(),
     questionnaireData: z.string().optional(),
   })
-  .refine((data) => data.password === data.passwordConfirm, {
+  .refine((data) => !data.passwordConfirm || data.password === data.passwordConfirm, {
     message: "Passwords don't match",
     path: ["passwordConfirm"],
   });
