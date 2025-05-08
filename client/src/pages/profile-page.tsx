@@ -34,7 +34,9 @@ import {
   AlertCircle,
   ArrowRight,
   Clock,
-  ChevronRight
+  ChevronRight,
+  Info as InfoIcon,
+  CheckCircle2
 } from "lucide-react";
 import { Link } from "wouter";
 import { Badge } from "@/components/ui/badge";
