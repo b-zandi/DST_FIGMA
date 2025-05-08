@@ -193,6 +193,16 @@ export default function ProfilePage() {
               </TabsList>
               
               <TabsContent value="profile" className="space-y-8">
+                {/* Welcome Banner */}
+                <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 shadow-sm">
+                  <h2 className="text-xl font-medium text-blue-800">
+                    Welcome back, {user?.firstName || 'Investor'}! 👋
+                  </h2>
+                  <p className="text-blue-600 mt-1">
+                    Manage your DST investment portfolio and update your profile below.
+                  </p>
+                </div>
+                
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                   <div className="lg:col-span-2">
                     <Card>
@@ -402,6 +412,16 @@ export default function ProfilePage() {
               </TabsContent>
               
               <TabsContent value="investments" className="space-y-6">
+                {/* Welcome Banner */}
+                <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 shadow-sm">
+                  <h2 className="text-xl font-medium text-blue-800">
+                    Welcome back, {user?.firstName || 'Investor'}! 👋
+                  </h2>
+                  <p className="text-blue-600 mt-1">
+                    Review your current investments and explore new opportunities.
+                  </p>
+                </div>
+                
                 {!user?.accreditedStatus ? (
                   <Card>
                     <CardHeader>
