@@ -31,14 +31,31 @@ export function Header() {
     logoutMutation.mutate();
   };
 
-  const navItems: NavItem[] = [
+  // Different nav items based on authentication status
+  const commonNavItems: NavItem[] = [
+    { title: "FAQ", href: "/faq", icon: <svg className="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg> },
+  ];
+  
+  const guestNavItems: NavItem[] = [
     { title: "Find a DST", href: "/auth?tab=register", icon: <Building className="h-4 w-4 mr-1.5" /> },
     { title: "Are You Accredited?", href: "/accreditation", icon: <svg className="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
     </svg> },
-    { title: "FAQ", href: "/faq", icon: <svg className="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+  ];
+  
+  const userNavItems: NavItem[] = [
+    { title: "My Investments", href: "/profile?tab=investments", icon: <Building className="h-4 w-4 mr-1.5" /> },
+    { title: "Find New DSTs", href: "/home", icon: <svg className="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
     </svg> },
+  ];
+  
+  // Combine the appropriate nav items based on auth status
+  const navItems: NavItem[] = [
+    ...(user ? userNavItems : guestNavItems),
+    ...commonNavItems
   ];
 
   return (

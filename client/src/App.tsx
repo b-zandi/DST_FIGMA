@@ -8,6 +8,7 @@ import AuthPage from "@/pages/auth-page";
 import FAQPage from "@/pages/faq-page";
 import ProfilePage from "@/pages/profile-page";
 import TestPage from "@/pages/test-page";
+import LandingPage from "@/pages/landing-page";
 
 import InvestmentDetailPage from "@/pages/investment-detail-page";
 import AccreditationPage from "@/pages/accreditation-page";
@@ -18,7 +19,8 @@ import { ProtectedRoute } from "./lib/protected-route";
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={HomePage} />
+      <Route path="/" component={LandingPage} />
+      <Route path="/home" component={HomePage} />
       <Route path="/auth" component={AuthPage} />
       <Route path="/faq" component={FAQPage} />
 
