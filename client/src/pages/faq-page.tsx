@@ -20,13 +20,77 @@ import {
 import { Input } from "@/components/ui/input";
 import { BookOpen, Search } from "lucide-react";
 
+// Static FAQ content
+const staticFaqs: FAQ[] = [
+  {
+    id: 1,
+    question: "What is a Delaware Statutory Trust (DST)?",
+    answer: "A Delaware Statutory Trust (DST) is a legally recognized trust that allows investors to own fractional interests in commercial real estate properties. DSTs are commonly used for 1031 exchanges, offering professional management and potential tax benefits for accredited investors.",
+    category: "basics",
+    order: 1
+  },
+  {
+    id: 2,
+    question: "How does a 1031 exchange work with a DST?",
+    answer: "When selling an investment property, investors can use a 1031 exchange to defer capital gains taxes by reinvesting the proceeds into a DST property. The DST must be identified within 45 days of the sale, and the exchange must be completed within 180 days. This allows investors to defer taxes while transitioning to a more passive investment structure.",
+    category: "tax",
+    order: 2
+  },
+  {
+    id: 3,
+    question: "What are the potential benefits of DST investments?",
+    answer: "DST investments offer several potential benefits including tax deferral through 1031 exchanges, passive income opportunities, access to institutional-quality properties, professional management, potential appreciation, portfolio diversification, and simplified estate planning.",
+    category: "benefits",
+    order: 3
+  },
+  {
+    id: 4,
+    question: "Who can invest in a DST?",
+    answer: "DST investments are available exclusively to accredited investors as defined by the Securities and Exchange Commission (SEC). Accreditation typically requires an individual income exceeding $200,000 (or $300,000 with spouse) for the past two years, or a net worth over $1 million (excluding primary residence).",
+    category: "eligibility",
+    order: 4
+  },
+  {
+    id: 5,
+    question: "What types of properties are available through DSTs?",
+    answer: "DSTs typically invest in commercial real estate assets such as multifamily apartment complexes, industrial properties, medical facilities, self-storage facilities, retail centers, and office buildings. These properties are often institutional-grade assets with stable income potential.",
+    category: "investment",
+    order: 5
+  },
+  {
+    id: 6,
+    question: "What are the minimum investment amounts for DSTs?",
+    answer: "Minimum investment amounts for DSTs typically range from $25,000 to $100,000, depending on the specific offering. This lower entry point (compared to direct property ownership) allows for greater diversification across multiple properties or DST investments.",
+    category: "investment",
+    order: 6
+  },
+  {
+    id: 7,
+    question: "What risks should I be aware of when investing in DSTs?",
+    answer: "Key risks include: lack of liquidity (DSTs are generally not easily sold), potential fluctuations in property value, the inability to make changes to the property or management (the 'no-call provision'), dependence on the expertise of the sponsor/asset manager, and market/economic risks affecting commercial real estate.",
+    category: "risks",
+    order: 7
+  },
+  {
+    id: 8,
+    question: "How are DST investments taxed?",
+    answer: "DST investments typically provide pass-through tax treatment, with income, deductions, and depreciation passed to investors on a pro-rata basis. Investors receive Schedule K-1 forms reporting their share of income and expenses. When using a 1031 exchange, capital gains taxes from the sale of a previous investment property can be deferred.",
+    category: "tax",
+    order: 8
+  }
+];
+
 export default function FAQPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
-  const { data: faqs = [] } = useQuery<FAQ[]>({
+  // API FAQs (but use static FAQs if none are returned from the API)
+  const { data: apiFaqs = [] } = useQuery<FAQ[]>({
     queryKey: ["/api/faqs"],
   });
+  
+  // Use API FAQs if available, otherwise use static FAQs
+  const faqs = apiFaqs.length > 0 ? apiFaqs : staticFaqs;
 
   // Get unique categories from FAQs
   const categories = ["all", ...Array.from(new Set(faqs.map(faq => faq.category)))];

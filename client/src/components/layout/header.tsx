@@ -45,12 +45,8 @@ export function Header() {
     </svg> },
   ];
   
-  const userNavItems: NavItem[] = [
-    { title: "My Investments", href: "/profile?tab=investments", icon: <Building className="h-4 w-4 mr-1.5" /> },
-    { title: "Find New DSTs", href: "/home", icon: <svg className="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-    </svg> },
-  ];
+  // Empty array for logged-in users since we're removing the menu items
+  const userNavItems: NavItem[] = [];
   
   // Combine the appropriate nav items based on auth status
   const navItems: NavItem[] = [
