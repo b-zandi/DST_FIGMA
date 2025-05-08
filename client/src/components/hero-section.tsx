@@ -22,7 +22,7 @@ export function HeroSection() {
                 <Search className="h-5 w-5 text-gray-400 mr-3" />
                 <Input 
                   type="text" 
-                  placeholder="Ask Franklin AI about DST investments..."
+                  placeholder="Ask AI about DST investments..."
                   className="flex-1 border-0 focus-visible:ring-0 focus-visible:ring-offset-0 px-0 py-0 text-base h-auto"
                 />
               </div>

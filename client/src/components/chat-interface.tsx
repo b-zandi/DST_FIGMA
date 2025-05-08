@@ -14,7 +14,7 @@ export function ChatInterface() {
         <MessageSquareText className="h-5 w-5 text-primary" />
         <Input 
           type="text" 
-          placeholder="Ask Franklin AI about DST investments..."
+          placeholder="Ask AI about DST investments..."
           className="flex-1 border-0 focus-visible:ring-0 focus-visible:ring-offset-0 px-0 py-3 text-base"
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
@@ -45,7 +45,7 @@ export function ChatInterface() {
       
       <div className="flex justify-center items-center gap-3 mt-6 text-xs text-gray-500">
         <Building className="h-3 w-3" />
-        <span>Powered by Franklin AI</span>
+        <span>Powered by AI</span>
       </div>
     </div>
   );
