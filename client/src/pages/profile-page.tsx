@@ -86,6 +86,20 @@ export default function ProfilePage() {
   const { toast } = useToast();
   const [isAccreditedInvestor, setIsAccreditedInvestor] = useState(user?.accreditedStatus || false);
   const [activeTab, setActiveTab] = useState("profile");
+  
+  // Parse questionnaire data to check if user selected "Not Sure" for accreditation
+  const [isNotSureAboutAccreditation, setIsNotSureAboutAccreditation] = useState(false);
+  
+  useEffect(() => {
+    if (user?.questionnaireData) {
+      try {
+        const questionnaireData = JSON.parse(user.questionnaireData);
+        setIsNotSureAboutAccreditation(questionnaireData.accredited === "notSure");
+      } catch (e) {
+        console.error("Failed to parse questionnaire data", e);
+      }
+    }
+  }, [user?.questionnaireData]);
 
   // Fetch user investments
   const { 
@@ -202,6 +216,54 @@ export default function ProfilePage() {
                     Manage your DST investment portfolio and update your profile below.
                   </p>
                 </div>
+                
+                {/* Accreditation Information Box for "Not Sure" users */}
+                {isNotSureAboutAccreditation && !user?.accreditedStatus && (
+                  <Card className="border-amber-200 bg-amber-50">
+                    <CardHeader className="pb-2">
+                      <CardTitle className="flex items-center text-amber-800">
+                        <InfoIcon className="h-5 w-5 mr-2 text-amber-600" />
+                        Learn About Accreditation
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-amber-700 mb-4">
+                        You indicated that you're not sure about your accreditation status. Becoming an accredited investor 
+                        is required for Delaware Statutory Trust investments. Here are some resources to help you:
+                      </p>
+                      <div className="space-y-3 mb-4">
+                        <div className="flex items-start gap-2">
+                          <CheckCircle2 className="h-5 w-5 text-amber-600 mt-0.5 flex-shrink-0" />
+                          <p className="text-amber-700">
+                            <span className="font-medium">Annual Income:</span> Individual income exceeding $200,000 (or $300,000 with spouse) in each of the two most recent years.
+                          </p>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <CheckCircle2 className="h-5 w-5 text-amber-600 mt-0.5 flex-shrink-0" />
+                          <p className="text-amber-700">
+                            <span className="font-medium">Net Worth:</span> Net worth over $1 million (individually or with spouse), excluding your primary residence.
+                          </p>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <CheckCircle2 className="h-5 w-5 text-amber-600 mt-0.5 flex-shrink-0" />
+                          <p className="text-amber-700">
+                            <span className="font-medium">Professional Credentials:</span> Certain licenses, designations or credentials recognized by the SEC.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex flex-col sm:flex-row gap-3">
+                        <Button asChild variant="outline" className="border-amber-500 text-amber-700 hover:bg-amber-100">
+                          <Link href="/accreditation">
+                            Read Full Requirements
+                          </Link>
+                        </Button>
+                        <Button className="bg-amber-600 hover:bg-amber-700">
+                          Start Verification Process
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
                 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                   <div className="lg:col-span-2">
