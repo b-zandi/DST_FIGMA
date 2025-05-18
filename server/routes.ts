@@ -196,7 +196,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
-      const { password, ...safeUser } = user;
+      const userObj = user as { password?: string; [key: string]: any };
+      const { password, ...safeUser } = userObj;
       res.json({ exists: true, user: safeUser });
     } catch (error) {
       next(error);
@@ -207,7 +208,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       // Get all users from the Map in MemStorage
       const allUsers = Array.from((storage as any).users.values()).map(user => {
-        const { password, ...safeUser } = user;
+        const userObj = user as { password?: string; [key: string]: any };
+        const { password, ...safeUser } = userObj;
         return safeUser;
       });
       res.json(allUsers);

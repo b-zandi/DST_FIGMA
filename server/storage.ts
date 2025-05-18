@@ -15,7 +15,7 @@ import {
 import createMemoryStore from "memorystore";
 import session from "express-session";
 import connectPg from "connect-pg-simple";
-import { db, pool } from "./db";
+import { db } from "./db";
 import { eq, and } from "drizzle-orm";
 
 const MemoryStore = createMemoryStore(session);
@@ -377,7 +377,6 @@ export class DatabaseStorage implements IStorage {
 
   constructor() {
     this.sessionStore = new PostgresSessionStore({ 
-      pool, 
       createTableIfMissing: true 
     });
   }

@@ -81,11 +81,6 @@ export function setupAuth(app: Express) {
       // Remove passwordConfirm from the payload as we don't store it
       const { passwordConfirm, ...userDataWithoutConfirm } = req.body;
       
-      // Ensure username is set - use email if not provided
-      if (!userDataWithoutConfirm.username) {
-        userDataWithoutConfirm.username = userDataWithoutConfirm.email;
-      }
-      
       console.log("Creating user with data:", { 
         ...userDataWithoutConfirm,
         password: "REDACTED" 
@@ -109,20 +104,26 @@ export function setupAuth(app: Express) {
   });
 
   app.post("/api/login", (req, res, next) => {
-    passport.authenticate("local", (err, user, info) => {
-      if (err) return next(err);
-      if (!user) return res.status(401).json({ message: "Invalid email or password" });
-      
-      req.login(user, (err) => {
+    passport.authenticate(
+      'local',
+      (
+        err: Error | null,
+        user: Express.User | false,
+        info: Record<string, unknown> | undefined
+      ) => {
         if (err) return next(err);
-        
-        // Remove password from response
-        const { password, ...userWithoutPassword } = user;
-        res.status(200).json(userWithoutPassword);
-      });
-    })(req, res, next);
-  });
+        if (!user) return res.status(401).json({ message: "Invalid credentials" });
 
+        req.login(user, (err) => {
+          if (err) return next(err);
+
+          // Remove password from response
+          const { password, ...userWithoutPassword } = user as any;
+          res.status(200).json(userWithoutPassword);
+        });
+      }
+    )(req, res, next); // <--- This parentheses runs the returned middleware function
+  });
   app.post("/api/logout", (req, res, next) => {
     req.logout((err) => {
       if (err) return next(err);
