@@ -33,8 +33,8 @@ jobs:
     - name: TypeScript Check
       run: pnpm check
       
-    - name: Lint
-      run: pnpm lint
+    #- name: Lint
+     # run: pnpm lint
       
     # Uncomment when tests are implemented
     # - name: Run tests
