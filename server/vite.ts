@@ -26,6 +26,10 @@ export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
     middlewareMode: true,
     hmr: { server },
+    // Accept any sub-domain that ends with .replit.dev when running
+    // in Replit; elsewhere fall back to the default rules.
+    allowedHosts:
+      process.env.REPLIT_DB_URL !== undefined ? [".replit.dev"] : true,
   };
 
   const vite = await createViteServer({
