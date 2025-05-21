@@ -1,0 +1,22 @@
+<script async src="https://tally.so/widgets/embed.js"></script>
+
+<script>
+window.TallyConfig = {
+  "formId": "mVyyZj",
+  "popup": {
+    "width": 400,
+    "emoji": {
+      "text": "👋",
+      "animation": "wave"
+    },
+    "layout": "modal",
+    "open": {
+      "trigger": "time",
+      "ms": 5000
+    },
+    "alignLeft": true,
+    "autoClose": 1000
+  }
+};
+</script>
+
