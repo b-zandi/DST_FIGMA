@@ -42,7 +42,7 @@ export default function HomePage() {
                   </h2>
                   
                   <p className="text-gray-600 mb-6">
-                    DST investments are available exclusively to accredited investors as defined by the Securities and Exchange Commission (SEC).
+                    DST investments are available exclusively to accredited investors as defined by the Securities and Exchange Commission (SEC). DST interests are illiquid, may be leveraged, and investors can lose all or part of their principal.
                   </p>
                   
                   <div className="space-y-5">
@@ -109,7 +109,7 @@ export default function HomePage() {
                     </div>
                     
                     <p className="text-gray-600 mb-6">
-                      Our streamlined verification process helps determine if you meet the SEC's criteria for an accredited investor. Here's how it works:
+                      Here's how it works:
                     </p>
                     
                     <div className="space-y-5">
@@ -128,8 +128,8 @@ export default function HomePage() {
                           2
                         </div>
                         <div>
-                          <p className="font-medium text-gray-900">Submit verification materials</p>
-                          <p className="text-gray-600">Provide the necessary documentation based on your qualification method</p>
+                          <p className="font-medium text-gray-900">Complete Our Questionnaire</p>
+                          <p className="text-gray-600">Answer a few income/net-worth questions to see if you meet SEC criteria.</p>
                         </div>
                       </div>
                       
@@ -138,8 +138,8 @@ export default function HomePage() {
                           3
                         </div>
                         <div>
-                          <p className="font-medium text-gray-900">Receive confirmation</p>
-                          <p className="text-gray-600">Once verified, gain access to all DST investment opportunities</p>
+                          <p className="font-medium text-gray-900">Third-party verification & next steps</p>
+                          <p className="text-gray-600">If you qualify, we’ll introduce you to an independent adviser that will complete the formal accreditation check and, at your request, discuss DST options</p>
                         </div>
                       </div>
                     </div>
@@ -244,47 +244,23 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Contact Options Section */}
-        <section className="py-12 bg-gray-50 w-full">
-          <div className="w-full px-4 sm:px-6 lg:px-8">
-            <div className="max-w-5xl mx-auto">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">
-                Have questions about DST investments?
+        {/* CTA Section */}
+        <section className="bg-white py-16">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                Ready to Explore DST Investments?
               </h2>
-              <p className="text-gray-600 mb-10 text-center">
-                Our team of investment professionals is here to help you navigate the world of DST investments and 1031 exchanges
+              <p className="text-xl text-gray-600 mb-8">
+                Create an account, complete the questionnaire, and begin your DST Investment journey .
               </p>
-              
-              <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-                <div className="bg-white border border-gray-200 rounded-md p-8 text-center">
-                  <div className="flex justify-center mb-5">
-                    <Phone className="h-6 w-6 text-gray-700" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Schedule a Call</h3>
-                  <p className="text-gray-600 mb-6">
-                    Speak with one of our investment advisors at a time that works for you.
-                  </p>
-                  <div>
-                    <Button variant="outline" className="text-sm px-6 py-2 h-auto border-gray-300 w-full">
-                      Book a Time
-                    </Button>
-                  </div>
-                </div>
-                
-                <div className="bg-white border border-gray-200 rounded-md p-8 text-center">
-                  <div className="flex justify-center mb-5">
-                    <Mail className="h-6 w-6 text-gray-700" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Email Us</h3>
-                  <p className="text-gray-600 mb-6">
-                    Send us your questions and we'll respond within one business day.
-                  </p>
-                  <div>
-                    <Button variant="outline" className="text-sm px-6 py-2 h-auto border-gray-300 w-full">
-                      Contact Us
-                    </Button>
-                  </div>
-                </div>
+              <PromoterDisclosure />
+              <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6">
+                <Button size="lg" asChild>
+                  <Link href="/auth">
+                    Start Questionnaire
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>
