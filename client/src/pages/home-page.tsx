@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/footer";
 import { HeroSection } from "@/components/hero-section";
 import { FeaturesSection } from "@/components/features-section";
 import { HowItWorksSection } from "@/components/how-it-works-section";
+import { PromoterDisclosure } from "@/components/promoter-disclosure";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import {
@@ -144,7 +145,8 @@ export default function HomePage() {
                     </div>
                     
                     <div className="mt-8">
-                      <Button asChild className="w-full bg-blue-500 hover:bg-blue-600 text-white">
+                      <PromoterDisclosure />
+                      <Button asChild className="w-full bg-blue-500 hover:bg-blue-600 text-white mt-3">
                         <Link href="/auth?tab=register">
                           Start Verification Process
                         </Link>
