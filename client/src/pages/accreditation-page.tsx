@@ -479,7 +479,39 @@ export default function AccreditationPage() {
                   </CardContent>
                 </Card>
 
+                {/* Verification Support Card */}
+                <Card>
+                  <CardContent className="pt-6">
+                    <h3 className="text-xl font-bold text-[#1A2B50] mb-4">
+                      Need Help with Verification?
+                    </h3>
 
+                    <p className="text-gray-600 mb-6">
+                      Our team can guide you through the accreditation verification process to ensure you can access our DST investment opportunities.
+                    </p>
+
+                    <div className="space-y-4">
+                      <PromoterDisclosure />
+                      <Button className="w-full mt-3">Schedule a Consultation</Button>
+                    </div>
+
+                    <div className="mt-6 p-4 bg-yellow-50 rounded-lg border border-yellow-100">
+                      <div className="flex">
+                        <div className="flex-shrink-0">
+                          <AlertTriangle className="h-5 w-5 text-yellow-500" />
+                        </div>
+                        <div className="ml-3">
+                          <h3 className="text-sm font-medium text-yellow-800">Important Notice</h3>
+                          <p className="mt-1 text-sm text-yellow-700">
+                            The information on this page is provided for educational purposes only and does not constitute legal or financial advice. Always consult with qualified professionals regarding your specific situation. 
+
+                            DST interests are illiquid, may be leveraged, and investors can lose all or part of their principal.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
 
                 {/* Recent Updates Card */}
                 <Card>
@@ -543,11 +575,12 @@ export default function AccreditationPage() {
                 Ready to Explore DST Investments?
               </h2>
               <p className="text-xl text-gray-600 mb-8">
-                Schedule a call with one of our DST investment specialists to learn more about current opportunities.
+                Create an account, complete the questionnaire, and begin your DST Investment journey .
               </p>
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <PromoterDisclosure />
+              <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6">
                 <Button size="lg" variant="outline" className="border-gray-300">
-                  Schedule a Consultation
+                  Start Questionnaire
                 </Button>
               </div>
             </div>
