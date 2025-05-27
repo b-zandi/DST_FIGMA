@@ -488,12 +488,14 @@ export default function AccreditationPage() {
                     </h3>
 
                     <p className="text-gray-600 mb-6">
-                      Our team can guide you through the accreditation verification process to ensure you can access our DST investment opportunities.
+                      Setup an account, complete the questionnaire, and our team can guide you through the next steps to ensure you are on your way to accessing DST investment opportunities.
                     </p>
 
                     <div className="space-y-4">
                       <PromoterDisclosure />
-                      <Button className="w-full mt-3">Schedule a Consultation</Button>
+                      <Button className="w-full mt-3" asChild>
+                        <Link href="/auth">Create Account</Link>
+                      </Button>
                     </div>
 
                     <div className="mt-6 p-4 bg-yellow-50 rounded-lg border border-yellow-100">
