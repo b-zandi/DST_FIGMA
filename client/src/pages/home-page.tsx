@@ -148,7 +148,7 @@ export default function HomePage() {
                       <PromoterDisclosure />
                       <Button asChild className="w-full bg-blue-500 hover:bg-blue-600 text-white mt-3">
                         <Link href="/auth?tab=register">
-                          Start Verification Process
+                          Create Account
                         </Link>
                       </Button>
                     </div>
