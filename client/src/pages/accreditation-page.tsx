@@ -65,7 +65,7 @@ export default function AccreditationPage() {
                       Entities & Organizations
                     </TabsTrigger>
                   </TabsList>
-                  
+
                   <TabsContent value="individual" className="space-y-8">
                     <div className="bg-white rounded-lg shadow-sm p-6 md:p-8">
                       <h2 className="text-2xl font-bold text-[#1A2B50] mb-4">
@@ -74,7 +74,7 @@ export default function AccreditationPage() {
                       <p className="text-gray-600 mb-6">
                         To qualify as an accredited investor, individuals must meet at least one of the following criteria established by the Securities and Exchange Commission (SEC):
                       </p>
-                      
+
                       <div className="space-y-6">
                         <div className="flex">
                           <div className="flex-shrink-0 mt-1">
@@ -92,7 +92,7 @@ export default function AccreditationPage() {
                             </p>
                           </div>
                         </div>
-                        
+
                         <div className="flex">
                           <div className="flex-shrink-0 mt-1">
                             <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary">
@@ -106,7 +106,7 @@ export default function AccreditationPage() {
                             </p>
                           </div>
                         </div>
-                        
+
                         <div className="flex">
                           <div className="flex-shrink-0 mt-1">
                             <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary">
@@ -120,7 +120,7 @@ export default function AccreditationPage() {
                             </p>
                           </div>
                         </div>
-                        
+
                         <div className="flex">
                           <div className="flex-shrink-0 mt-1">
                             <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary">
@@ -136,7 +136,7 @@ export default function AccreditationPage() {
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="bg-white rounded-lg shadow-sm p-6 md:p-8">
                       <h2 className="text-2xl font-bold text-[#1A2B50] mb-4">
                         How to Verify Your Accreditation Status
@@ -144,7 +144,7 @@ export default function AccreditationPage() {
                       <p className="text-gray-600 mb-6">
                         The SEC requires verification of accredited investor status before participating in certain securities offerings. The verification process typically involves the following steps:
                       </p>
-                      
+
                       <div className="space-y-6">
                         <div className="flex">
                           <div className="flex-shrink-0">
@@ -159,7 +159,7 @@ export default function AccreditationPage() {
                             </p>
                           </div>
                         </div>
-                        
+
                         <div className="flex">
                           <div className="flex-shrink-0">
                             <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white font-semibold">
@@ -173,7 +173,7 @@ export default function AccreditationPage() {
                             </p>
                           </div>
                         </div>
-                        
+
                         <div className="flex">
                           <div className="flex-shrink-0">
                             <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white font-semibold">
@@ -187,7 +187,7 @@ export default function AccreditationPage() {
                             </p>
                           </div>
                         </div>
-                        
+
                         <div className="flex">
                           <div className="flex-shrink-0">
                             <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white font-semibold">
@@ -202,7 +202,7 @@ export default function AccreditationPage() {
                           </div>
                         </div>
                       </div>
-                      
+
                       <div className="mt-6 p-4 bg-primary/5 rounded-lg border border-primary/10">
                         <div className="flex">
                           <div className="flex-shrink-0">
@@ -218,7 +218,7 @@ export default function AccreditationPage() {
                       </div>
                     </div>
                   </TabsContent>
-                  
+
                   <TabsContent value="entity" className="space-y-8">
                     <div className="bg-white rounded-lg shadow-sm p-6 md:p-8">
                       <h2 className="text-2xl font-bold text-[#1A2B50] mb-4">
@@ -227,7 +227,7 @@ export default function AccreditationPage() {
                       <p className="text-gray-600 mb-6">
                         For entities and organizations to qualify as accredited investors, they must meet one of the following criteria established by the SEC:
                       </p>
-                      
+
                       <div className="space-y-6">
                         <div className="flex">
                           <div className="flex-shrink-0 mt-1">
@@ -242,7 +242,7 @@ export default function AccreditationPage() {
                             </p>
                           </div>
                         </div>
-                        
+
                         <div className="flex">
                           <div className="flex-shrink-0 mt-1">
                             <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary">
@@ -256,7 +256,7 @@ export default function AccreditationPage() {
                             </p>
                           </div>
                         </div>
-                        
+
                         <div className="flex">
                           <div className="flex-shrink-0 mt-1">
                             <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary">
@@ -270,7 +270,7 @@ export default function AccreditationPage() {
                             </p>
                           </div>
                         </div>
-                        
+
                         <div className="flex">
                           <div className="flex-shrink-0 mt-1">
                             <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary">
@@ -284,7 +284,7 @@ export default function AccreditationPage() {
                             </p>
                           </div>
                         </div>
-                        
+
                         <div className="flex">
                           <div className="flex-shrink-0 mt-1">
                             <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary">
@@ -300,7 +300,7 @@ export default function AccreditationPage() {
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="bg-white rounded-lg shadow-sm p-6 md:p-8">
                       <h2 className="text-2xl font-bold text-[#1A2B50] mb-4">
                         Entity Verification Process
@@ -308,7 +308,7 @@ export default function AccreditationPage() {
                       <p className="text-gray-600 mb-6">
                         Entities seeking to verify their accredited investor status typically need to provide the following documentation:
                       </p>
-                      
+
                       <div className="space-y-6">
                         <div className="flex">
                           <div className="flex-shrink-0">
@@ -323,7 +323,7 @@ export default function AccreditationPage() {
                             </p>
                           </div>
                         </div>
-                        
+
                         <div className="flex">
                           <div className="flex-shrink-0">
                             <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white font-semibold">
@@ -337,7 +337,7 @@ export default function AccreditationPage() {
                             </p>
                           </div>
                         </div>
-                        
+
                         <div className="flex">
                           <div className="flex-shrink-0">
                             <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white font-semibold">
@@ -351,7 +351,7 @@ export default function AccreditationPage() {
                             </p>
                           </div>
                         </div>
-                        
+
                         <div className="flex">
                           <div className="flex-shrink-0">
                             <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white font-semibold">
@@ -366,7 +366,7 @@ export default function AccreditationPage() {
                           </div>
                         </div>
                       </div>
-                      
+
                       <div className="mt-6 p-4 bg-primary/5 rounded-lg border border-primary/10">
                         <div className="flex">
                           <div className="flex-shrink-0">
@@ -383,14 +383,14 @@ export default function AccreditationPage() {
                     </div>
                   </TabsContent>
                 </Tabs>
-                
+
                 {/* FAQ Section */}
                 <div className="mt-12">
                   <div className="bg-white rounded-lg shadow-sm p-6 md:p-8">
                     <h2 className="text-2xl font-bold text-[#1A2B50] mb-6">
                       Frequently Asked Questions About Accreditation
                     </h2>
-                    
+
                     <Accordion type="single" collapsible className="w-full">
                       <AccordionItem value="item-1">
                         <AccordionTrigger className="text-[#1A2B50] font-medium">
@@ -400,7 +400,7 @@ export default function AccreditationPage() {
                           DST investments are considered private securities offerings and are typically offered under Regulation D of the Securities Act. The SEC limits these investments to accredited investors because they are considered sophisticated enough to understand the risks involved and financially capable of bearing potential losses. The accreditation requirement helps protect retail investors from high-risk, complex investments.
                         </AccordionContent>
                       </AccordionItem>
-                      
+
                       <AccordionItem value="item-2">
                         <AccordionTrigger className="text-[#1A2B50] font-medium">
                           How long does the accreditation verification process take?
@@ -409,7 +409,7 @@ export default function AccreditationPage() {
                           The verification process typically takes 2-5 business days once all required documentation has been submitted. Working with a third-party verification service can streamline this process. At DST Brokerage, we work with trusted verification partners to make the process as efficient as possible.
                         </AccordionContent>
                       </AccordionItem>
-                      
+
                       <AccordionItem value="item-3">
                         <AccordionTrigger className="text-[#1A2B50] font-medium">
                           Do I need to verify my accreditation status for each investment?
@@ -418,7 +418,7 @@ export default function AccreditationPage() {
                           Verification requirements can vary depending on the specific offering and the exemption under which it is being offered. For Rule 506(c) offerings, verification is required for each new offering. However, if you invest in multiple DSTs from the same sponsor within a short timeframe, your verification may be valid for all of those investments. The verification is typically valid for 90 days to 3 years, depending on the verification method used.
                         </AccordionContent>
                       </AccordionItem>
-                      
+
                       <AccordionItem value="item-4">
                         <AccordionTrigger className="text-[#1A2B50] font-medium">
                           Can my IRA or other retirement account invest in DSTs?
@@ -427,7 +427,7 @@ export default function AccreditationPage() {
                           Yes, self-directed IRAs and certain other retirement accounts can invest in DSTs. However, the account itself must qualify as an accredited investor, which typically means the individual who controls the account must meet the accreditation requirements. Additionally, there may be special considerations for retirement accounts, including UBIT (Unrelated Business Income Tax) implications, especially for debt-financed properties.
                         </AccordionContent>
                       </AccordionItem>
-                      
+
                       <AccordionItem value="item-5">
                         <AccordionTrigger className="text-[#1A2B50] font-medium">
                           If I don't qualify as an accredited investor, are there alternative real estate investment options?
@@ -440,7 +440,7 @@ export default function AccreditationPage() {
                   </div>
                 </div>
               </div>
-              
+
               {/* Sidebar */}
               <div className="space-y-6">
                 {/* Benefits Card */}
@@ -449,7 +449,7 @@ export default function AccreditationPage() {
                     <h3 className="text-xl font-bold text-[#1A2B50] mb-4">
                       Benefits of Accredited Investor Status
                     </h3>
-                    
+
                     <ul className="space-y-3">
                       <li className="flex">
                         <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-3" />
@@ -461,7 +461,7 @@ export default function AccreditationPage() {
                       </li>
                       <li className="flex">
                         <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-3" />
-                        <span className="text-gray-700">Potential for higher returns compared to public markets</span>
+                        <span className="text-gray-700">May offer returns that differ from public-market investments</span>
                       </li>
                       <li className="flex">
                         <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-3" />
@@ -478,46 +478,16 @@ export default function AccreditationPage() {
                     </ul>
                   </CardContent>
                 </Card>
-                
-                {/* Verification Support Card */}
-                <Card>
-                  <CardContent className="pt-6">
-                    <h3 className="text-xl font-bold text-[#1A2B50] mb-4">
-                      Need Help with Verification?
-                    </h3>
-                    
-                    <p className="text-gray-600 mb-6">
-                      Our team can guide you through the accreditation verification process to ensure you can access our DST investment opportunities.
-                    </p>
-                    
-                    <div className="space-y-4">
-                      <PromoterDisclosure />
-                      <Button className="w-full mt-3">Schedule a Consultation</Button>
-                    </div>
-                    
-                    <div className="mt-6 p-4 bg-yellow-50 rounded-lg border border-yellow-100">
-                      <div className="flex">
-                        <div className="flex-shrink-0">
-                          <AlertTriangle className="h-5 w-5 text-yellow-500" />
-                        </div>
-                        <div className="ml-3">
-                          <h3 className="text-sm font-medium text-yellow-800">Important Notice</h3>
-                          <p className="mt-1 text-sm text-yellow-700">
-                            The information on this page is provided for educational purposes only and does not constitute legal or financial advice. Always consult with qualified professionals regarding your specific situation.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-                
+
+
+
                 {/* Recent Updates Card */}
                 <Card>
                   <CardContent className="pt-6">
                     <h3 className="text-xl font-bold text-[#1A2B50] mb-4">
                       Regulatory Updates
                     </h3>
-                    
+
                     <div className="space-y-4">
                       <div className="border-b pb-4">
                         <p className="flex items-center text-sm text-gray-500 mb-1">
@@ -531,7 +501,7 @@ export default function AccreditationPage() {
                           The SEC expanded the accredited investor definition to include new categories based on professional knowledge and certifications.
                         </p>
                       </div>
-                      
+
                       <div className="border-b pb-4">
                         <p className="flex items-center text-sm text-gray-500 mb-1">
                           <Clock className="h-4 w-4 mr-1" />
@@ -544,7 +514,7 @@ export default function AccreditationPage() {
                           The SEC clarified verification requirements for Rule 506(c) offerings, emphasizing the importance of reasonable steps to verify status.
                         </p>
                       </div>
-                      
+
                       <div>
                         <p className="flex items-center text-sm text-gray-500 mb-1">
                           <Clock className="h-4 w-4 mr-1" />
@@ -564,7 +534,7 @@ export default function AccreditationPage() {
             </div>
           </div>
         </section>
-        
+
         {/* CTA Section */}
         <section className="bg-white py-16">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
