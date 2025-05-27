@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
 import { ArrowRight } from "lucide-react";
+import { PromoterDisclosure } from "@/components/promoter-disclosure";
 
 export function CTASection() {
   const { user } = useAuth();
@@ -23,7 +24,9 @@ export function CTASection() {
                 Create an account today to explore our institutional-quality real estate investment opportunities.
               </p>
               
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <PromoterDisclosure />
+              
+              <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6">
                 {user ? (
                   <Button size="lg" className="gap-2 bg-primary hover:bg-primary/90 text-white" asChild>
                     <Link href="/investments">

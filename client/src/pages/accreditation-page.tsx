@@ -1,5 +1,6 @@
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { PromoterDisclosure } from "@/components/promoter-disclosure";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -490,7 +491,8 @@ export default function AccreditationPage() {
                     </p>
                     
                     <div className="space-y-4">
-                      <Button className="w-full">Schedule a Consultation</Button>
+                      <PromoterDisclosure />
+                      <Button className="w-full mt-3">Schedule a Consultation</Button>
                     </div>
                     
                     <div className="mt-6 p-4 bg-yellow-50 rounded-lg border border-yellow-100">
