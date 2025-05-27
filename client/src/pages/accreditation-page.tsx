@@ -584,7 +584,7 @@ export default function AccreditationPage() {
               <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6">
                 <Button size="lg" asChild>
                   <Link href="/auth">
-                    Start Questionnaire
+                    Create Account
                   </Link>
                 </Button>
               </div>
