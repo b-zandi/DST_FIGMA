@@ -579,8 +579,10 @@ export default function AccreditationPage() {
               </p>
               <PromoterDisclosure />
               <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6">
-                <Button size="lg" variant="outline" className="border-gray-300">
-                  Start Questionnaire
+                <Button size="lg" asChild>
+                  <Link href="/auth">
+                    Start Questionnaire
+                  </Link>
                 </Button>
               </div>
             </div>
