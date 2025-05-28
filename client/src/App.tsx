@@ -9,6 +9,8 @@ import FAQPage from "@/pages/faq-page";
 import ProfilePage from "@/pages/profile-page";
 import TestPage from "@/pages/test-page";
 import LandingPage from "@/pages/landing-page";
+import ForgotPasswordPage from "@/pages/forgot-password-page";
+import ResetPasswordPage from "@/pages/reset-password-page";
 
 import InvestmentDetailPage from "@/pages/investment-detail-page";
 import AccreditationPage from "@/pages/accreditation-page";
@@ -28,6 +30,8 @@ function Router() {
       <Route path="/accreditation" component={AccreditationPage} />
       <Route path="/learn-more" component={LearnMorePage} />
       <Route path="/test" component={TestPage} />
+      <Route path="/forgot-password" component={ForgotPasswordPage} />
+      <Route path="/reset-password" component={ResetPasswordPage} />
       <ProtectedRoute path="/profile" component={ProfilePage} />
       <Route component={NotFound} />
     </Switch>
