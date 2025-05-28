@@ -9,12 +9,36 @@ export const users = pgTable("users", {
   firstName: text("first_name"),
   lastName: text("last_name"),
   phone: text("phone"),
+  
+  // Accreditation and scoring
   accreditedStatus: boolean("accredited_status").default(false),
   accreditationScore: integer("accreditation_score").default(0),
   accreditationSegment: text("accreditation_segment").default('notReady'),
-  questionnaireData: text("questionnaire_data"), // Stored as JSON
+  
+  // Page 1 - Core Investment Profile
+  accredited: text("accredited"), // 'yes', 'notSure', 'no'
+  saleStatus: text("sale_status"), // 'active', 'lt6', 'lt12', 'ownNoSale', 'none'
+  equityBracket: text("equity_bracket"), // '100-249', '250-499', '500-999', '1mPlus'
+  horizon: text("horizon"), // '<3', '3-5', '5-10', '10+'
+  returnNeed: text("return_need"), // 'le4', '5-6', '7-8', 'ge9'
+  passiveImportance: integer("passive_importance"), // 1-5 scale
+  
+  // Page 2 - Property and Experience Details
+  location: text("location"),
+  propertyType: text("property_type"), // 'multifamily', 'industrial', 'retail', 'office', 'land', 'other'
+  mortgageBracket: text("mortgage_bracket"), // 'free', 'lt25', '25to50', 'gt50'
+  prior1031: text("prior_1031"), // 'yes', 'no'
+  qiReady: text("qi_ready"), // 'yes', 'no'
+  riskTolerance: integer("risk_tolerance"), // 1-5 scale
+  advisor: text("advisor"), // 'yes', 'no'
+  notes: text("notes"),
+  truthfulAcknowledgement: boolean("truthful_acknowledgement"),
+  
+  // System fields
+  questionnaireData: text("questionnaire_data"), // Backup JSON storage
   isProfileComplete: boolean("is_profile_complete").default(false),
   createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 export const faqs = pgTable("faqs", {
@@ -73,6 +97,23 @@ export const insertUserSchema = createInsertSchema(users)
     accreditedStatus: true,
     accreditationScore: true,
     accreditationSegment: true,
+    // Page 1 questionnaire fields
+    accredited: true,
+    saleStatus: true,
+    equityBracket: true,
+    horizon: true,
+    returnNeed: true,
+    passiveImportance: true,
+    // Page 2 questionnaire fields
+    location: true,
+    propertyType: true,
+    mortgageBracket: true,
+    prior1031: true,
+    qiReady: true,
+    riskTolerance: true,
+    advisor: true,
+    notes: true,
+    truthfulAcknowledgement: true,
     questionnaireData: true,
   })
   .extend({
@@ -83,6 +124,22 @@ export const insertUserSchema = createInsertSchema(users)
     lastName: z.string().optional(),
     accreditationScore: z.number().optional(),
     accreditationSegment: z.enum(['high', 'medium', 'low', 'notReady']).optional(),
+    // Questionnaire field validations
+    accredited: z.enum(['yes', 'notSure', 'no']).optional(),
+    saleStatus: z.enum(['active', 'lt6', 'lt12', 'ownNoSale', 'none']).optional(),
+    equityBracket: z.enum(['100-249', '250-499', '500-999', '1mPlus']).optional(),
+    horizon: z.enum(['<3', '3-5', '5-10', '10+']).optional(),
+    returnNeed: z.enum(['le4', '5-6', '7-8', 'ge9']).optional(),
+    passiveImportance: z.number().min(1).max(5).optional(),
+    location: z.string().optional(),
+    propertyType: z.enum(['multifamily', 'industrial', 'retail', 'office', 'land', 'other']).optional(),
+    mortgageBracket: z.enum(['free', 'lt25', '25to50', 'gt50']).optional(),
+    prior1031: z.enum(['yes', 'no']).optional(),
+    qiReady: z.enum(['yes', 'no']).optional(),
+    riskTolerance: z.number().min(1).max(5).optional(),
+    advisor: z.enum(['yes', 'no']).optional(),
+    notes: z.string().optional(),
+    truthfulAcknowledgement: z.boolean().optional(),
     questionnaireData: z.string().optional(),
   })
   .refine((data) => !data.passwordConfirm || data.password === data.passwordConfirm, {
