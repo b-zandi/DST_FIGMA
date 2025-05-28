@@ -18,7 +18,7 @@ function StepCard({ number, title, description, icon, benefit, isActive, onClick
   return (
     <div 
       className={cn(
-        "bg-white p-6 border rounded-lg transition-all duration-300 cursor-pointer hover:shadow-md h-full",
+        "bg-white p-6 border rounded-lg transition-all duration-300 cursor-pointer hover:shadow-md flex flex-col justify-between h-full",
         isActive ? "border-blue-500 shadow-md" : "border-gray-200"
       )}
       onClick={onClick}
@@ -42,20 +42,6 @@ function StepCard({ number, title, description, icon, benefit, isActive, onClick
           </p>
         </div>
       </div>
-      
-      {isActive && (
-        <div className="mt-4 pt-4 border-t border-gray-100">
-          <div className="flex items-start">
-            <div className="flex-shrink-0 mr-3 mt-1">
-              {icon}
-            </div>
-            <div>
-              <p className="text-sm font-medium text-blue-700">Key Benefit</p>
-              <p className="text-sm text-gray-600">{benefit}</p>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
@@ -75,7 +61,7 @@ export function HowItWorksSection() {
             <StepCard 
               number={1}
               title="Get Qualified"
-              description="Create a free account and complete our self-attestation questionnaire. If you appear to meet SEC criteria, we introduce you to a third-party for formal accreditation."
+              description="Create an account, take our self-attest quiz, then we connect you with our third-party partner for verification."
               icon={<CheckCircle className="h-5 w-5 text-blue-500" />}
               benefit=""
               isActive={activeStep === 1}
@@ -85,7 +71,7 @@ export function HowItWorksSection() {
             <StepCard 
               number={2}
               title="Prepare Your Exchange"
-              description="Work with your real-estate adviser to list the relinquished property, select a qualified intermediary, and note the IRS timeline (45/180 days)."
+              description="List the property, hire a qualified intermediary, and mark the 45-/180-day IRS deadlines."
               icon={<Clock className="h-5 w-5 text-blue-500" />}
               benefit=""
               isActive={activeStep === 2}
@@ -95,7 +81,7 @@ export function HowItWorksSection() {
             <StepCard 
               number={3}
               title="Identify a DST"
-              description="Once verified, our third-party partner will review a menu of DST offerings that match your objectives and remaining 1031 timeline."
+              description="After verification, review DST offerings that match your goals and timeline."
               icon={<Briefcase className="h-5 w-5 text-blue-500" />}
               benefit=""
               isActive={activeStep === 3}
@@ -105,7 +91,7 @@ export function HowItWorksSection() {
             <StepCard 
               number={4}
               title="Deposit & Close"
-              description="Place a non-refundable deposit to reserve an interest, finalize subscription docs, and fund before Day 180."
+              description="Reserve your interest with a deposit, sign subscription docs, and fund before Day 180."
               icon={<ArrowUpRight className="h-5 w-5 text-blue-500" />}
               benefit=""
               isActive={activeStep === 4}
