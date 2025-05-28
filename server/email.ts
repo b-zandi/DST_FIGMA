@@ -25,7 +25,7 @@ export async function sendPasswordResetEmail(params: PasswordResetEmailParams): 
   
   const emailContent = {
     to: params.to,
-    from: 'noreply@dstbrokerage.com', // You can change this to your domain
+    from: 'mannamohit542@gmail.com',
     subject: 'Reset Your DST Brokerage Password',
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
