@@ -71,35 +71,45 @@ export function HowItWorksSection() {
             How Does It Work?
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
             <StepCard 
               number={1}
-              title="Prepare"
-              description="Determine which investment property you want to sell, establish a qualified intermediary, and close your property."
-              icon={<Clock className="h-5 w-5 text-blue-500" />}
-              benefit="Our team will guide you through the 1031 exchange timeline to ensure you meet all IRS deadlines."
+              title="Get Qualified"
+              description="Create a free account and complete our self-attestation questionnaire. If you appear to meet SEC criteria, we introduce you to a third-party for formal accreditation."
+              icon={<CheckCircle className="h-5 w-5 text-blue-500" />}
+              benefit=""
               isActive={activeStep === 1}
               onClick={() => setActiveStep(1)}
             />
             
             <StepCard 
               number={2}
-              title="Identify a DST"
-              description="Our platform will connect you with a DST that matches your investment objectives and timeline."
-              icon={<Briefcase className="h-5 w-5 text-blue-500" />}
-              benefit="Access to institutional-quality real estate investments with lower minimum investments than direct ownership."
+              title="Prepare Your Exchange"
+              description="Work with your real-estate adviser to list the relinquished property, select a qualified intermediary, and note the IRS timeline (45/180 days)."
+              icon={<Clock className="h-5 w-5 text-blue-500" />}
+              benefit=""
               isActive={activeStep === 2}
               onClick={() => setActiveStep(2)}
             />
             
             <StepCard 
               number={3}
-              title="Deposit & Close"
-              description="Make a non-refundable deposit in order to secure your position in the investment."
-              icon={<CheckCircle className="h-5 w-5 text-blue-500" />}
-              benefit="Complete your 1031 exchange quickly and efficiently, often closing in as few as 1-3 days."
+              title="Identify a DST"
+              description="Once verified, our third-party partner will review a menu of DST offerings that match your objectives and remaining 1031 timeline."
+              icon={<Briefcase className="h-5 w-5 text-blue-500" />}
+              benefit=""
               isActive={activeStep === 3}
               onClick={() => setActiveStep(3)}
+            />
+            
+            <StepCard 
+              number={4}
+              title="Deposit & Close"
+              description="Place a non-refundable deposit to reserve an interest, finalize subscription docs, and fund before Day 180."
+              icon={<ArrowUpRight className="h-5 w-5 text-blue-500" />}
+              benefit=""
+              isActive={activeStep === 4}
+              onClick={() => setActiveStep(4)}
             />
           </div>
           
