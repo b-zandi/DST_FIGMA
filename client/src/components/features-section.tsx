@@ -36,31 +36,37 @@ export function FeaturesSection() {
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-2xl font-bold text-gray-900 mb-8">
-            Why Choose a DST Investment Vehicle?
+            What is a DST Investment?
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             <FeatureCard
               icon={<div className="w-8 h-8 bg-blue-100 flex items-center justify-center rounded-sm">
                 <div className="w-4 h-4 bg-blue-500" />
               </div>}
-              title="Passive Income"
-              description="Receive regular distributions from professionally managed properties without the hassles of direct management."
+              title="Fractional Real-Estate Ownership"
+              description="Investors purchase beneficial interests in a Delaware Statutory Trust that already owns income-producing property. One DST can have dozens of passive co-owners."
             />
             <FeatureCard
               icon={<div className="w-8 h-8 bg-blue-100 flex items-center justify-center rounded-full">
                 <div className="w-4 h-4 bg-blue-500 rounded-full" />
               </div>}
-              title="Asset Protection"
-              description="Benefit from structured liability protection providing added security."
+              title="1031 Exchange Friendly"
+              description="Because the DST owns the real estate, a properly structured DST interest can qualify as like-kind property, letting investors defer capital-gains tax when they roll over sale proceeds."
             />
             <FeatureCard
               icon={<div className="w-8 h-8 bg-blue-100 flex items-center justify-center">
                 <div className="w-0 h-0 border-l-[8px] border-r-[8px] border-b-[14px] border-l-transparent border-r-transparent border-b-blue-500" />
               </div>}
-              title="Tax Advantages"
-              description="Take advantage of potential tax deferrals through 1031 exchanges and other tax benefits."
+              title="Professional Management & Limited Liability"
+              description="The property manager handles leasing, financing, and reporting. Investors' liability is limited to their invested capital; they don't sign on the loan personally."
             />
+          </div>
+
+          <div className="text-center mb-4">
+            <p className="text-sm text-gray-600 italic">
+              DST interests are illiquid, may be leveraged, and investors can lose all or part of their principal. Past performance of real-estate markets does not guarantee future results.
+            </p>
           </div>
         
           <div className="text-center">
