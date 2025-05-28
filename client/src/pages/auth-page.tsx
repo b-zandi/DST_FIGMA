@@ -134,7 +134,7 @@ export default function AuthPage() {
       // Update accredited status based on segment
       const isAccredited = accreditationResult.segment === 'high' || accreditationResult.segment === 'medium';
       
-      // Convert questionnaire answers to JSON string for storage
+      // Map questionnaire answers to individual database columns
       // Use email as username since the database requires it
       const userData = {
         ...emailFormData,
@@ -144,7 +144,23 @@ export default function AuthPage() {
         accreditedStatus: isAccredited,
         accreditationScore: accreditationResult.score,
         accreditationSegment: accreditationResult.segment,
-        questionnaireData: JSON.stringify(accreditationResult.answers)
+        // Map each questionnaire answer to its dedicated column
+        accredited: accreditationResult.answers.accredited,
+        saleStatus: accreditationResult.answers.saleStatus,
+        equityBracket: accreditationResult.answers.equityBracket,
+        horizon: accreditationResult.answers.horizon,
+        returnNeed: accreditationResult.answers.returnNeed,
+        passiveImportance: accreditationResult.answers.passiveImportance,
+        location: accreditationResult.answers.location,
+        propertyType: accreditationResult.answers.propertyType,
+        mortgageBracket: accreditationResult.answers.mortgageBracket,
+        prior1031: accreditationResult.answers.prior1031,
+        qiReady: accreditationResult.answers.qiReady,
+        riskTolerance: accreditationResult.answers.riskTolerance,
+        advisor: accreditationResult.answers.advisor,
+        notes: accreditationResult.answers.notes,
+        truthfulAcknowledgement: accreditationResult.answers.truthfulAcknowledgement,
+        questionnaireData: JSON.stringify(accreditationResult.answers) // Keep as backup
       };
       
       registerMutation.mutate(userData);
