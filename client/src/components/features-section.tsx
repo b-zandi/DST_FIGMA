@@ -72,7 +72,7 @@ export function FeaturesSection() {
           <div className="text-center">
             <Button asChild variant="outline" className="gap-2 border-gray-300 bg-white rounded-md text-sm px-6 py-2 h-auto">
               <Link href="/learn-more">
-                View All DST Benefits
+                Learn More About DST Investments
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>
