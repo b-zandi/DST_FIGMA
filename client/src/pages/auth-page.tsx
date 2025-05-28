@@ -115,13 +115,22 @@ export default function AuthPage() {
   const onRegisterEmailSubmit = async (data: RegisterEmailFormValues) => {
     // Check if email already exists before proceeding
     try {
+      console.log('Checking email:', data.email);
       const response = await fetch('/api/check-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: data.email }),
       });
       
+      console.log('Response status:', response.status);
+      console.log('Response headers:', response.headers.get('content-type'));
+      
+      if (!response.ok) {
+        throw new Error('Failed to check email');
+      }
+      
       const result = await response.json();
+      console.log('API result:', result);
       
       if (result.exists) {
         toast({
@@ -142,6 +151,7 @@ export default function AuthPage() {
       setEmailFormData(emailData);
       setRegistrationStage('profileForm');
     } catch (error) {
+      console.error('Email check error:', error);
       toast({
         title: "Error",
         description: "Failed to verify email. Please try again.",
