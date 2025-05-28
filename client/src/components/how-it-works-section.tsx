@@ -18,7 +18,7 @@ function StepCard({ number, title, description, icon, benefit, isActive, onClick
   return (
     <div 
       className={cn(
-        "bg-white p-4 border rounded-lg transition-all duration-300 cursor-pointer hover:shadow-md",
+        "bg-white p-4 border rounded-lg transition-all duration-300 cursor-pointer hover:shadow-md flex flex-col justify-between h-full",
         isActive ? "border-blue-500 shadow-md" : "border-gray-200"
       )}
       onClick={onClick}
@@ -57,7 +57,7 @@ export function HowItWorksSection() {
             How Does It Work?
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10 items-stretch">
             <StepCard 
               number={1}
               title="Get Qualified"
