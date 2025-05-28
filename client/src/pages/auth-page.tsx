@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "wouter";
+import { useLocation, Link } from "wouter";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -261,14 +261,21 @@ export default function AuthPage() {
                       </form>
                     </Form>
 
-                    <div className="text-center mt-4">
-                      <Button 
-                        variant="link" 
-                        onClick={() => setActiveTab("register")}
-                        className="text-sm text-primary"
-                      >
-                        Don't have an account? Register here
-                      </Button>
+                    <div className="text-center mt-4 space-y-2">
+                      <Link href="/forgot-password">
+                        <Button variant="link" className="text-sm text-primary p-0">
+                          Forgot your password?
+                        </Button>
+                      </Link>
+                      <div>
+                        <Button 
+                          variant="link" 
+                          onClick={() => setActiveTab("register")}
+                          className="text-sm text-primary"
+                        >
+                          Don't have an account? Register here
+                        </Button>
+                      </div>
                     </div>
                   </TabsContent>
 
