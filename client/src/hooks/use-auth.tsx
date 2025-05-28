@@ -69,11 +69,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       navigate("/profile");
     },
     onError: (error: Error) => {
-      toast({
-        title: "Registration failed",
-        description: error.message,
-        variant: "destructive",
-      });
+      if (error.message.includes("Email already exists")) {
+        toast({
+          title: "Account already exists",
+          description: "An account with this email already exists. Please log in instead.",
+          variant: "destructive",
+        });
+        // Give user a moment to read the message, then navigate to login
+        setTimeout(() => {
+          navigate("/auth?mode=login");
+        }, 2000);
+      } else {
+        toast({
+          title: "Registration failed",
+          description: error.message,
+          variant: "destructive",
+        });
+      }
     },
   });
 
