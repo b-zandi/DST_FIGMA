@@ -37,6 +37,11 @@ export const users = pgTable("users", {
   // System fields
   questionnaireData: text("questionnaire_data"), // Backup JSON storage
   isProfileComplete: boolean("is_profile_complete").default(false),
+  
+  // Password reset fields
+  resetToken: text("reset_token"),
+  resetTokenExpiry: timestamp("reset_token_expiry"),
+  
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
