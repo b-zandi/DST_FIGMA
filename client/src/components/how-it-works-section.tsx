@@ -18,26 +18,26 @@ function StepCard({ number, title, description, icon, benefit, isActive, onClick
   return (
     <div 
       className={cn(
-        "bg-white p-6 border rounded-lg transition-all duration-300 cursor-pointer hover:shadow-md flex flex-col justify-between h-full",
+        "bg-white p-4 border rounded-lg transition-all duration-300 cursor-pointer hover:shadow-md",
         isActive ? "border-blue-500 shadow-md" : "border-gray-200"
       )}
       onClick={onClick}
     >
-      <div className="flex items-start mb-4">
-        <div className="flex-shrink-0 mr-4">
+      <div className="flex items-start">
+        <div className="flex-shrink-0 mr-3">
           <div className={cn(
-            "rounded-full flex items-center justify-center h-10 w-10 text-white",
+            "rounded-full flex items-center justify-center h-8 w-8 text-white text-sm font-medium",
             isActive ? "bg-blue-600" : "bg-blue-500"
           )}>
             {number}
           </div>
         </div>
-        <div>
-          <h3 className="font-semibold text-gray-900 text-lg mb-2 flex items-center">
+        <div className="min-w-0">
+          <h3 className="font-semibold text-gray-900 text-base mb-1 flex items-center">
             {title}
             {isActive && <CheckCircle className="h-4 w-4 ml-2 text-blue-500" />}
           </h3>
-          <p className="text-gray-600">
+          <p className="text-gray-600 text-sm leading-relaxed">
             {description}
           </p>
         </div>
