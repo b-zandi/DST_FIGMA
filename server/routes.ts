@@ -24,6 +24,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Set up authentication routes
   setupAuth(app);
   
+  // Email check route
+  app.post("/api/check-email", async (req, res, next) => {
+    try {
+      const { email } = req.body;
+      const existingUser = await storage.getUserByEmail(email);
+      res.json({ exists: !!existingUser });
+    } catch (error) {
+      next(error);
+    }
+  });
+  
   // FAQ routes
   app.get("/api/faqs", async (req, res, next) => {
     try {

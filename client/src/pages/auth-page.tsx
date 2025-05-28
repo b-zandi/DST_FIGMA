@@ -18,6 +18,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useAuth } from "@/hooks/use-auth";
+import { useToast } from "@/hooks/use-toast";
 import { Building, Shield, Briefcase, AlertTriangle, CheckCircle2, UserCircle, DollarSign } from "lucide-react";
 import { DSTInvestorQuestionnaire } from "@/components/dst-investor-questionnaire";
 import { DstAnswers } from "@/lib/calculateDstScore";
@@ -72,6 +73,7 @@ export default function AuthPage() {
 
   const { user, loginMutation, registerMutation } = useAuth();
   const [, navigate] = useLocation();
+  const { toast } = useToast();
 
   // Redirect if the user is already logged in
   useEffect(() => {
@@ -110,11 +112,42 @@ export default function AuthPage() {
     loginMutation.mutate(data);
   };
 
-  const onRegisterEmailSubmit = (data: RegisterEmailFormValues) => {
-    // Save email form data and proceed to profile form
-    const { agreeTerms, passwordConfirm, ...emailData } = data;
-    setEmailFormData(emailData);
-    setRegistrationStage('profileForm');
+  const onRegisterEmailSubmit = async (data: RegisterEmailFormValues) => {
+    // Check if email already exists before proceeding
+    try {
+      const response = await fetch('/api/check-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: data.email }),
+      });
+      
+      const result = await response.json();
+      
+      if (result.exists) {
+        toast({
+          title: "Account already exists",
+          description: "An account with this email already exists. Please log in instead.",
+          variant: "destructive",
+        });
+        // Redirect to login after showing message
+        setTimeout(() => {
+          setMode('login');
+          setRegistrationStage('emailForm');
+        }, 2000);
+        return;
+      }
+      
+      // Email doesn't exist, proceed with registration
+      const { agreeTerms, passwordConfirm, ...emailData } = data;
+      setEmailFormData(emailData);
+      setRegistrationStage('profileForm');
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to verify email. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
   
   const onRegisterProfileSubmit = (data: RegisterProfileFormValues) => {
