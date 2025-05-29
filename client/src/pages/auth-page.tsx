@@ -61,8 +61,8 @@ type AccreditationResult = {
 };
 
 export default function AuthPage() {
-  const [searchParams] = useLocation();
-  const params = new URLSearchParams(searchParams);
+  const [location] = useLocation();
+  const params = new URLSearchParams(window.location.search);
   const tabFromUrl = params.get("tab");
   const [activeTab, setActiveTab] = useState<string>(tabFromUrl === "register" ? "register" : "login");
   
