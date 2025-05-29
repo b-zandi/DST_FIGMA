@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -21,6 +21,7 @@ interface NavItem {
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [location] = useLocation();
   const { user, logoutMutation } = useAuth();
 
   const toggleMobileMenu = () => {
@@ -70,16 +71,23 @@ export function Header() {
 
           {/* Main Navigation - Desktop */}
           <nav className="hidden md:flex items-center space-x-6 flex-1">
-            {navItems.map((item, index) => (
-              <Link 
-                key={item.title} 
-                href={item.href}
-                className={`flex items-center text-gray-600 hover:text-gray-900 text-sm font-medium py-3 ${index === 1 ? 'border-b-2 border-blue-500' : ''}`}
-              >
-                {item.icon}
-                {item.title}
-              </Link>
-            ))}
+            {navItems.map((item, index) => {
+              const isActive = location === item.href || 
+                              (item.href === "/auth?tab=register" && location === "/auth") ||
+                              (item.href === "/accreditation" && location === "/accreditation") ||
+                              (item.href === "/faq" && location === "/faq");
+              
+              return (
+                <Link 
+                  key={item.title} 
+                  href={item.href}
+                  className={`flex items-center text-gray-600 hover:text-gray-900 text-sm font-medium py-3 ${isActive ? 'border-b-2 border-blue-500' : ''}`}
+                >
+                  {item.icon}
+                  {item.title}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Auth - Desktop */}
@@ -150,17 +158,24 @@ export function Header() {
       <div className={`md:hidden bg-white border-t ${mobileMenuOpen ? 'block' : 'hidden'}`}>
         <div className="py-2 px-4">
           
-          {navItems.map((item, index) => (
-            <div key={item.title} className="py-2">
-              <Link
-                href={item.href}
-                className={`flex items-center text-sm ${index === 1 ? 'text-blue-500 font-medium' : 'text-gray-700'} hover:text-gray-900 py-1.5`}
-              >
-                {item.icon}
-                {item.title}
-              </Link>
-            </div>
-          ))}
+          {navItems.map((item, index) => {
+            const isActive = location === item.href || 
+                            (item.href === "/auth?tab=register" && location === "/auth") ||
+                            (item.href === "/accreditation" && location === "/accreditation") ||
+                            (item.href === "/faq" && location === "/faq");
+            
+            return (
+              <div key={item.title} className="py-2">
+                <Link
+                  href={item.href}
+                  className={`flex items-center text-sm ${isActive ? 'text-blue-500 font-medium' : 'text-gray-700'} hover:text-gray-900 py-1.5`}
+                >
+                  {item.icon}
+                  {item.title}
+                </Link>
+              </div>
+            );
+          })}
           
           <div className="pt-4 mt-2 border-t border-gray-200">
             {user ? (
