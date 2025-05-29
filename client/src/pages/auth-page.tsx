@@ -14,12 +14,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useAuth } from "@/hooks/use-auth";
 import { useToast } from "@/hooks/use-toast";
-import { Building, Shield, Briefcase, AlertTriangle, CheckCircle2, UserCircle, DollarSign } from "lucide-react";
+import { Building, Shield, Briefcase, AlertTriangle, CheckCircle2, UserCircle, DollarSign, AlertCircle } from "lucide-react";
 import { DSTInvestorQuestionnaire } from "@/components/dst-investor-questionnaire";
 import { DstAnswers } from "@/lib/calculateDstScore";
 
@@ -74,6 +75,9 @@ export default function AuthPage() {
   const { user, loginMutation, registerMutation } = useAuth();
   const [, navigate] = useLocation();
   const { toast } = useToast();
+  
+  // Login error state
+  const [loginError, setLoginError] = useState<string | null>(null);
 
   // Redirect if the user is already logged in
   useEffect(() => {
@@ -109,7 +113,15 @@ export default function AuthPage() {
   });
 
   const onLoginSubmit = (data: LoginFormValues) => {
-    loginMutation.mutate(data);
+    // Clear any previous errors
+    setLoginError(null);
+    
+    loginMutation.mutate(data, {
+      onError: (error) => {
+        // Show error inline instead of toast
+        setLoginError("Invalid email or password. Please try again.");
+      }
+    });
   };
 
   const onRegisterEmailSubmit = async (data: RegisterEmailFormValues) => {
@@ -140,7 +152,7 @@ export default function AuthPage() {
         });
         // Redirect to login after showing message
         setTimeout(() => {
-          setMode('login');
+          setActiveTab('login');
           setRegistrationStage('emailForm');
         }, 2000);
         return;
@@ -293,6 +305,15 @@ export default function AuthPage() {
                             </FormItem>
                           )}
                         />
+
+                        {loginError && (
+                          <Alert variant="destructive">
+                            <AlertCircle className="h-4 w-4" />
+                            <AlertDescription>
+                              {loginError}
+                            </AlertDescription>
+                          </Alert>
+                        )}
 
                         <Button 
                           type="submit" 
