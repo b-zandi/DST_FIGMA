@@ -82,7 +82,10 @@ export async function sendPasswordResetEmail(params: PasswordResetEmailParams): 
       return false;
     }
 
-    console.log(`Password reset email sent to ${params.to}`);
+    // Log response details for debugging
+    const responseHeaders = response.headers.get('x-message-id');
+    console.log(`Password reset email sent to ${params.to}, SendGrid Message ID: ${responseHeaders}`);
+    console.log(`Response status: ${response.status}`);
     return true;
   } catch (error) {
     console.error('Failed to send password reset email:', error);
