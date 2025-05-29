@@ -257,7 +257,7 @@ export default function HomePage() {
               <PromoterDisclosure />
               <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6">
                 <Button size="lg" asChild>
-                  <Link href="/auth">
+                  <Link href="/auth?tab=register">
                     Start Questionnaire
                   </Link>
                 </Button>
