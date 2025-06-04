@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useLocation } from "wouter";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -17,6 +18,7 @@ export default function ContactPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const [, setLocation] = useLocation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -163,7 +165,7 @@ export default function ContactPage() {
                   consultation to investment completion.
                 </p>
                 <div className="flex justify-center">
-                  <Button size="lg">
+                  <Button size="lg" onClick={() => setLocation('/auth')}>
                     Create Account
                   </Button>
                 </div>
