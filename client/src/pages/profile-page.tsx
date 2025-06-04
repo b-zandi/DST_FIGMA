@@ -468,64 +468,52 @@ export default function ProfilePage() {
                       </CardContent>
                     </Card>
 
-                    {/* Educational Links Section */}
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Educational Resources</CardTitle>
-                        <CardDescription>Learn more about DST investments and accreditation</CardDescription>
-                      </CardHeader>
-                      <CardContent className="space-y-4">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <Button variant="outline" asChild className="justify-start h-auto p-4">
+                    {/* Educational Resources Section */}
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-3">Educational Resources</h3>
+                      <p className="text-sm text-gray-600 mb-4">Learn more about DST investments and accreditation</p>
+                      
+                      <div className="space-y-3">
+                        <div className="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                          <Building className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                          <div className="flex-1">
+                            <p className="font-medium text-gray-900">DST Investments Guide</p>
+                            <p className="text-xs text-gray-500">Learn about Delaware Statutory Trusts</p>
+                          </div>
+                          <Button variant="ghost" size="sm" asChild>
                             <Link href="/learn-more">
-                              <div className="flex items-center space-x-3">
-                                <Building className="h-5 w-5 text-blue-600" />
-                                <div className="text-left">
-                                  <p className="font-medium">DST Investments Guide</p>
-                                  <p className="text-xs text-gray-500">Learn about Delaware Statutory Trusts</p>
-                                </div>
-                              </div>
-                            </Link>
-                          </Button>
-
-                          <Button variant="outline" asChild className="justify-start h-auto p-4">
-                            <Link href="/accreditation">
-                              <div className="flex items-center space-x-3">
-                                <BadgeCheck className="h-5 w-5 text-green-600" />
-                                <div className="text-left">
-                                  <p className="font-medium">Accreditation Status</p>
-                                  <p className="text-xs text-gray-500">Understanding investor requirements</p>
-                                </div>
-                              </div>
-                            </Link>
-                          </Button>
-
-                          <Button variant="outline" asChild className="justify-start h-auto p-4">
-                            <Link href="/faq">
-                              <div className="flex items-center space-x-3">
-                                <InfoIcon className="h-5 w-5 text-purple-600" />
-                                <div className="text-left">
-                                  <p className="font-medium">Frequently Asked Questions</p>
-                                  <p className="text-xs text-gray-500">Common questions about DST investing</p>
-                                </div>
-                              </div>
-                            </Link>
-                          </Button>
-
-                          <Button variant="outline" asChild className="justify-start h-auto p-4">
-                            <Link href="/contact">
-                              <div className="flex items-center space-x-3">
-                                <DollarSign className="h-5 w-5 text-amber-600" />
-                                <div className="text-left">
-                                  <p className="font-medium">Investment Consultation</p>
-                                  <p className="text-xs text-gray-500">Schedule a call with our experts</p>
-                                </div>
-                              </div>
+                              <ChevronRight className="h-4 w-4" />
                             </Link>
                           </Button>
                         </div>
-                      </CardContent>
-                    </Card>
+
+                        <div className="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                          <BadgeCheck className="h-5 w-5 text-green-600 flex-shrink-0" />
+                          <div className="flex-1">
+                            <p className="font-medium text-gray-900">Accreditation Status</p>
+                            <p className="text-xs text-gray-500">Understanding investor requirements</p>
+                          </div>
+                          <Button variant="ghost" size="sm" asChild>
+                            <Link href="/accreditation">
+                              <ChevronRight className="h-4 w-4" />
+                            </Link>
+                          </Button>
+                        </div>
+
+                        <div className="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                          <InfoIcon className="h-5 w-5 text-purple-600 flex-shrink-0" />
+                          <div className="flex-1">
+                            <p className="font-medium text-gray-900">Frequently Asked Questions</p>
+                            <p className="text-xs text-gray-500">Common questions about DST investing</p>
+                          </div>
+                          <Button variant="ghost" size="sm" asChild>
+                            <Link href="/faq">
+                              <ChevronRight className="h-4 w-4" />
+                            </Link>
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </TabsContent>
