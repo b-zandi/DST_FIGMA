@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Mail } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export default function ContactPage() {
@@ -67,7 +67,7 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="max-w-2xl mx-auto">
           {/* Contact Form */}
           <Card>
             <CardHeader>
@@ -149,97 +149,6 @@ export default function ContactPage() {
               </form>
             </CardContent>
           </Card>
-
-          {/* Contact Information */}
-          <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Get in Touch</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <MapPin className="h-6 w-6 text-blue-600 mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold text-gray-900">Office Address</h3>
-                    <p className="text-gray-600 mt-1">
-                      123 Financial District<br />
-                      New York, NY 10001
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <Phone className="h-6 w-6 text-blue-600 mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold text-gray-900">Phone</h3>
-                    <p className="text-gray-600 mt-1">(800) 555-1234</p>
-                    <p className="text-sm text-gray-500">Monday - Friday, 8:00 AM - 6:00 PM EST</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <Mail className="h-6 w-6 text-blue-600 mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold text-gray-900">Email</h3>
-                    <p className="text-gray-600 mt-1">info@dstbrokerage.com</p>
-                    <p className="text-sm text-gray-500">We respond within 24 hours</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <Clock className="h-6 w-6 text-blue-600 mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold text-gray-900">Business Hours</h3>
-                    <div className="text-gray-600 mt-1 space-y-1">
-                      <p>Monday - Friday: 8:00 AM - 6:00 PM EST</p>
-                      <p>Saturday: 9:00 AM - 2:00 PM EST</p>
-                      <p>Sunday: Closed</p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Investment Consultation</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 mb-4">
-                  Schedule a complimentary consultation with one of our DST investment specialists 
-                  to discuss your investment objectives and explore suitable opportunities.
-                </p>
-                <Button className="w-full" variant="outline">
-                  Schedule a Call
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Investment Minimums</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Typical DST Minimum:</span>
-                    <span className="font-semibold">$100,000</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">1031 Exchange Minimum:</span>
-                    <span className="font-semibold">$100,000</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Direct Investment:</span>
-                    <span className="font-semibold">$25,000</span>
-                  </div>
-                </div>
-                <p className="text-sm text-gray-500 mt-4">
-                  Minimums vary by property and sponsor. Contact us for specific investment details.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
         </div>
 
         {/* Additional Information */}
