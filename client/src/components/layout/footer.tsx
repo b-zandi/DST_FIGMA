@@ -7,14 +7,7 @@ export function Footer() {
     <footer className="bg-gray-100 py-8 text-sm">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-3">Platform</h3>
-              <ul className="space-y-2">
-                {/* Platform links removed as requested */}
-              </ul>
-            </div>
-
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 max-w-3xl mx-auto">
             <div>
               <h3 className="font-semibold text-gray-900 mb-3">Company</h3>
               <ul className="space-y-2">
