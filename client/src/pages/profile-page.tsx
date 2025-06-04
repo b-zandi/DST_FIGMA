@@ -197,14 +197,10 @@ export default function ProfilePage() {
             </div>
 
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full md:w-auto grid-cols-2 mb-4">
+              <TabsList className="grid w-full md:w-auto grid-cols-1 mb-4">
                 <TabsTrigger value="profile" className="px-8">
                   <UserCircle2 className="mr-2 h-4 w-4" />
                   Profile
-                </TabsTrigger>
-                <TabsTrigger value="investments" className="px-8">
-                  <Briefcase className="mr-2 h-4 w-4" />
-                  Investments
                 </TabsTrigger>
               </TabsList>
               
@@ -471,206 +467,67 @@ export default function ProfilePage() {
                         </div>
                       </CardContent>
                     </Card>
-                  </div>
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="investments" className="space-y-6">
-                {/* Welcome Banner */}
-                <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 shadow-sm">
-                  <h2 className="text-xl font-medium text-blue-800">
-                    Welcome back, {user?.firstName || 'Investor'}! 👋
-                  </h2>
-                  <p className="text-blue-600 mt-1">
-                    Review your current investments and explore new opportunities.
-                  </p>
-                </div>
-                
-                {!user?.accreditedStatus ? (
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-xl flex items-center">
-                        <AlertCircle className="h-5 w-5 mr-2 text-amber-500" />
-                        Accreditation Required
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="mb-4">
-                        You need to be verified as an accredited investor to make DST investments. 
-                        Please update your profile to confirm your accredited investor status.
-                      </p>
-                      <Button onClick={() => setActiveTab("profile")}>
-                        Update Profile
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </CardContent>
-                  </Card>
-                ) : (
-                  <>
-                    {/* Investment Summary Card */}
+
+                    {/* Educational Links Section */}
                     <Card>
                       <CardHeader>
-                        <CardTitle className="text-xl">Investment Summary</CardTitle>
+                        <CardTitle>Educational Resources</CardTitle>
+                        <CardDescription>Learn more about DST investments and accreditation</CardDescription>
                       </CardHeader>
-                      <CardContent>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                          <div className="bg-gray-50 p-4 rounded-lg">
-                            <p className="text-sm text-gray-500 mb-1">Total Invested</p>
-                            {isLoadingInvestments ? (
-                              <Skeleton className="h-8 w-28" />
-                            ) : (
-                              <p className="text-2xl font-bold text-[#1A2B50]">
-                                {formatCurrency(totalInvestmentValue)}
-                              </p>
-                            )}
-                          </div>
-                          <div className="bg-gray-50 p-4 rounded-lg">
-                            <p className="text-sm text-gray-500 mb-1">Active Investments</p>
-                            {isLoadingInvestments ? (
-                              <Skeleton className="h-8 w-20" />
-                            ) : (
-                              <p className="text-2xl font-bold text-[#1A2B50]">
-                                {userInvestments.length}
-                              </p>
-                            )}
-                          </div>
-                          <div className="bg-gray-50 p-4 rounded-lg">
-                            <p className="text-sm text-gray-500 mb-1">Total Distributions</p>
-                            {isLoadingInvestments ? (
-                              <Skeleton className="h-8 w-28" />
-                            ) : (
-                              <p className="text-2xl font-bold text-[#1A2B50]">
-                                {formatCurrency(
-                                  userInvestments.reduce(
-                                    (sum, inv) => sum + parseFloat(inv.distributionsPaid), 
-                                    0
-                                  )
-                                )}
-                              </p>
-                            )}
-                          </div>
+                      <CardContent className="space-y-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <Button variant="outline" asChild className="justify-start h-auto p-4">
+                            <Link href="/learn-more">
+                              <div className="flex items-center space-x-3">
+                                <Building className="h-5 w-5 text-blue-600" />
+                                <div className="text-left">
+                                  <p className="font-medium">DST Investments Guide</p>
+                                  <p className="text-xs text-gray-500">Learn about Delaware Statutory Trusts</p>
+                                </div>
+                              </div>
+                            </Link>
+                          </Button>
+
+                          <Button variant="outline" asChild className="justify-start h-auto p-4">
+                            <Link href="/accreditation">
+                              <div className="flex items-center space-x-3">
+                                <BadgeCheck className="h-5 w-5 text-green-600" />
+                                <div className="text-left">
+                                  <p className="font-medium">Accreditation Status</p>
+                                  <p className="text-xs text-gray-500">Understanding investor requirements</p>
+                                </div>
+                              </div>
+                            </Link>
+                          </Button>
+
+                          <Button variant="outline" asChild className="justify-start h-auto p-4">
+                            <Link href="/faq">
+                              <div className="flex items-center space-x-3">
+                                <InfoIcon className="h-5 w-5 text-purple-600" />
+                                <div className="text-left">
+                                  <p className="font-medium">Frequently Asked Questions</p>
+                                  <p className="text-xs text-gray-500">Common questions about DST investing</p>
+                                </div>
+                              </div>
+                            </Link>
+                          </Button>
+
+                          <Button variant="outline" asChild className="justify-start h-auto p-4">
+                            <Link href="/contact">
+                              <div className="flex items-center space-x-3">
+                                <DollarSign className="h-5 w-5 text-amber-600" />
+                                <div className="text-left">
+                                  <p className="font-medium">Investment Consultation</p>
+                                  <p className="text-xs text-gray-500">Schedule a call with our experts</p>
+                                </div>
+                              </div>
+                            </Link>
+                          </Button>
                         </div>
                       </CardContent>
                     </Card>
-                    
-                    {/* Investment List */}
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="text-xl">Your DST Investments</CardTitle>
-                        <CardDescription>
-                          Your current Delaware Statutory Trust investments
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        {isLoadingInvestments ? (
-                          // Loading skeleton
-                          <div className="space-y-6">
-                            {[1, 2].map((i) => (
-                              <div key={i} className="border rounded-lg p-4">
-                                <div className="flex flex-col md:flex-row gap-4">
-                                  <Skeleton className="h-24 w-full md:w-40 rounded-md" />
-                                  <div className="flex-1 space-y-2">
-                                    <Skeleton className="h-6 w-3/4" />
-                                    <Skeleton className="h-4 w-1/2" />
-                                    <div className="grid grid-cols-2 gap-2 mt-2">
-                                      <Skeleton className="h-4 w-20" />
-                                      <Skeleton className="h-4 w-24" />
-                                      <Skeleton className="h-4 w-16" />
-                                      <Skeleton className="h-4 w-20" />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        ) : userInvestments.length === 0 ? (
-                          // Empty state
-                          <div className="text-center py-12">
-                            <Briefcase className="h-12 w-12 mx-auto text-gray-300 mb-4" />
-                            <p className="text-gray-600 mb-6">You don't have any investments yet.</p>
-                            <Button asChild>
-                              <Link href="/investing">
-                                Browse Available Investments
-                                <ArrowRight className="ml-2 h-4 w-4" />
-                              </Link>
-                            </Button>
-                          </div>
-                        ) : (
-                          // Investment list
-                          <div className="space-y-6">
-                            {userInvestments.map((userInvestment) => (
-                              <div key={userInvestment.id} className="border rounded-lg overflow-hidden">
-                                <div className="flex flex-col md:flex-row">
-                                  <div className="md:w-40 h-24 md:h-auto">
-                                    <img 
-                                      src={userInvestment.investment.imageUrl} 
-                                      alt={userInvestment.investment.title}
-                                      className="w-full h-full object-cover"
-                                    />
-                                  </div>
-                                  <div className="flex-1 p-4">
-                                    <div className="flex justify-between items-start">
-                                      <div>
-                                        <h3 className="font-medium text-lg">{userInvestment.investment.title}</h3>
-                                        <p className="text-sm text-gray-500 flex items-center mt-1">
-                                          <MapPin className="h-3.5 w-3.5 mr-1" /> 
-                                          {userInvestment.investment.location}
-                                        </p>
-                                      </div>
-                                      <Badge>
-                                        {userInvestment.investment.assetClass}
-                                      </Badge>
-                                    </div>
-                                    
-                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-                                      <div>
-                                        <p className="text-xs text-gray-500">Investment Amount</p>
-                                        <p className="text-sm font-medium">{formatCurrency(userInvestment.investmentAmount)}</p>
-                                      </div>
-                                      <div>
-                                        <p className="text-xs text-gray-500">Ownership</p>
-                                        <p className="text-sm font-medium">{userInvestment.ownershipPercentage}%</p>
-                                      </div>
-                                      <div>
-                                        <p className="text-xs text-gray-500">Expected Yield</p>
-                                        <p className="text-sm font-medium">{userInvestment.investment.projectedYield}</p>
-                                      </div>
-                                      <div>
-                                        <p className="text-xs text-gray-500">Distributions Paid</p>
-                                        <p className="text-sm font-medium">{formatCurrency(userInvestment.distributionsPaid)}</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="bg-gray-50 px-4 py-3 flex items-center justify-between">
-                                  <div className="flex items-center">
-                                    <Clock className="h-4 w-4 text-gray-500 mr-1.5" />
-                                    <span className="text-sm text-gray-500">
-                                      Invested on {new Date(userInvestment.investmentDate).toLocaleDateString()}
-                                    </span>
-                                  </div>
-                                  <Button variant="ghost" size="sm" asChild>
-                                    <Link href={`/investment/${userInvestment.investment.id}`}>
-                                      View Details
-                                      <ChevronRight className="ml-1 h-4 w-4" />
-                                    </Link>
-                                  </Button>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </CardContent>
-                      <CardFooter className="flex justify-end">
-                        <Button variant="outline" asChild>
-                          <Link href="/investing">
-                            Browse More Investments
-                          </Link>
-                        </Button>
-                      </CardFooter>
-                    </Card>
-                  </>
-                )}
+                  </div>
+                </div>
               </TabsContent>
             </Tabs>
           </div>
