@@ -11,26 +11,7 @@ export function Footer() {
             <div>
               <h3 className="font-semibold text-gray-900 mb-3">Platform</h3>
               <ul className="space-y-2">
-                <li>
-                  <Link href="/" className="text-gray-600 hover:text-gray-900">
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/products/find-dst" className="text-gray-600 hover:text-gray-900">
-                    Find a DST
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/accreditation" className="text-gray-600 hover:text-gray-900">
-                    Are You Accredited?
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/faq" className="text-gray-600 hover:text-gray-900">
-                    FAQ
-                  </Link>
-                </li>
+                {/* Platform links removed as requested */}
               </ul>
             </div>
 
