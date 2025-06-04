@@ -162,12 +162,9 @@ export default function ContactPage() {
                   ownership. Our experienced team will guide you through the entire process, from initial 
                   consultation to investment completion.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <div className="flex justify-center">
                   <Button size="lg">
-                    View Current Offerings
-                  </Button>
-                  <Button size="lg" variant="outline">
-                    Download Investment Guide
+                    Create Account
                   </Button>
                 </div>
               </div>
