@@ -506,7 +506,7 @@ export default function AuthPage() {
                               <div>
                                 <h4 className="font-semibold text-green-800">You appear to be an Accredited Investor</h4>
                                 <p className="text-green-700 mt-1">
-                                  Based on your responses, you likely meet the SEC requirements for accredited investor status. You'll be eligible to access our full range of DST investment opportunities.
+                                  Based on your responses, you likely meet the SEC requirements for accredited investor status. Please continue to complete your profile page.
                                 </p>
                               </div>
                             </div>
