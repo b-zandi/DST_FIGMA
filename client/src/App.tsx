@@ -11,6 +11,9 @@ import TestPage from "@/pages/test-page";
 import LandingPage from "@/pages/landing-page";
 import ForgotPasswordPage from "@/pages/forgot-password-page";
 import ResetPasswordPage from "@/pages/reset-password-page";
+import TermsOfServicePage from "@/pages/terms-of-service-page";
+import PrivacyPolicyPage from "@/pages/privacy-policy-page";
+import ContactPage from "@/pages/contact-page";
 
 import InvestmentDetailPage from "@/pages/investment-detail-page";
 import AccreditationPage from "@/pages/accreditation-page";
@@ -32,6 +35,9 @@ function Router() {
       <Route path="/test" component={TestPage} />
       <Route path="/forgot-password" component={ForgotPasswordPage} />
       <Route path="/reset-password" component={ResetPasswordPage} />
+      <Route path="/terms-of-service" component={TermsOfServicePage} />
+      <Route path="/privacy-policy" component={PrivacyPolicyPage} />
+      <Route path="/contact" component={ContactPage} />
       <ProtectedRoute path="/profile" component={ProfilePage} />
       <Route component={NotFound} />
     </Switch>
