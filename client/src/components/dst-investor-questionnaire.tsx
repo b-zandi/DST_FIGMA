@@ -129,7 +129,12 @@ const page2Questions = [
   {
     name: 'riskTolerance',
     label: 'How would you rate your overall risk tolerance?',
-    type: 'likert',
+    type: 'radio',
+    options: [
+      { value: 'Conservative', label: 'Conservative - I prefer stability over growth' },
+      { value: 'Moderate', label: 'Moderate - I balance risk and return' },
+      { value: 'Adventurous', label: 'Adventurous - I seek higher returns despite risk' },
+    ],
   },
   {
     name: 'advisor',
@@ -157,10 +162,10 @@ const page2Questions = [
 
 const Page1Schema = z.object({
   accredited: z.enum(['yes', 'notSure', 'no']),
-  saleStatus: z.enum(['active', 'lt6', 'lt12', 'ownNoSale', 'none']),
-  equityBracket: z.enum(['100-249', '250-499', '500-999', '1mPlus']),
-  horizon: z.enum(['<3', '3-5', '5-10', '10+']),
-  returnNeed: z.enum(['le4', '5-6', '7-8', 'ge9']),
+  saleStatus: z.enum(['active', 'lt3mo', '3-6mo', '6-12mo', 'ownNoSale', 'none']),
+  equityBracket: z.enum(['<100', '100-249', '250-499', '500-999', '≥1000']),
+  horizon: z.enum(['<5 years', '5-10 years', '10+ years']),
+  returnNeed: z.enum(['<= 6%', '6.1%-8%', '8.1%-10%', '> 10%']),
   passiveImportance: z.coerce.number().min(1).max(5),
 })
 
@@ -177,14 +182,12 @@ const Page2Schema = z.object({
     ])
     .optional(),
   mortgageBracket: z
-    .enum(['free', 'lt25', '25to50', 'gt50'])
+    .enum(['<25%', '25-50%', '50-75%', '>75%'])
     .optional(),
   prior1031: z.enum(['yes', 'no']).optional(),
   qiReady: z.enum(['yes', 'no']).optional(),
   riskTolerance: z
-    .coerce.number()
-    .min(1)
-    .max(5)
+    .enum(['Conservative', 'Moderate', 'Adventurous'])
     .optional(),
   advisor: z.enum(['yes', 'no']).optional(),
   notes: z.string().optional(),
@@ -203,7 +206,7 @@ interface Props {
   onComplete: (data: {
     answers: DstAnswers
     score: number
-    segment: 'high' | 'medium' | 'low' | 'notReady'
+    segment: 'diamond' | 'hot' | 'warm' | 'cold'
   }) => void
 }
 
