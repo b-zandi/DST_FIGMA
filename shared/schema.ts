@@ -29,7 +29,7 @@ export const users = pgTable("users", {
   mortgageBracket: text("mortgage_bracket"), // 'free', 'lt25', '25to50', 'gt50'
   prior1031: text("prior_1031"), // 'yes', 'no'
   qiReady: text("qi_ready"), // 'yes', 'no'
-  riskTolerance: integer("risk_tolerance"), // 1-5 scale
+  riskTolerance: text("risk_tolerance"), // 'Conservative', 'Moderate', 'Adventurous'
   advisor: text("advisor"), // 'yes', 'no'
   notes: text("notes"),
   truthfulAcknowledgement: boolean("truthful_acknowledgement"),
