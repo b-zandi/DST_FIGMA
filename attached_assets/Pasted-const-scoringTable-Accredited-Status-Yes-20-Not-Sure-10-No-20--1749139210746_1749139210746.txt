@@ -1,0 +1,109 @@
+const scoringTable = {
+  "Accredited Status": {
+    "Yes": 20,
+    "Not Sure": 10,
+    "No": -20
+  },
+  "Anything Else": {
+    "Free Text": 0
+  },
+  "Bronze": {
+    "≥ 50": "Accredited = notSure AND equity ≥ 250k"
+  },
+  "Completed 1031 Before": {
+    "Yes": 3,
+    "No": 0
+  },
+  "Equity (k USD)": {
+    "≥ 1,000": 25,
+    "500–999": 20,
+    "250–499": 10,
+    "100–249": 5,
+    "<100": 0
+  },
+  "Gold": {
+    "≥ 80": "Accredited = yes AND (saleStatus = active OR <3mo) AND equity ≥ 500k AND horizon 5-10 or 10+ AND targetYield ≤ 8% AND passiveImportance ≥ 3"
+  },
+  "Investment Horizon": {
+    "10+ years": 10,
+    "5–10 years": 10,
+    "<5 years": 5
+  },
+  "Mortgage Balance vs Value": {
+    "<25%": 15,
+    "25-50%": 10,
+    "50-75%": 5,
+    ">75%": 0
+  },
+  "NotReady": {
+    "< 50": "Low composite score; often non‑accredited, low equity, or distant horizon"
+  },
+  "Nurture": {
+    "≥ 50": "All other leads scoring ≥ 50 but not meeting upper‑tier rules"
+  },
+  "Passive Importance (1–5)": {
+    "1": 2,
+    "2": 4,
+    "3": 6,
+    "4": 8,
+    "5": 10
+  },
+  "Qualified Intermediary Selected": {
+    "Yes": 3,
+    "No": 0
+  },
+  "Risk Tolerance": {
+    "Conservative": -2,
+    "Moderate": 0,
+    "Adventurous": 2
+  },
+  "Sale Timeline": {
+    "Active Listing": 20,
+    "< 3 mo": 20,
+    "3–6 mo": 15,
+    "6–12 mo": 10,
+    "Own, No Sale Planned": 5,
+    "None": 0
+  },
+  "Silver": {
+    "≥ 60 OR (<80 AND (saleTimeline = <3mo OR active) AND equity ≥ 250k)": "Mid-tier composite score with positive equity and time factors"
+  },
+  "Target Yield (expected return)": {
+    "<= 6%": 10,
+    "6.1%–8%": 8,
+    "8.1%–10%": 5,
+    "> 10%": 2
+  }
+};
+
+// Lead classification logic
+function classifyLead(responses) {
+  let totalScore = 0;
+
+  for (const [question, answer] of Object.entries(responses)) {
+    const options = scoringTable[question];
+    if (options && answer in options && typeof options[answer] === "number") {
+      totalScore += options[answer];
+    }
+  }
+
+  let classification = "Cold";
+  if (totalScore >= 80) classification = "Diamond";
+  else if (totalScore >= 50) classification = "Hot";
+  else if (totalScore >= 20) classification = "Warm";
+
+  return { totalScore, classification };
+}
+
+// Example usage
+const exampleResponses = {
+  "Accredited Status": "Yes",
+  "Sale Timeline": "Active Listing",
+  "Equity (k USD)": "500–999",
+  "Passive Importance (1–5)": "4",
+  "Investment Horizon": "5–10 years",
+  "Target Yield (expected return)": "<= 6%",
+  "Risk Tolerance": "Moderate"
+};
+
+console.log(classifyLead(exampleResponses));
