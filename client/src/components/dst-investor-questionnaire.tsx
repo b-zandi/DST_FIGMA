@@ -226,9 +226,24 @@ export const DSTInvestorQuestionnaire: React.FC<Props> = ({ onComplete }) => {
   })
 
   const onSubmit: SubmitHandler<WizardInputs> = (data) => {
-    const scoreResult = calculateDstScore(data as DstAnswers)
+    // Map risk tolerance string to both integer and behavior fields
+    const riskMapping = {
+      'Conservative': { riskTolerance: 1, riskBehavior: 'Conservative' as const },
+      'Moderate': { riskTolerance: 3, riskBehavior: 'Moderate' as const },
+      'Adventurous': { riskTolerance: 5, riskBehavior: 'Adventurous' as const }
+    };
+    
+    const riskInfo = data.riskTolerance ? riskMapping[data.riskTolerance as keyof typeof riskMapping] : undefined;
+    
+    const processedData: DstAnswers = {
+      ...data,
+      riskTolerance: riskInfo?.riskTolerance,
+      riskBehavior: riskInfo?.riskBehavior
+    } as DstAnswers;
+    
+    const scoreResult = calculateDstScore(processedData)
     onComplete({
-      answers: data as DstAnswers,
+      answers: processedData,
       ...scoreResult,
     })
   }

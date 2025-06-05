@@ -10,7 +10,8 @@ export type DstAnswers = {
   mortgageBracket?: '<25%' | '25-50%' | '50-75%' | '>75%';
   prior1031?: 'yes' | 'no';
   qiReady?: 'yes' | 'no';
-  riskTolerance?: 'Conservative' | 'Moderate' | 'Adventurous';
+  riskTolerance?: number; // 1-5 scale
+  riskBehavior?: 'Conservative' | 'Moderate' | 'Adventurous';
   advisor?: 'yes' | 'no';
   notes?: string;
   truthfulAcknowledgement: boolean;
@@ -91,7 +92,7 @@ export function calculateDstScore(answers: DstAnswers): {
     "Passive Importance (1-5)": answers.passiveImportance,
     "Investment Horizon": answers.horizon,
     "Target Yield (expected return)": answers.returnNeed,
-    "Risk Tolerance": answers.riskTolerance,
+    "Risk Tolerance": answers.riskBehavior,
     "Completed 1031 Before": answers.prior1031,
     "Qualified Intermediary Selected": answers.qiReady,
     "Mortgage Balance vs Value": answers.mortgageBracket
