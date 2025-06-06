@@ -1,7 +1,5 @@
 import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { EducationalCalculator } from "@/components/educational-calculator";
 
 export function HeroSection() {
   return (
@@ -15,21 +13,9 @@ export function HeroSection() {
             Get expert DST due diligence and Delaware Statutory Trust investment advice for your 1031 exchange or direct investment
           </p>
           
-          {/* Search Bar */}
-          <div className="relative mb-8">
-            <div className="flex items-center border border-gray-300 rounded-md bg-white overflow-hidden">
-              <div className="flex-1 flex items-center px-4 py-3">
-                <Search className="h-5 w-5 text-gray-400 mr-3" />
-                <Input 
-                  type="text" 
-                  placeholder="Ask AI about DST investments..."
-                  className="flex-1 border-0 focus-visible:ring-0 focus-visible:ring-offset-0 px-0 py-0 text-base h-auto"
-                />
-              </div>
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white rounded-none h-full px-5">
-                <ArrowRight className="h-5 w-5" />
-              </Button>
-            </div>
+          {/* Educational Calculator */}
+          <div className="mb-8">
+            <EducationalCalculator />
           </div>
           
           {/* Quick Links */}
