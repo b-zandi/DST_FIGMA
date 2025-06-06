@@ -5,7 +5,7 @@ import { Footer } from "../components/layout/footer";
 import { Button } from "../components/ui/button";
 import { Badge } from "../components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
-import { useAuth } from "../../hooks/use-auth";
+import { useAuth } from "../hooks/use-auth";
 import { 
   MapPin, 
   Calendar, 

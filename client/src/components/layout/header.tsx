@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "../../hooks/use-auth";
 import { Button, buttonVariants } from "../ui/button";
-import { cn } from "../lib/utils";
+import { cn } from "../../lib/utils";
 import { Building, ChevronDown, User, Menu, LogOut } from "lucide-react";
 import { Input } from "../ui/input";
 import {

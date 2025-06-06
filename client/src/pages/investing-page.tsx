@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from "../components/ui/select";
 import { useState } from "react";
-import { useAuth } from "../../hooks/use-auth";
+import { useAuth } from "../hooks/use-auth";
 import { Link } from "wouter";
 
 // Example DST investment opportunities
