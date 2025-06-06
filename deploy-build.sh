@@ -21,15 +21,22 @@ sed -i 's|"@/hooks/use-auth"|"./hooks/use-auth"|g' client/src/App.tsx
 find client/src/components -name "*.tsx" -exec sed -i 's|"@/lib/utils"|"../../lib/utils"|g' {} \;
 find client/src/components -name "*.tsx" -exec sed -i 's|"@/hooks/use-toast"|"../../hooks/use-toast"|g' {} \;
 find client/src/components -name "*.tsx" -exec sed -i 's|"@/components/ui/|"../ui/|g' {} \;
+find client/src/components -name "*.tsx" -exec sed -i 's|"@/components/educational-calculator"|"./educational-calculator"|g' {} \;
+find client/src/components -name "*.tsx" -exec sed -i 's|"@/components/|"./|g' {} \;
 
 # Fix hooks imports
 find client/src/hooks -name "*.tsx" -name "*.ts" -exec sed -i 's|"@/components/ui/toast"|"../components/ui/toast"|g' {} \;
+find client/src/hooks -name "*.tsx" -exec sed -i 's|"@/lib/queryClient"|"../lib/queryClient"|g' {} \;
+find client/src/hooks -name "*.tsx" -exec sed -i 's|"@/hooks/use-toast"|"./use-toast"|g' {} \;
+
+# Fix lib imports
+find client/src/lib -name "*.tsx" -exec sed -i 's|"@/hooks/use-auth"|"../hooks/use-auth"|g' {} \;
 
 # Fix pages imports
 find client/src/pages -name "*.tsx" -exec sed -i 's|"@/components/|"../components/|g' {} \;
 find client/src/pages -name "*.tsx" -exec sed -i 's|"@/hooks/|"../hooks/|g' {} \;
 find client/src/pages -name "*.tsx" -exec sed -i 's|"@/lib/|"../lib/|g' {} \;
-find client/src/pages -name "*.tsx" -exec sed -i 's|"@shared/schema"|"../../shared/schema"|g' {} \;
+find client/src/pages -name "*.tsx" -exec sed -i 's|"@shared/schema"|"../../../shared/schema"|g' {} \;
 
 # Run the build
 echo "Running Vite build..."
