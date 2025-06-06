@@ -43,6 +43,25 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
 
+// Helper function to get tier badge based on accreditation segment
+const getTierBadge = (segment: string) => {
+  const tierMapping = {
+    'diamond': { tier: 'GOLD', color: 'bg-yellow-500 text-white' },
+    'hot': { tier: 'SILVER', color: 'bg-slate-300 text-slate-800' },
+    'warm': { tier: 'BRONZE', color: 'bg-white text-amber-700 border border-amber-700' },
+    'cold': null // Don't show badge for cold leads
+  };
+  
+  const tierInfo = tierMapping[segment as keyof typeof tierMapping];
+  if (!tierInfo) return null;
+  
+  return (
+    <Badge className={`${tierInfo.color} text-xs font-semibold tracking-wide uppercase px-2 py-1`}>
+      {tierInfo.tier} TIER
+    </Badge>
+  );
+};
+
 // Types for user investments
 type UserInvestment = {
   id: number;
@@ -182,6 +201,7 @@ export default function ProfilePage() {
     }).format(numValue);
   };
 
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -207,12 +227,19 @@ export default function ProfilePage() {
               <TabsContent value="profile" className="space-y-8">
                 {/* Welcome Banner */}
                 <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 shadow-sm">
-                  <h2 className="text-xl font-medium text-blue-800">
-                    Welcome back, {user?.firstName || 'Investor'}! 👋
-                  </h2>
-                  <p className="text-blue-600 mt-1">
-                    Manage your DST investment portfolio and update your profile below.
-                  </p>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="flex items-center space-x-3">
+                        <h2 className="text-xl font-medium text-blue-800">
+                          Welcome back, {user?.firstName || 'Investor'}! 👋
+                        </h2>
+                        {user?.accreditationSegment && getTierBadge(user.accreditationSegment)}
+                      </div>
+                      <p className="text-blue-600 mt-1">
+                        Manage your DST investment portfolio and update your profile below.
+                      </p>
+                    </div>
+                  </div>
                 </div>
                 
                 {/* Accreditation Information Box for "Not Sure" users */}
