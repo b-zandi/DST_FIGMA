@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { useAuth } from "@/hooks/use-auth";
+import { useAuth } from @/hooks/use-auth";
 import { ArrowRight } from "lucide-react";
 import { PromoterDisclosure } from "@/components/promoter-disclosure";
 

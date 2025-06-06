@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { useAuth } from "@/hooks/use-auth";
+import { useAuth } from @/hooks/use-auth";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn } from @/lib/utils";
 import { Building, ChevronDown, User, Menu, LogOut } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {

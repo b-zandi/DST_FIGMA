@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { MapPin, Phone, Mail } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from @/hooks/use-toast";
 import { useLocation } from "wouter";
 
 export default function ContactPage() {
