@@ -10,29 +10,14 @@ export function HeroSection() {
             DST Investing. Made Simple.
           </h1>
           <p className="text-lg text-gray-600 mb-8">
-            Learn all about Delaware Statutory Trust Investment Vehicles, how you can qualify today.
+            What is a DST? How do you qualify? Start here and find out today.
           </p>
           
           {/* Educational Calculator */}
           <div className="mb-8">
             <EducationalCalculator />
           </div>
-          
-          {/* Quick Links */}
-          <div className="flex flex-wrap gap-4">
-            <Link href="/how-it-works" className="flex items-center">
-              <span className="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
-              <span className="text-gray-700">How do DSTs work?</span>
-            </Link>
-            <Link href="/benefits" className="flex items-center">
-              <span className="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
-              <span className="text-gray-700">DST investment benefits</span>
-            </Link>
-            <Link href="/accreditation" className="flex items-center">
-              <span className="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
-              <span className="text-gray-700">Am I accredited?</span>
-            </Link>
-          </div>
+
         </div>
       </div>
     </section>
