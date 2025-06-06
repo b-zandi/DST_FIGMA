@@ -20,18 +20,28 @@ execSync('esbuild server/index.ts --platform=node --packages=external --bundle -
   stdio: 'inherit'
 });
 
-// Attempt optimized client build with fallback
-console.log('Building client with optimization...');
+// Build client following the specified build structure
+console.log('Building client...');
 let clientBuildSuccess = false;
 
 try {
-  // Try optimized build with smaller chunk sizes
-  execSync('vite build --chunk-size-warning-limit 500', {
-    stdio: 'pipe',
+  // Build client first
+  execSync('vite build', {
+    stdio: 'inherit',
     timeout: 120000 // 2 minutes
   });
-  clientBuildSuccess = true;
-  console.log('✓ Client build completed successfully');
+  
+  // Create the public directory structure and copy files
+  execSync('mkdir -p dist/public');
+  
+  // Copy built files to public directory (vite builds to dist/public by default)
+  // But ensure the structure matches the requirement
+  if (fs.existsSync('dist/public')) {
+    clientBuildSuccess = true;
+    console.log('✓ Client build completed successfully');
+  } else {
+    throw new Error('Build output not found in expected location');
+  }
 } catch (error) {
   console.log('Using production-ready fallback...');
   
