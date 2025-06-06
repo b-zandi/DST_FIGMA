@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Button } from "./ui/"button";
-import { Input } from "./ui/"input";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 import { ArrowRight, MessageSquareText, Building } from "lucide-react";
 
 export function ChatInterface() {

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/"card";
-import { Input } from "./ui/"input";
-import { Label } from "./ui/"label";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 import { Calculator, TrendingUp, Shield, AlertTriangle } from "lucide-react";
-import { Alert, AlertDescription } from "./ui/"alert";
+import { Alert, AlertDescription } from "./ui/alert";
 
 export function EducationalCalculator() {
   const [propertyValue, setPropertyValue] = useState(1000000);

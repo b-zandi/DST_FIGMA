@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Header } from "../components/layout/header";
 import { Footer } from "../components/layout/footer";
-import { useAuth } from "../hooks/use-auth";
+import { useAuth } from "../../hooks/use-auth";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Checkbox } from "../components/ui/checkbox";

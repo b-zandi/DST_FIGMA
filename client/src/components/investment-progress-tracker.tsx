@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "./ui/"button";
+import { Button } from "./ui/button";
 import { 
   CheckCircle, 
   Calendar, 
@@ -15,7 +15,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "./ui/"tooltip";
+} from "./ui/tooltip";
 
 interface InvestmentStage {
   id: number;
