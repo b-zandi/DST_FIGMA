@@ -10,7 +10,7 @@ export function HeroSection() {
             DST Investing. Made Simple.
           </h1>
           <p className="text-lg text-gray-600 mb-8">
-            Get expert DST due diligence and Delaware Statutory Trust investment advice for your 1031 exchange or direct investment
+            Learn all about Delaware Statutory Trust Investment Vehicles, how you can qualify today.
           </p>
           
           {/* Educational Calculator */}
