@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { EducationalCalculator } from "@/components/educational-calculator";
+import { EducationalCalculator } from "./educational-calculator";
 
 export function HeroSection() {
   return (

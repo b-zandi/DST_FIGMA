@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { format } from "date-fns";
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar } from "./ui/"calendar";
 import {
   Dialog,
   DialogContent,
@@ -9,20 +9,20 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+} from "./ui/"dialog";
+import { Button } from "./ui/"button";
 import { 
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from "./ui/"select";
+import { Input } from "./ui/"input";
+import { Label } from "./ui/"label";
 import { Phone } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import { useAuth } from "@/hooks/use-auth";
+import { useToast } from "../../hooks/use-toast";
+import { useAuth } from "../hooks/use-auth";
 
 // Available time slots
 const TIME_SLOTS = [

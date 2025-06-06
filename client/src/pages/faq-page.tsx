@@ -1,23 +1,23 @@
 import { useState } from "react";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
+import { Header } from "../components/layout/header";
+import { Footer } from "../components/layout/footer";
 import { useQuery } from "@tanstack/react-query";
-import { FAQ } from "@shared/schema";
+import { FAQ } from "../../../shared/schema";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Card } from "@/components/ui/card";
+} from "../components/ui/accordion";
+import { Card } from "../components/ui/card";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
+} from "../components/ui/select";
+import { Input } from "../components/ui/input";
 import { BookOpen, Search } from "lucide-react";
 
 // Static FAQ content

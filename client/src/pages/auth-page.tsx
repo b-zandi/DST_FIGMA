@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useLocation, Link } from "wouter";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Header } from "../components/layout/header";
+import { Footer } from "../components/layout/footer";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
 import {
   Form,
   FormControl,
@@ -12,17 +12,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+} from "../components/ui/form";
+import { Checkbox } from "../components/ui/checkbox";
+import { Alert, AlertDescription } from "../components/ui/alert";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useAuth } from "@/hooks/use-auth";
-import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "../hooks/use-auth";
+import { useToast } from "../hooks/use-toast";
 import { Building, Shield, Briefcase, AlertTriangle, CheckCircle2, UserCircle, DollarSign, AlertCircle } from "lucide-react";
-import { DSTInvestorQuestionnaire } from "@/components/dst-investor-questionnaire";
-import { DstAnswers } from "@/lib/calculateDstScore";
+import { DSTInvestorQuestionnaire } from "../components/dst-investor-questionnaire";
+import { DstAnswers } from "../lib/calculateDstScore";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),

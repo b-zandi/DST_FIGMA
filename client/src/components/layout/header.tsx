@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { useAuth } from "@/hooks/use-auth";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { useAuth } from "../hooks/use-auth";
+import { Button, buttonVariants } from "./ui/"button";
+import { cn } from "../../lib/utils";
 import { Building, ChevronDown, User, Menu, LogOut } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Input } from "./ui/"input";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuSeparator,
-} from "@/components/ui/dropdown-menu";
+} from "./ui/"dropdown-menu";
 
 interface NavItem {
   title: string;

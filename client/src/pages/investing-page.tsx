@@ -1,8 +1,8 @@
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Header } from "../components/layout/header";
+import { Footer } from "../components/layout/footer";
+import { Button } from "../components/ui/button";
+import { Badge } from "../components/ui/badge";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card";
 import { useQuery } from "@tanstack/react-query";
 import { Briefcase, Building, MapPin, Calendar, DollarSign, ChevronRight, Filter, SlidersHorizontal, Shield } from "lucide-react";
 import { 
@@ -11,9 +11,9 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "../components/ui/select";
 import { useState } from "react";
-import { useAuth } from "@/hooks/use-auth";
+import { useAuth } from "../hooks/use-auth";
 import { Link } from "wouter";
 
 // Example DST investment opportunities

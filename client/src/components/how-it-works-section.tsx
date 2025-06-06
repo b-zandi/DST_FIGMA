@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
+import { Button } from "./ui/button";
 import { ArrowRight, CheckCircle, Clock, Briefcase, ArrowUpRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 interface StepCardProps {
   number: number;

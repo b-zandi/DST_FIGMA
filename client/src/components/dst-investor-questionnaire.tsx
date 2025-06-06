@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { calculateDstScore, DstAnswers } from '@/lib/calculateDstScore'
+import { calculateDstScore, DstAnswers } from '../lib/calculateDstScore'
 
 /* ---------- Question metadata ---------- */
 

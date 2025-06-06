@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
-import { useAuth } from "@/hooks/use-auth";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Header } from "../components/layout/header";
+import { Footer } from "../components/layout/footer";
+import { useAuth } from "../hooks/use-auth";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Checkbox } from "../components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -13,14 +13,14 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from "../components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ProfileUpdate, profileUpdateSchema } from "@shared/schema";
+import { ProfileUpdate, profileUpdateSchema } from "../../../shared/schema";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { apiRequest, queryClient, getQueryFn } from "@/lib/queryClient";
-import { useToast } from "@/hooks/use-toast";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
+import { apiRequest, queryClient, getQueryFn } from "../lib/queryClient";
+import { useToast } from "../hooks/use-toast";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "../components/ui/card";
 import { 
   UserCircle2, 
   Shield, 
@@ -41,10 +41,10 @@ import {
   X
 } from "lucide-react";
 import { Link } from "wouter";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+import { Badge } from "../components/ui/badge";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui/tabs";
+import { Skeleton } from "../components/ui/skeleton";
+import { Alert, AlertTitle, AlertDescription } from "../components/ui/alert";
 
 // Helper function to get tier badge and medal based on accreditation segment
 const getTierInfo = (segment: string) => {

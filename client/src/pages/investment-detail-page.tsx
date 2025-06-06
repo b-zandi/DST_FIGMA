@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useRoute, Link } from "wouter";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useAuth } from "@/hooks/use-auth";
+import { Header } from "../components/layout/header";
+import { Footer } from "../components/layout/footer";
+import { Button } from "../components/ui/button";
+import { Badge } from "../components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import { useAuth } from "../hooks/use-auth";
 import { 
   MapPin, 
   Calendar, 
@@ -25,13 +25,13 @@ import {
   Shield,
   Info
 } from "lucide-react";
-import { InvestmentProgressTracker } from "@/components/investment-progress-tracker";
+import { InvestmentProgressTracker } from "../components/investment-progress-tracker";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@/components/ui/tabs";
+} from "../components/ui/tabs";
 import {
   Table,
   TableBody,
@@ -39,7 +39,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "../components/ui/table";
 
 // Example DST investment opportunities (same as in investing-page.tsx)
 const investments = [

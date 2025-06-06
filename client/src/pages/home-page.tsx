@@ -1,21 +1,21 @@
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
-import { HeroSection } from "@/components/hero-section";
-import { FeaturesSection } from "@/components/features-section";
-import { HowItWorksSection } from "@/components/how-it-works-section";
-import { PromoterDisclosure } from "@/components/promoter-disclosure";
+import { Header } from "../components/layout/header";
+import { Footer } from "../components/layout/footer";
+import { HeroSection } from "../components/hero-section";
+import { FeaturesSection } from "../components/features-section";
+import { HowItWorksSection } from "../components/how-it-works-section";
+import { PromoterDisclosure } from "../components/promoter-disclosure";
 import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from "../components/ui/accordion";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, InfoIcon, Phone, Mail, MessageSquareText, CheckCircle2 } from "lucide-react";
-import { FAQ } from "@shared/schema";
-import { ScheduleCallDialog } from "@/components/schedule-call-dialog";
+import { FAQ } from "../../../shared/schema";
+import { ScheduleCallDialog } from "../components/schedule-call-dialog";
 
 export default function HomePage() {
   const { data: faqs } = useQuery<FAQ[]>({

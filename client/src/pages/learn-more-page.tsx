@@ -1,9 +1,9 @@
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
-import { Button } from "@/components/ui/button";
+import { Header } from "../components/layout/header";
+import { Footer } from "../components/layout/footer";
+import { Button } from "../components/ui/button";
 import { Link } from "wouter";
-import { Card } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card } from "../components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
 import { 
   Building, 
   Briefcase, 
