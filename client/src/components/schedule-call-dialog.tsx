@@ -21,8 +21,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Phone } from "lucide-react";
-import { useToast } from @/hooks/use-toast";
-import { useAuth } from @/hooks/use-auth";
+import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/use-auth";
 
 // Available time slots
 const TIME_SLOTS = [
