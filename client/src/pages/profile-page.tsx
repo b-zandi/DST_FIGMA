@@ -36,30 +36,47 @@ import {
   Clock,
   ChevronRight,
   Info as InfoIcon,
-  CheckCircle2
+  CheckCircle2,
+  Medal
 } from "lucide-react";
 import { Link } from "wouter";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
 
-// Helper function to get tier badge based on accreditation segment
-const getTierBadge = (segment: string) => {
+// Helper function to get tier badge and medal based on accreditation segment
+const getTierInfo = (segment: string) => {
   const tierMapping = {
-    'diamond': { tier: 'GOLD', color: 'bg-yellow-500 text-white' },
-    'hot': { tier: 'SILVER', color: 'bg-slate-300 text-slate-800' },
-    'warm': { tier: 'BRONZE', color: 'bg-white text-amber-700 border border-amber-700' },
+    'diamond': { 
+      tier: 'GOLD', 
+      color: 'bg-yellow-500 text-white',
+      medalColor: 'text-yellow-500'
+    },
+    'hot': { 
+      tier: 'SILVER', 
+      color: 'bg-slate-300 text-slate-800',
+      medalColor: 'text-slate-400'
+    },
+    'warm': { 
+      tier: 'BRONZE', 
+      color: 'bg-white text-amber-700 border border-amber-700',
+      medalColor: 'text-amber-600'
+    },
     'cold': null // Don't show badge for cold leads
   };
   
   const tierInfo = tierMapping[segment as keyof typeof tierMapping];
-  if (!tierInfo) return null;
+  if (!tierInfo) return { badge: null, medal: null };
   
-  return (
+  const badge = (
     <Badge className={`${tierInfo.color} text-xs font-semibold tracking-wide uppercase px-2 py-1`}>
       {tierInfo.tier} TIER
     </Badge>
   );
+
+  const medal = <Medal className={`h-6 w-6 ${tierInfo.medalColor}`} />;
+  
+  return { badge, medal };
 };
 
 // Types for user investments
@@ -230,10 +247,11 @@ export default function ProfilePage() {
                   <div className="flex items-center justify-between">
                     <div>
                       <div className="flex items-center space-x-3">
-                        <h2 className="text-xl font-medium text-blue-800">
-                          Welcome back, {user?.firstName || 'Investor'}! 👋
+                        <h2 className="text-xl font-medium text-blue-800 flex items-center space-x-2">
+                          <span>Welcome back, {user?.firstName || 'Investor'}!</span>
+                          {user?.accreditationSegment ? getTierInfo(user.accreditationSegment).medal : <Medal className="h-6 w-6 text-gray-400" />}
                         </h2>
-                        {user?.accreditationSegment && getTierBadge(user.accreditationSegment)}
+                        {user?.accreditationSegment && getTierInfo(user.accreditationSegment).badge}
                       </div>
                       <p className="text-blue-600 mt-1">
                         Manage your DST investment portfolio and update your profile below.
