@@ -37,12 +37,14 @@ import {
   ChevronRight,
   Info as InfoIcon,
   CheckCircle2,
-  Medal
+  Medal,
+  X
 } from "lucide-react";
 import { Link } from "wouter";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 
 // Helper function to get tier badge and medal based on accreditation segment
 const getTierInfo = (segment: string) => {
@@ -124,6 +126,7 @@ export default function ProfilePage() {
   const { toast } = useToast();
   const [isAccreditedInvestor, setIsAccreditedInvestor] = useState(user?.accreditedStatus || false);
   const [activeTab, setActiveTab] = useState("profile");
+  const [showNextStep, setShowNextStep] = useState(true);
   
   // Parse questionnaire data to check if user selected "Not Sure" for accreditation
   const [isNotSureAboutAccreditation, setIsNotSureAboutAccreditation] = useState(false);
@@ -242,6 +245,24 @@ export default function ProfilePage() {
               </TabsList>
               
               <TabsContent value="profile" className="space-y-8">
+                {/* Next Step Alert */}
+                {showNextStep && (
+                  <Alert variant="info" className="relative shadow-sm">
+                    <InfoIcon className="h-4 w-4" />
+                    <AlertTitle>Next step</AlertTitle>
+                    <AlertDescription>
+                      Explore live DST listings or schedule a call to confirm your investment fit.
+                    </AlertDescription>
+                    <button
+                      onClick={() => setShowNextStep(false)}
+                      className="absolute top-4 right-4 p-1 hover:bg-blue-100 rounded-sm transition-colors"
+                      aria-label="Dismiss alert"
+                    >
+                      <X className="h-4 w-4 text-blue-600" />
+                    </button>
+                  </Alert>
+                )}
+
                 {/* Welcome Banner */}
                 <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 shadow-sm">
                   <div className="flex items-center justify-between">
