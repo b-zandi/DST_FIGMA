@@ -3,6 +3,7 @@ import {
   faqs, 
   investments, 
   userInvestments,
+  questionnaireSubmissions,
   type User, 
   type InsertUser, 
   type FAQ, 
@@ -10,7 +11,9 @@ import {
   type Investment,
   type InsertInvestment,
   type UserInvestment,
-  type InsertUserInvestment
+  type InsertUserInvestment,
+  type QuestionnaireSubmission,
+  type InsertQuestionnaireSubmission
 } from "@shared/schema";
 import createMemoryStore from "memorystore";
 import session from "express-session";
@@ -48,6 +51,11 @@ export interface IStorage {
   getUserInvestmentById(id: number): Promise<(UserInvestment & { investment: Investment }) | undefined>;
   createUserInvestment(userInvestment: InsertUserInvestment): Promise<UserInvestment>;
   updateUserInvestment(id: number, data: Partial<UserInvestment>): Promise<UserInvestment | undefined>;
+  
+  // Questionnaire Submission methods
+  createQuestionnaireSubmission(submission: InsertQuestionnaireSubmission): Promise<QuestionnaireSubmission>;
+  getQuestionnaireSubmissionsByUser(userId: number): Promise<QuestionnaireSubmission[]>;
+  updateQuestionnaireSubmissionWebhookStatus(id: number, sent: boolean): Promise<void>;
   
   sessionStore: session.Store;
 }

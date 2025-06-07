@@ -93,6 +93,19 @@ export const userInvestments = pgTable("user_investments", {
   investmentStatus: text("investment_status").notNull(),
 });
 
+export const questionnaireSubmissions = pgTable("questionnaire_submissions", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").references(() => users.id),
+  userEmail: text("user_email").notNull(),
+  userName: text("user_name"),
+  score: integer("score").notNull(),
+  segment: text("segment").notNull(), // 'diamond', 'hot', 'warm', 'cold'
+  answers: text("answers").notNull(), // JSON string of all answers
+  webhookSent: boolean("webhook_sent").default(false),
+  webhookSentAt: timestamp("webhook_sent_at"),
+  submittedAt: timestamp("submitted_at").defaultNow(),
+});
+
 export const insertUserSchema = createInsertSchema(users)
   .pick({
     password: true,
@@ -181,6 +194,16 @@ export const insertUserInvestmentSchema = createInsertSchema(userInvestments)
     investmentStatus: true,
   });
 
+export const insertQuestionnaireSubmissionSchema = createInsertSchema(questionnaireSubmissions)
+  .pick({
+    userId: true,
+    userEmail: true,
+    userName: true,
+    score: true,
+    segment: true,
+    answers: true,
+  });
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type ProfileUpdate = z.infer<typeof profileUpdateSchema>;
 export type LoginData = z.infer<typeof loginSchema>;
@@ -191,3 +214,5 @@ export type Investment = typeof investments.$inferSelect;
 export type InsertInvestment = z.infer<typeof insertInvestmentSchema>;
 export type UserInvestment = typeof userInvestments.$inferSelect;
 export type InsertUserInvestment = z.infer<typeof insertUserInvestmentSchema>;
+export type QuestionnaireSubmission = typeof questionnaireSubmissions.$inferSelect;
+export type InsertQuestionnaireSubmission = z.infer<typeof insertQuestionnaireSubmissionSchema>;
