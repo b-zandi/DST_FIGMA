@@ -524,6 +524,33 @@ export class DatabaseStorage implements IStorage {
       .returning();
     return updatedUserInvestment;
   }
+
+  // Questionnaire Submission methods
+  async createQuestionnaireSubmission(submission: InsertQuestionnaireSubmission): Promise<QuestionnaireSubmission> {
+    const [questionnaire] = await db
+      .insert(questionnaireSubmissions)
+      .values(submission)
+      .returning();
+    return questionnaire;
+  }
+
+  async getQuestionnaireSubmissionsByUser(userId: number): Promise<QuestionnaireSubmission[]> {
+    return db
+      .select()
+      .from(questionnaireSubmissions)
+      .where(eq(questionnaireSubmissions.userId, userId))
+      .orderBy(questionnaireSubmissions.submittedAt);
+  }
+
+  async updateQuestionnaireSubmissionWebhookStatus(id: number, sent: boolean): Promise<void> {
+    await db
+      .update(questionnaireSubmissions)
+      .set({ 
+        webhookSent: sent,
+        webhookSentAt: sent ? new Date() : null
+      })
+      .where(eq(questionnaireSubmissions.id, id));
+  }
 }
 
 // Switch to database storage instead of memory storage

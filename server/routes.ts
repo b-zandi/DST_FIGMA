@@ -2,7 +2,8 @@ import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { setupAuth } from "./auth";
-import { insertUserInvestmentSchema } from "@shared/schema";
+import { insertUserInvestmentSchema, insertQuestionnaireSubmissionSchema } from "@shared/schema";
+import { sendN8nWebhook } from "./webhook-service";
 
 // Middleware to check if user is authenticated
 function isAuthenticated(req: Request, res: Response, next: NextFunction) {
@@ -194,6 +195,55 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       res.json(updatedUser);
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  // Questionnaire submission with n8n webhook
+  app.post("/api/questionnaire/submit", isAuthenticated, async (req, res, next) => {
+    try {
+      const userId = req.user!.id;
+      const { score, segment, answers } = req.body;
+      
+      // Create submission record
+      const submissionData = {
+        userId,
+        userEmail: req.user!.email,
+        userName: req.user!.firstName && req.user!.lastName 
+          ? `${req.user!.firstName} ${req.user!.lastName}`
+          : null,
+        score: parseInt(score),
+        segment,
+        answers: JSON.stringify(answers)
+      };
+
+      const result = insertQuestionnaireSubmissionSchema.safeParse(submissionData);
+      if (!result.success) {
+        return res.status(400).json({ 
+          message: "Invalid questionnaire data", 
+          errors: result.error.format() 
+        });
+      }
+
+      // Save to database
+      const submission = await storage.createQuestionnaireSubmission(result.data);
+      
+      // Send webhook to n8n (async, don't block response)
+      sendN8nWebhook(submission)
+        .then(success => {
+          if (success) {
+            storage.updateQuestionnaireSubmissionWebhookStatus(submission.id, true);
+          }
+        })
+        .catch(error => {
+          console.error('Webhook error:', error);
+        });
+
+      res.status(201).json({ 
+        message: "Questionnaire submitted successfully",
+        submissionId: submission.id
+      });
     } catch (error) {
       next(error);
     }

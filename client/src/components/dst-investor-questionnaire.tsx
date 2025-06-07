@@ -3,6 +3,9 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { calculateDstScore, DstAnswers } from '../lib/calculateDstScore'
+import { useMutation } from '@tanstack/react-query'
+import { useAuth } from '../hooks/use-auth'
+import { useToast } from '../hooks/use-toast'
 
 /* ---------- Question metadata ---------- */
 
@@ -212,6 +215,8 @@ interface Props {
 
 export const DSTInvestorQuestionnaire: React.FC<Props> = ({ onComplete }) => {
   const [step, setStep] = useState<1 | 2>(1)
+  const { user } = useAuth()
+  const { toast } = useToast()
 
   const {
     register,
@@ -225,7 +230,40 @@ export const DSTInvestorQuestionnaire: React.FC<Props> = ({ onComplete }) => {
     },
   })
 
-  const onSubmit: SubmitHandler<WizardInputs> = (data) => {
+  // API mutation for submitting questionnaire to backend with n8n webhook
+  const submitMutation = useMutation({
+    mutationFn: async (submissionData: { score: number; segment: string; answers: DstAnswers }) => {
+      const response = await fetch('/api/questionnaire/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(submissionData),
+      })
+      
+      if (!response.ok) {
+        const error = await response.json()
+        throw new Error(error.message || 'Failed to submit questionnaire')
+      }
+      
+      return response.json()
+    },
+    onSuccess: () => {
+      toast({
+        title: "Questionnaire Submitted",
+        description: "Your responses have been submitted and our team will be notified.",
+      })
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Submission Failed",
+        description: error.message,
+        variant: "destructive",
+      })
+    }
+  })
+
+  const onSubmit: SubmitHandler<WizardInputs> = async (data) => {
     // Map risk tolerance string to both integer and behavior fields
     const riskMapping = {
       'Conservative': { riskTolerance: 1, riskBehavior: 'Conservative' as const },
@@ -242,6 +280,17 @@ export const DSTInvestorQuestionnaire: React.FC<Props> = ({ onComplete }) => {
     } as DstAnswers;
     
     const scoreResult = calculateDstScore(processedData)
+    
+    // If user is authenticated, submit to backend with n8n webhook
+    if (user) {
+      await submitMutation.mutateAsync({
+        score: scoreResult.score,
+        segment: scoreResult.segment,
+        answers: processedData
+      })
+    }
+    
+    // Call the original onComplete callback
     onComplete({
       answers: processedData,
       ...scoreResult,
@@ -407,9 +456,10 @@ export const DSTInvestorQuestionnaire: React.FC<Props> = ({ onComplete }) => {
           ) : (
             <button
               type="submit"
-              className="ml-auto px-4 py-2 bg-green-600 text-white rounded"
+              disabled={submitMutation.isPending}
+              className="ml-auto px-4 py-2 bg-green-600 text-white rounded disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Submit
+              {submitMutation.isPending ? 'Submitting...' : 'Submit'}
             </button>
           )}
         </div>
