@@ -206,10 +206,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const { score, segment, answers, guestEmail, guestName } = req.body;
       
       // Create submission record (handle both authenticated and guest users)
+      const isUserAuthenticated = req.isAuthenticated && req.isAuthenticated() && req.user;
       const submissionData = {
-        userId: req.isAuthenticated() ? req.user!.id : null,
-        userEmail: req.isAuthenticated() ? req.user!.email : (guestEmail || 'guest@example.com'),
-        userName: req.isAuthenticated() 
+        userId: isUserAuthenticated ? req.user!.id : null,
+        userEmail: isUserAuthenticated ? req.user!.email : (guestEmail || 'guest@example.com'),
+        userName: isUserAuthenticated 
           ? (req.user!.firstName && req.user!.lastName 
               ? `${req.user!.firstName} ${req.user!.lastName}`
               : null)
