@@ -7,6 +7,7 @@ import { promisify } from "util";
 import { storage } from "./storage";
 import { User as SelectUser } from "@shared/schema";
 import { sendPasswordResetEmail } from "./email";
+import { sendRegistrationWebhook } from "./webhook-service";
 
 declare global {
   namespace Express {
@@ -91,6 +92,17 @@ export function setupAuth(app: Express) {
         ...userDataWithoutConfirm,
         password: await hashPassword(userDataWithoutConfirm.password),
       });
+
+      // Send registration webhook to n8n (async, don't block response)
+      sendRegistrationWebhook(user)
+        .then(success => {
+          if (success) {
+            console.log(`Registration webhook sent successfully for user ${user.id}`);
+          }
+        })
+        .catch(error => {
+          console.error('Registration webhook error:', error);
+        });
 
       // Remove password from response
       const { password, ...userWithoutPassword } = user;
