@@ -281,13 +281,16 @@ export const DSTInvestorQuestionnaire: React.FC<Props> = ({ onComplete }) => {
     
     const scoreResult = calculateDstScore(processedData)
     
-    // If user is authenticated, submit to backend with n8n webhook
-    if (user) {
+    // Submit to backend with n8n webhook (works for both authenticated and guest users)
+    try {
       await submitMutation.mutateAsync({
         score: scoreResult.score,
         segment: scoreResult.segment,
         answers: processedData
       })
+    } catch (error) {
+      console.log('Webhook submission error:', error)
+      // Continue even if webhook fails for guest users
     }
     
     // Call the original onComplete callback

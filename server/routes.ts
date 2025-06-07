@@ -200,19 +200,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Questionnaire submission with n8n webhook
-  app.post("/api/questionnaire/submit", isAuthenticated, async (req, res, next) => {
+  // Questionnaire submission with n8n webhook (supports both authenticated and guest users)
+  app.post("/api/questionnaire/submit", async (req, res, next) => {
     try {
-      const userId = req.user!.id;
-      const { score, segment, answers } = req.body;
+      const { score, segment, answers, guestEmail, guestName } = req.body;
       
-      // Create submission record
+      // Create submission record (handle both authenticated and guest users)
       const submissionData = {
-        userId,
-        userEmail: req.user!.email,
-        userName: req.user!.firstName && req.user!.lastName 
-          ? `${req.user!.firstName} ${req.user!.lastName}`
-          : null,
+        userId: req.isAuthenticated() ? req.user!.id : null,
+        userEmail: req.isAuthenticated() ? req.user!.email : (guestEmail || 'guest@example.com'),
+        userName: req.isAuthenticated() 
+          ? (req.user!.firstName && req.user!.lastName 
+              ? `${req.user!.firstName} ${req.user!.lastName}`
+              : null)
+          : (guestName || 'Guest User'),
         score: parseInt(score),
         segment,
         answers: JSON.stringify(answers)
